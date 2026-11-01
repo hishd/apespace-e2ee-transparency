@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APESpace Code Verification</title>
+<meta name="description" content="Check, in your own browser, that APESpace's development and production environments run the same signed release.">
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --line: #e2e1dc;
+    --ok: #1a7f4b; --ok-bg: #e7f4ec; --bad: #b42318; --bad-bg: #fdecea; --accent: #1f4fd1; --on-accent: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141413; --surface: #1d1d1b; --text: #ecebe6; --muted: #a3a29b; --line: #34332f;
+      --ok: #4cc38a; --ok-bg: #16301f; --bad: #f97066; --bad-bg: #3a1714; --accent: #7aa2ff; --on-accent: #0b1a3d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 1.75rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.1rem; margin: 40px 0 12px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--muted); max-width: 640px; }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em; overflow-wrap: anywhere; }
+  a { color: var(--accent); }
+  button {
+    font: inherit; font-weight: 600; padding: 10px 20px; border-radius: 8px; border: 0; cursor: pointer;
+    background: var(--accent); color: var(--on-accent);
+  }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .actions small { color: var(--muted); }
+  .verdict { border-radius: 10px; padding: 16px 20px; font-weight: 600; margin: 24px 0; display: none; }
+  .verdict.ok { display: block; background: var(--ok-bg); color: var(--ok); }
+  .verdict.bad { display: block; background: var(--bad-bg); color: var(--bad); }
+  .envs { display: grid; gap: 16px; }
+  .env { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .env header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .env h3 { margin: 0; font-size: 1.05rem; }
+  .env .origin { color: var(--muted); font-size: 0.9rem; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin: 12px 0 4px; }
+  .bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.2s; }
+  ul.checks { list-style: none; padding: 0; margin: 12px 0 0; }
+  ul.checks li { padding: 4px 0 4px 28px; position: relative; }
+  ul.checks li::before { position: absolute; left: 4px; font-weight: 700; }
+  ul.checks li.ok::before { content: "✓"; color: var(--ok); }
+  ul.checks li.bad::before { content: "✗"; color: var(--bad); }
+  ul.checks li.info::before { content: "·"; color: var(--muted); }
+  .status { font-size: 0.9rem; color: var(--muted); }
+  ol, ul.plain { padding-left: 20px; }
+  ol li, ul.plain li { margin-bottom: 6px; }
+  pre { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; overflow-x: auto; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>APESpace code verification</h1>
+  <p class="lead">Check, in your own browser, that APESpace's development and production environments run
+  exactly the same code, and that this code is a release signed by APESpace's official build.
+  Nothing here asks you to trust APESpace's servers: your browser downloads the code and checks it itself.</p>
+
+  <div class="actions">
+    <button id="run">Verify now</button>
+    <small>Downloads about 45&nbsp;MB from each environment, the same files a meeting loads. Takes 1&ndash;3 minutes.</small>
+  </div>
+
+  <div id="verdict" class="verdict" role="status" aria-live="polite"></div>
+  <div id="envs" class="envs"></div>
+
+  <h2>What your browser checks</h2>
+  <ol>
+    <li><strong>The release is signed by APESpace's official build.</strong> Each release has a signed build record.
+      Your browser checks the signature, that the signing certificate was issued by
+      <a href="https://www.sigstore.dev/">Sigstore</a> to APESpace's build workflow
+      (<code>Advantage-Group/APESpace-Jitsi-Meet</code>), and that the signature is recorded in Sigstore's public,
+      append-only log (Rekor), so it cannot be quietly replaced.</li>
+    <li><strong>Each environment serves exactly that release.</strong> Your browser downloads every script,
+      WebAssembly module and stylesheet of the release from each environment, as a meeting would load them,
+      and compares their fingerprints (SHA-256) with the signed list. A single changed character shows up.</li>
+    <li><strong>Development and production serve the same release.</strong> So the code you can test on the
+      development environment is the code that runs in production.</li>
+    <li><strong>The encryption library is the published one.</strong> End-to-end encryption is done by
+      <code>lib-jitsi-meet</code>, Jitsi's open-source library, plus a public security patch. Anyone can rebuild it
+      and get exactly the fingerprint checked here (see <a href="https://github.com/hishd/apespace-e2ee-transparency/tree/main/e2ee-module">e2ee-module</a>).</li>
+  </ol>
+
+  <h2>Check it without this page</h2>
+  <p>The same check from the command line (Node.js 20 or later):</p>
+  <pre><code>git clone https://github.com/hishd/apespace-e2ee-transparency.git
+cd apespace-e2ee-transparency
+node verify/cli.mjs</code></pre>
+  <p>Or verify a build record's signature with Sigstore's own tool:</p>
+  <pre><code>cosign verify-blob \
+  --bundle releases/&lt;release&gt;/builds/&lt;record&gt;.json.sigstore.json \
+  --certificate-identity-regexp '^https://github\.com/Advantage-Group/APESpace-Jitsi-Meet/\.github/workflows/build-docker-image\.yml@refs/heads/(develop|main|master)$' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  releases/&lt;release&gt;/builds/&lt;record&gt;.json</code></pre>
+
+  <h2>What this does and does not show</h2>
+  <ul class="plain">
+    <li>It shows what each environment serves <em>to you</em>, at the time you check.</li>
+    <li>Pages (HTML) and <code>interface_config.js</code> are assembled by each server for its own deployment
+      (addresses, settings), so they are not compared. Images, fonts and sounds are skipped.</li>
+    <li>The rest of the APESpace app is not open source. This check proves every environment runs the same
+      signed release; it does not show what that code does. The encryption library is the part you can
+      rebuild from source.</li>
+  </ul>
+
+  <footer>
+    Source of this page and all records: <a href="https://github.com/hishd/apespace-e2ee-transparency">github.com/hishd/apespace-e2ee-transparency</a>.
+  </footer>
+</main>
+
+<script type="module">
+  import { checkAll } from './verify/check.js';
+
+  const $ = sel => document.querySelector(sel);
+  const el = (tag, attrs = {}, text) => Object.assign(document.createElement(tag), attrs, text === undefined ? {} : { textContent: text });
+  const short = id => `${id.slice(0, 16)}…`;
+  const config = await (await fetch('verify/config.json', { cache: 'no-store' })).json();
+  const cards = {};
+
+  for (const env of config.environments) {
+    const card = el('section', { className: 'env' });
+    const header = el('header');
+
+    header.append(el('h3', {}, env.name), el('span', { className: 'origin mono' }, env.origin));
+    card.append(header, el('div', { className: 'bar' }), el('div', { className: 'status' }, 'Not checked yet'),
+      el('ul', { className: 'checks' }));
+    card.querySelector('.bar').append(el('span'));
+    $('#envs').append(card);
+    cards[env.name] = card;
+  }
+
+  const item = (list, cls, text, link) => {
+    const li = el('li', { className: cls }, text);
+
+    if (link) {
+      li.append(' (', el('a', { href: link.href, target: '_blank', rel: 'noopener' }, link.text), ')');
+    }
+    list.append(li);
+  };
+
+  $('#run').addEventListener('click', async () => {
+    $('#run').disabled = true;
+    $('#verdict').className = 'verdict';
+    for (const card of Object.values(cards)) {
+      card.querySelector('.checks').replaceChildren();
+      card.querySelector('.bar span').style.width = '0';
+      card.querySelector('.status').textContent = 'Waiting…';
+    }
+
+    try {
+      const { results, allVerified, sameRelease } = await checkAll(config, (env, done, total) => {
+        cards[env.name].querySelector('.bar span').style.width = `${(100 * done / total).toFixed(1)}%`;
+        cards[env.name].querySelector('.status').textContent = `Comparing files: ${done} of ${total}`;
+      });
+
+      for (const r of results) {
+        const card = cards[r.name];
+        const list = card.querySelector('.checks');
+
+        card.querySelector('.bar span').style.width = '100%';
+        if (!r.release) {
+          card.querySelector('.status').textContent = 'Checked';
+          item(list, 'bad', 'Serves an app that is not in any published release');
+          continue;
+        }
+        card.querySelector('.status').textContent = `Release ${r.release.id}`;
+        for (const b of r.release.builds) {
+          b.verified
+            ? item(list, 'ok', `Signed by the official build: ${b.source.branch} @ ${b.source.commit.slice(0, 7)}, ${new Date(b.builtAt).toLocaleString()}`,
+              { href: `https://search.sigstore.dev/?logIndex=${b.logIndex}`, text: `public log #${b.logIndex}` })
+            : item(list, 'bad', `A build record does not verify: ${b.error}`);
+        }
+        r.mismatches.length
+          ? item(list, 'bad', `${r.mismatches.length} of ${r.compared} files differ from the signed release: ${r.mismatches.slice(0, 5).join(', ')}`)
+          : item(list, 'ok', `${r.identical} of ${r.compared} files are identical to the signed release`);
+        r.unreadable.length && item(list, 'info', `${r.unreadable.join(', ')}: this server does not let other sites read ${r.unreadable.length === 1 ? 'this file' : 'these files'}, so your browser could not check ${r.unreadable.length === 1 ? 'it' : 'them'}. The command-line check below covers ${r.unreadable.length === 1 ? 'it' : 'them'}.`);
+        r.encryptionLibrary
+          ? item(list, 'ok', `Encryption library is the published, rebuildable build (${short(config.encryptionLibrary.sha256)})`)
+          : item(list, 'bad', 'Encryption library differs from the published build');
+      }
+
+      $('#verdict').className = `verdict ${sameRelease ? 'ok' : 'bad'}`;
+      $('#verdict').textContent = sameRelease
+        ? `✓ Verified: development and production run the same signed release (${short(results[0].release.id)}).`
+        : allVerified ? '✗ The environments run different releases.' : '✗ Verification failed. See the details below.';
+    } catch (e) {
+      $('#verdict').className = 'verdict bad';
+      $('#verdict').textContent = `✗ Could not complete the check: ${e.message}`;
+    }
+    $('#run').disabled = false;
+  });
+</script>
+</body>
+</html>
