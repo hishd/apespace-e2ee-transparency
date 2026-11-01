@@ -87,6 +87,11 @@
       and get exactly the fingerprint checked here (see <a href="https://github.com/hishd/apespace-e2ee-transparency/tree/main/e2ee-module">e2ee-module</a>).</li>
   </ol>
 
+  <h2>Check your own meeting</h2>
+  <p>This page checks what the servers send to this page. To check the meeting you are actually in, install the
+    <a href="https://github.com/hishd/apespace-e2ee-transparency/tree/main/extension">APESpace Verify</a> browser extension:
+    it checks every file your meeting loads, and its E2EE Inspector lets you see for yourself that the media is encrypted.</p>
+
   <h2>Check it without this page</h2>
   <p>The same check from the command line (Node.js 20 or later):</p>
   <pre><code>git clone https://github.com/hishd/apespace-e2ee-transparency.git
@@ -120,7 +125,7 @@ node verify/cli.mjs</code></pre>
   const $ = sel => document.querySelector(sel);
   const el = (tag, attrs = {}, text) => Object.assign(document.createElement(tag), attrs, text === undefined ? {} : { textContent: text });
   const short = id => `${id.slice(0, 16)}…`;
-  const config = await (await fetch('verify/config.json', { cache: 'no-store' })).json();
+  const config = await (await fetch('extension/config.json', { cache: 'no-store' })).json();
   const cards = {};
 
   for (const env of config.environments) {

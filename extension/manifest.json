@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "APESpace Verify",
+  "version": "1.0.0",
+  "description": "Checks that the APESpace meeting you are in runs a signed, published release, and lets you inspect its end-to-end encryption.",
+  "permissions": [
+    "scripting",
+    "storage",
+    "webNavigation",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "https://conference.dev.apespace.apept.net/*",
+    "https://meet.apespace.justsocial.chat/*"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "APESpace Verify"
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { --text: #1d1d1b; --muted: #5f5f5a; --line: #e2e1dc; --ok: #1a7f4b; --bad: #b42318; --warn-bg: #fff4e0; --warn: #b26a00; --bg: #fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --text: #ecebe6; --muted: #a3a29b; --line: #34332f; --ok: #4cc38a; --bad: #f97066; --warn-bg: #3a2a10; --warn: #f0b45a; --bg: #1d1d1b; }
+  }
+  * { box-sizing: border-box; }
+  body { font: 13px/1.45 system-ui, sans-serif; width: 360px; margin: 0; padding: 14px; color: var(--text); background: var(--bg); }
+  h1 { font-size: 15px; margin: 0 0 10px; }
+  h2 { font-size: 13px; margin: 14px 0 6px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .verdict { font-weight: 600; }
+  .ok { color: var(--ok); }
+  .bad { color: var(--bad); }
+  .muted { color: var(--muted); }
+  ul { padding-left: 18px; margin: 6px 0; }
+  li { margin: 2px 0; overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; overflow-wrap: anywhere; }
+  .warn { background: var(--warn-bg); border-radius: 6px; padding: 8px; margin: 6px 0; }
+  label { display: flex; gap: 8px; align-items: flex-start; margin: 8px 0; }
+  label b { font-weight: 600; }
+  button { font: inherit; padding: 5px 10px; margin-top: 6px; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+  <h1>APESpace Verify</h1>
+
+  <div id="code"></div>
+
+  <h2>E2EE Inspector</h2>
+  <div class="warn">
+    For <b>test meetings only</b>. While on, this browser keeps a copy of the media it receives (before
+    decryption) and of the media keys it receives, on the meeting sites only. Everyone in the meeting is
+    told in chat. Nothing is uploaded.
+  </div>
+  <label><input type="checkbox" id="on"> <span><b>Inspector mode</b><br>
+    <span class="muted">Reload or join the meeting after switching on. Turns itself off when Chrome restarts.</span></span></label>
+  <label><input type="checkbox" id="all"> <span><b>Check requests to all sites for leaked keys</b><br>
+    <span class="muted">Without this, HTTP requests to the meeting site only are checked. Chrome asks for access to all
+    sites; it is removed when Inspector mode is switched off.</span></span></label>
+  <button id="viewer">Open capture viewer…</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

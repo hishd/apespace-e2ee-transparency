@@ -6,7 +6,10 @@ Public, signed records of the code APESpace's meeting servers run, so anyone can
 - that this release was built and signed by APESpace's official build;
 - that the end-to-end encryption library is open source and can be rebuilt byte-for-byte.
 
-**Check it now:** open the [verification page](https://hishd.github.io/apespace-e2ee-transparency/), or run `node verify/cli.mjs` from a clone of this repository (Node.js 20+).
+**Check it now:**
+- open the [verification page](https://hishd.github.io/apespace-e2ee-transparency/), which checks both environments from your browser;
+- install the [APESpace Verify extension](extension/), which checks the meeting you are in and lets you inspect its end-to-end encryption;
+- or run `node verify/cli.mjs` from a clone of this repository (Node.js 20+).
 
 ## What is here
 
@@ -17,7 +20,8 @@ Public, signed records of the code APESpace's meeting servers run, so anyone can
 | `…json.sigstore.json` | The record's [Sigstore](https://www.sigstore.dev/) signature. |
 | `environments/<env>/` | Signed records of what each environment served, published whenever that changes. |
 | `e2ee-module/` | How to rebuild the encryption library from Jitsi's public source. |
-| `verify/` | The checker used by the verification page and the command line. |
+| `extension/` | The APESpace Verify browser extension. `extension/lib/` holds the signature and release checks shared by the extension, the page and the command line; `extension/config.json` the sites and trust anchors. |
+| `verify/` | The environment check used by the verification page and the command line. |
 | `index.html` | The verification page. |
 
 Records are added by APESpace's build pipeline and never rewritten: the main branch does not allow force pushes or deletion, and every signature is also logged in Sigstore's public, append-only log (Rekor).

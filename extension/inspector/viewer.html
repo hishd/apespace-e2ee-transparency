@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>E2EE Capture Viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="viewer.css">
+<script type="module" src="viewer.js"></script>
+</head>
+<body>
+<header>
+  <h1>E2EE Capture Viewer</h1>
+  <p>Opens a capture exported by the E2EE Inspector. Everything happens in this tab: the file is not
+    uploaded anywhere, and decryption uses only the keys inside the file, the same keys your browser
+    received in the meeting.</p>
+  <label class="file">Choose capture file (.ndjson) <input type="file" id="file" accept=".ndjson,.json"></label>
+  <p id="status" role="status"></p>
+</header>
+
+<main id="out" hidden>
+  <section>
+    <h2>1. What you received</h2>
+    <p class="lead">Each row is one stream of media your browser received from the meeting server.
+      "Encrypted" means the frame carries the E2EE trailer (IV and key index) and its content is AES-GCM
+      ciphertext. Press play to see and hear what the server delivered, then what it becomes with the keys.</p>
+    <div id="switch"></div>
+    <div id="streams"></div>
+  </section>
+
+  <section>
+    <h2>2. The keys your browser received</h2>
+    <p class="lead">Each participant's browser makes its own random media key and sends it to every other
+      participant inside an Olm-encrypted message. These are the keys your browser was handed. The
+      fingerprint is a short hash: compare it with the sender's capture without revealing the key.</p>
+    <table id="keys"></table>
+  </section>
+
+  <section>
+    <h2>3. How the keys travelled</h2>
+    <p class="lead">Everything the meeting server relayed for the key exchange. The first messages set up
+      an Olm session from public identity keys (check them with the emoji verification). The media keys
+      travel inside <b>key-info</b> messages as Olm ciphertext, which the server cannot open.</p>
+    <table id="timeline"></table>
+  </section>
+
+  <section>
+    <h2>4. Did a media key leave your browser?</h2>
+    <p class="lead">While the Inspector ran, everything the meeting page sent out was searched for the media
+      keys, as raw bytes, hex, base64 and number lists. This catches the app (or a tampered build) sending a key
+      out in a readable form. It cannot see a key that was first encrypted or disguised: that is what code
+      verification is for.</p>
+    <div id="leaks"></div>
+  </section>
+
+  <section>
+    <h2>5. Compare with the other participant's capture</h2>
+    <p class="lead">Load the capture the other person exported from the same meeting. If the server had
+      secretly put itself between you during the key exchange, your two browsers would hold different identity
+      keys for each other. This is the same protection as the emoji check, done by comparing the files.</p>
+    <label class="file">Choose the other capture (.ndjson) <input type="file" id="file2" accept=".ndjson,.json"></label>
+    <div id="compare"></div>
+  </section>
+</main>
+</body>
+</html>

@@ -10,7 +10,7 @@ import fs from 'node:fs';
 
 import { checkAll } from './check.js';
 
-const config = JSON.parse(fs.readFileSync(new URL('./config.json', import.meta.url), 'utf8'));
+const config = JSON.parse(fs.readFileSync(new URL('../extension/config.json', import.meta.url), 'utf8'));
 const short = id => id.slice(0, 16);
 let last = '';
 
