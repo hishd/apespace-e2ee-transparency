@@ -1,0 +1,13 @@
+{
+  "schema": "apespace-build-record/v1",
+  "release": "c8dfd1fa1043e9793add97e32f448788f909a3d579761687085696b46c6dad37",
+  "files": 730,
+  "image": "ghcr.io/advantage-group/apespace-jitsi-meet@sha256:18c153e6fe253b07d872ae7cde78dd55537aaa918e97431ee90cabd933ba209a",
+  "source": {
+    "repository": "Advantage-Group/APESpace-Jitsi-Meet",
+    "branch": "develop",
+    "commit": "464a40f0176d810401dd51ab988096883a3919d9"
+  },
+  "builtAt": "2026-11-01T19:50:06.100Z",
+  "run": "https://github.com/Advantage-Group/APESpace-Jitsi-Meet/actions/runs/41343100074"
+}
