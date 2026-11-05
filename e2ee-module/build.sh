@@ -1,13 +1,13 @@
 #!/bin/sh
 # Rebuilds APESpace's encryption library from Jitsi's public source:
 # lib-jitsi-meet v2118.0.0 plus olm-key-auth.patch (upstream commit 4a958bc1)
-# and hidden-key-recipients.patch.
+# hidden-key-recipients.patch and group-safety-number.patch.
 #
 #   ./build.sh [workdir]
 #
 # Needs git and Docker. Prints the SHA-256 of the built lib-jitsi-meet.min.js,
 # the file APESpace serves. It must be
-#   0133cb8aededd3595bcb538fb5030540337012906c2f6d2a3855f6a30039e0ed
+#   ecaa50d76b6926ff71eb5878676d1b423145af938471c093906ab8655b4e823b
 
 set -eu
 
@@ -20,6 +20,7 @@ git clone -q --filter=blob:none https://github.com/jitsi/lib-jitsi-meet.git "$WO
 git -C "$WORK/src" checkout -q "$BASE"
 git -C "$WORK/src" apply "$HERE/olm-key-auth.patch"
 git -C "$WORK/src" apply "$HERE/hidden-key-recipients.patch"
+git -C "$WORK/src" apply "$HERE/group-safety-number.patch"
 
 docker run --rm -v "$WORK/src":/src -w /src -e LIB_JITSI_MEET_COMMIT_HASH="$BASE+$FIX+apespace" node:20 \
     sh -c 'npm ci --no-audit --no-fund >/dev/null && npm pack >/dev/null'
