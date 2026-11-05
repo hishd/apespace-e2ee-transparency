@@ -31,17 +31,19 @@ Records are added by APESpace's build pipeline and never rewritten: the main bra
 The build pipeline builds the web app reproducibly (the same source always gives byte-identical files), fingerprints every file, and signs a build record with Sigstore keyless signing. The signing certificate is issued to the build workflow itself:
 
 ```
-https://github.com/Advantage-Group/APESpace-Jitsi-Meet/.github/workflows/build-docker-image.yml@refs/heads/<branch>
+https://github.com/OFF-GRID-APPS/APESpace-Jitsi-Meet-WebApp/.github/workflows/build-docker-image.yml@refs/heads/<branch>
 ```
 
 and the signature is recorded in Rekor. No one, including APESpace, can produce a valid record for this identity outside that workflow, or remove one from the log.
+
+APESpace's source moved to this repository on 3 November 2026. Earlier records were signed by the workflow of its previous repository, `Advantage-Group/APESpace-Jitsi-Meet`. They stay here unchanged, but the checks no longer accept that identity, so they show as "not the official build".
 
 Verify a record with Sigstore's own tool:
 
 ```sh
 cosign verify-blob \
   --bundle releases/<release>/builds/<record>.json.sigstore.json \
-  --certificate-identity-regexp '^https://github\.com/Advantage-Group/APESpace-Jitsi-Meet/\.github/workflows/build-docker-image\.yml@refs/heads/(develop|main|master)$' \
+  --certificate-identity-regexp '^https://github\.com/OFF-GRID-APPS/APESpace-Jitsi-Meet-WebApp/\.github/workflows/build-docker-image\.yml@refs/heads/(develop|main|master)$' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   releases/<release>/builds/<record>.json
 ```

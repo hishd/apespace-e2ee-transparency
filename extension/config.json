@@ -10,7 +10,7 @@
     }
   ],
   "repository": "hishd/apespace-e2ee-transparency",
-  "signer": "^https://github\\.com/Advantage-Group/APESpace-Jitsi-Meet/\\.github/workflows/build-docker-image\\.yml@refs/heads/(develop|main|master)$",
+  "signer": "^https://github\\.com/OFF-GRID-APPS/APESpace-Jitsi-Meet-WebApp/\\.github/workflows/build-docker-image\\.yml@refs/heads/(develop|main|master)$",
   "encryptionLibrary": {
     "path": "/libs/lib-jitsi-meet.min.js",
     "sha256": "7e5dde66ab7a7f0cc041b18c2bfe53b5765e4b7fb9615d691eafbacfecd885be",

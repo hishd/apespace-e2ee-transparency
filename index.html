@@ -75,7 +75,7 @@
     <li><strong>The release is signed by APESpace's official build.</strong> Each release has a signed build record.
       Your browser checks the signature, that the signing certificate was issued by
       <a href="https://www.sigstore.dev/">Sigstore</a> to APESpace's build workflow
-      (<code>Advantage-Group/APESpace-Jitsi-Meet</code>), and that the signature is recorded in Sigstore's public,
+      (<code>OFF-GRID-APPS/APESpace-Jitsi-Meet-WebApp</code>), and that the signature is recorded in Sigstore's public,
       append-only log (Rekor), so it cannot be quietly replaced.</li>
     <li><strong>Each environment serves exactly that release.</strong> Your browser downloads every script,
       WebAssembly module and stylesheet of the release from each environment, as a meeting would load them,
@@ -100,7 +100,7 @@ node verify/cli.mjs</code></pre>
   <p>Or verify a build record's signature with Sigstore's own tool:</p>
   <pre><code>cosign verify-blob \
   --bundle releases/&lt;release&gt;/builds/&lt;record&gt;.json.sigstore.json \
-  --certificate-identity-regexp '^https://github\.com/Advantage-Group/APESpace-Jitsi-Meet/\.github/workflows/build-docker-image\.yml@refs/heads/(develop|main|master)$' \
+  --certificate-identity-regexp '^https://github\.com/OFF-GRID-APPS/APESpace-Jitsi-Meet-WebApp/\.github/workflows/build-docker-image\.yml@refs/heads/(develop|main|master)$' \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   releases/&lt;release&gt;/builds/&lt;record&gt;.json</code></pre>
 
