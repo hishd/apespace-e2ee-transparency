@@ -1,0 +1,903 @@
+diff --git a/modules/e2ee/E2EEContext.js b/modules/e2ee/E2EEContext.js
+index c9baa5c4..5f431643 100644
+--- a/modules/e2ee/E2EEContext.js
++++ b/modules/e2ee/E2EEContext.js
+@@ -162,6 +162,20 @@ export default class E2EEcontext {
+         });
+     }
+ 
++    /**
++     * Hands the worker the port on which the key vault sends it the media keys. From then on the worker takes
++     * keys only from that port, so they never pass through this page.
++     *
++     * @param {MessagePort} port - The worker's end of the channel to the key vault.
++     * @returns {void}
++     */
++    attachKeyPort(port) {
++        this._worker.postMessage({
++            operation: 'keyPort',
++            port
++        }, [ port ]);
++    }
++
+     /**
+      * Set the E2EE key for the specified participant.
+      *
+diff --git a/modules/e2ee/E2EEncryption.js b/modules/e2ee/E2EEncryption.js
+index cd40d547..a911a8d7 100644
+--- a/modules/e2ee/E2EEncryption.js
++++ b/modules/e2ee/E2EEncryption.js
+@@ -1,8 +1,8 @@
+ import browser from '../browser';
+ 
+ import { ExternallyManagedKeyHandler } from './ExternallyManagedKeyHandler';
+-import { ManagedKeyHandler } from './ManagedKeyHandler';
+ import { OlmAdapter } from './OlmAdapter';
++import { VaultKeyHandler } from './VaultKeyHandler';
+ 
+ /**
+  * This module integrates {@link KeyHandler} with {@link JitsiConference} in order to enable E2E encryption.
+@@ -20,7 +20,8 @@ export class E2EEncryption {
+         if (this._externallyManaged) {
+             this._keyHandler = new ExternallyManagedKeyHandler(conference);
+         } else {
+-            this._keyHandler = new ManagedKeyHandler(conference);
++            // The keys live in the E2EE key vault, a sandboxed frame this page can't reach into.
++            this._keyHandler = new VaultKeyHandler(conference);
+         }
+     }
+ 
+diff --git a/modules/e2ee/KeyHandler.js b/modules/e2ee/KeyHandler.js
+index aa33726f..dda428ee 100644
+--- a/modules/e2ee/KeyHandler.js
++++ b/modules/e2ee/KeyHandler.js
+@@ -18,12 +18,14 @@ export class KeyHandler extends Listenable {
+      * Build a new KeyHandler instance, which will be used in a given conference.
+      * @param {JitsiConference} conference - the current conference.
+      * @param {object} options - the options passed to {E2EEContext}, see implemention.
++     * @param {object} [options.e2eeCtx] - an object to receive the keys instead of a new {E2EEContext}: the key
++     * vault passes one that forwards them to the page's encryption worker.
+      */
+     constructor(conference, options = {}) {
+         super();
+ 
+         this.conference = conference;
+-        this.e2eeCtx = new E2EEContext(options);
++        this.e2eeCtx = options.e2eeCtx ?? new E2EEContext(options);
+ 
+         this.enabled = false;
+         this._enabling = undefined;
+diff --git a/modules/e2ee/ManagedKeyHandler.js b/modules/e2ee/ManagedKeyHandler.js
+index 255c7395..a06dbf94 100644
+--- a/modules/e2ee/ManagedKeyHandler.js
++++ b/modules/e2ee/ManagedKeyHandler.js
+@@ -19,9 +19,12 @@ const DEBOUNCE_PERIOD = 5000;
+ export class ManagedKeyHandler extends KeyHandler {
+     /**
+      * Build a new AutomaticKeyHandler instance, which will be used in a given conference.
++     *
++     * @param {JitsiConference} conference - the conference, or the key vault's stand-in for it.
++     * @param {object} [options] - see {@link KeyHandler}.
+      */
+-    constructor(conference) {
+-        super(conference);
++    constructor(conference, options = {}) {
++        super(conference, options);
+ 
+         this._key = undefined;
+         this._conferenceJoined = false;
+diff --git a/modules/e2ee/OlmAdapter.js b/modules/e2ee/OlmAdapter.js
+index 041f1498..2603429e 100644
+--- a/modules/e2ee/OlmAdapter.js
++++ b/modules/e2ee/OlmAdapter.js
+@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
+ import { JitsiConferenceEvents } from '../../JitsiConferenceEvents';
+ import Deferred from '../util/Deferred';
+ import Listenable from '../util/Listenable';
+-import { FEATURE_E2EE, JITSI_MEET_MUC_TYPE } from '../xmpp/xmpp';
++import { FEATURE_E2EE, JITSI_MEET_MUC_TYPE } from '../xmpp/constants';
+ 
+ import { E2EEErrors } from './E2EEErrors';
+ import GroupVerification, { GROUP_MESSAGE_TYPES, GroupVerificationEvents } from './GroupVerification';
+diff --git a/modules/e2ee/VaultKeyHandler.js b/modules/e2ee/VaultKeyHandler.js
+new file mode 100644
+index 00000000..7a11743b
+--- /dev/null
++++ b/modules/e2ee/VaultKeyHandler.js
+@@ -0,0 +1,220 @@
++import { getLogger } from '@jitsi/logger';
++
++import { JitsiConferenceEvents } from '../../JitsiConferenceEvents';
++import { JITSI_MEET_MUC_TYPE } from '../xmpp/constants';
++
++import { KeyHandler } from './KeyHandler';
++
++const logger = getLogger('e2ee:VaultKeyHandler');
++
++/**
++ * The page's side of the E2EE key vault.
++ *
++ * The keys live in the vault: a sandboxed frame (opaque origin, so this page
++ * can't reach into it) that runs the library's open-source key code
++ * (lib-jitsi-meet.e2ee-vault.html). This handler keeps the media part of
++ * {@link KeyHandler} (attaching the encryption transforms, enabling the
++ * worker) and only relays for the vault: the conference's participants and
++ * their E2EE properties, Olm messages (already encrypted) and E2EE events.
++ * The media keys go from the vault straight to the encryption worker, over a
++ * channel whose two ends this page hands over without keeping.
++ */
++export class VaultKeyHandler extends KeyHandler {
++    /**
++     * @param {JitsiConference} conference - The conference.
++     */
++    constructor(conference) {
++        super(conference);
++
++        this._queue = [];
++        this._rpc = undefined;
++        this._requests = new Map();
++        this._nextRequestId = 1;
++        this._createVault();
++
++        const describe = participant => {
++            return {
++                features: [ ...participant._features ?? [] ],
++                hidden: participant.isHidden(),
++                id: participant.getId(),
++                properties: Object.fromEntries([ 'e2ee.enabled', 'e2ee.idKey.curve25519', 'e2ee.idKey.ed25519' ]
++                    .map(name => [ name, participant.getProperty(name) ])
++                    .filter(([ , value ]) => value !== undefined))
++            };
++        };
++
++        conference.on(JitsiConferenceEvents.CONFERENCE_JOINED, () => this._send({
++            myId: conference.myUserId(),
++            participants: conference.getParticipants().map(describe),
++            type: 'conference-joined'
++        }));
++        conference.on(JitsiConferenceEvents.CONFERENCE_LEFT, () => this._send({ type: 'conference-left' }));
++        conference.on(JitsiConferenceEvents.USER_JOINED, (id, participant) => this._send({
++            participant: describe(participant),
++            type: 'participant-joined'
++        }));
++        conference.on(JitsiConferenceEvents.USER_LEFT, id => this._send({
++            id,
++            type: 'participant-left'
++        }));
++        conference.on(JitsiConferenceEvents.PARTCIPANT_FEATURES_CHANGED, participant => this._send({
++            features: [ ...participant._features ?? [] ],
++            id: participant.getId(),
++            type: 'participant-features'
++        }));
++        conference.on(JitsiConferenceEvents.PARTICIPANT_PROPERTY_CHANGED, (participant, name, oldValue, newValue) => {
++            name.startsWith('e2ee.') && this._send({
++                id: participant.getId(),
++                name,
++                newValue,
++                oldValue,
++                type: 'property-changed'
++            });
++        });
++        conference.on(JitsiConferenceEvents.ENDPOINT_MESSAGE_RECEIVED, (participant, payload) => {
++            payload?.[JITSI_MEET_MUC_TYPE] === 'olm' && this._send({
++                from: participant.getId(),
++                payload,
++                type: 'endpoint-message'
++            });
++        });
++    }
++
++    /**
++     * Emoji verification and the group safety number, run in the vault.
++     *
++     * @returns {Object}
++     */
++    get sasVerification() {
++        return {
++            markParticipantVerified: (participant, verified) => this._send({
++                id: participant.getId(),
++                type: 'mark-verified',
++                verified
++            }),
++            reportGroupVerification: (roundId, matches) => this._send({
++                matches,
++                roundId,
++                type: 'report-group-verification'
++            }),
++            startGroupVerification: () => this._send({ type: 'start-group-verification' }),
++            startVerification: participant => this._send({
++                id: participant.getId(),
++                type: 'start-verification'
++            })
++        };
++    }
++
++    /**
++     * Sets up or tears down the keys, in the vault.
++     *
++     * @param {boolean} enabled - Whether E2EE is enabled.
++     * @returns {Promise<void>}
++     */
++    _setEnabled(enabled) {
++        const requestId = this._nextRequestId++;
++
++        return new Promise(resolve => {
++            this._requests.set(requestId, resolve);
++            this._send({
++                enabled,
++                requestId,
++                type: 'set-enabled'
++            });
++        });
++    }
++
++    /**
++     * Creates the vault frame and, once it has loaded, hands it its ports.
++     *
++     * @returns {void}
++     */
++    _createVault() {
++        const iframe = document.createElement('iframe');
++
++        // Scripts only: no same-origin access either way, no navigation of this page, no forms or popups.
++        iframe.setAttribute('sandbox', 'allow-scripts');
++        iframe.setAttribute('aria-hidden', 'true');
++        iframe.setAttribute('tabindex', '-1');
++        iframe.title = 'E2EE key vault';
++        iframe.style.display = 'none';
++        iframe.src = `${baseUrl()}lib-jitsi-meet.e2ee-vault.html`;
++        iframe.addEventListener('load', () => {
++            const rpc = new MessageChannel();
++            const keys = new MessageChannel();
++
++            // The worker's end goes to the worker, the vault's end to the vault: this page keeps neither.
++            this.e2eeCtx.attachKeyPort(keys.port1);
++            rpc.port1.onmessage = ({ data }) => this._onVaultMessage(data);
++            iframe.contentWindow.postMessage({ type: 'apespace-e2ee-vault-init' }, '*', [ rpc.port2, keys.port2 ]);
++            this._rpcPending = rpc.port1;
++        }, { once: true });
++        (document.body ?? document.documentElement).appendChild(iframe);
++        this._iframe = iframe;
++    }
++
++    /**
++     * Sends a message to the vault, or queues it until the vault is ready.
++     *
++     * @param {Object} msg - The message.
++     * @returns {void}
++     */
++    _send(msg) {
++        this._rpc ? this._rpc.postMessage(msg) : this._queue.push(msg);
++    }
++
++    /**
++     * Handles a message from the vault. Only Olm messages, our E2EE presence
++     * properties and E2EE events get through.
++     *
++     * @param {Object} msg - The message.
++     * @returns {void}
++     */
++    _onVaultMessage(msg) {
++        switch (msg?.type) {
++        case 'ready':
++            this._rpc = this._rpcPending;
++            for (const queued of this._queue.splice(0)) {
++                this._rpc.postMessage(queued);
++            }
++            break;
++        case 'send':
++            if (msg.payload?.[JITSI_MEET_MUC_TYPE] === 'olm' && typeof msg.to === 'string') {
++                this.conference.sendMessage(msg.payload, msg.to);
++            }
++            break;
++        case 'set-property':
++            if (/^e2ee\.idKey\.(ed25519|curve25519)$/.test(msg.name)) {
++                this.conference.setLocalParticipantProperty(msg.name, msg.value);
++            }
++            break;
++        case 'event':
++            if (typeof msg.name === 'string' && msg.name.startsWith('conference.e2ee.')) {
++                this.conference.eventEmitter.emit(msg.name, ...msg.args ?? []);
++            }
++            break;
++        case 'done':
++            this._requests.get(msg.requestId)?.();
++            this._requests.delete(msg.requestId);
++            break;
++        default:
++            logger.warn('Unexpected message from the E2EE key vault');
++        }
++    }
++}
++
++/**
++ * The URL this library was loaded from, without the file name: the vault is
++ * served next to it.
++ *
++ * @returns {string}
++ */
++function baseUrl() {
++    const script = document.querySelector('script[src*="lib-jitsi-meet"]');
++
++    if (script?.src) {
++        return script.src.substring(0, script.src.lastIndexOf('/') + 1);
++    }
++
++    return new URL('libs/', document.baseURI).href;
++}
+diff --git a/modules/e2ee/Worker.ts b/modules/e2ee/Worker.ts
+index bec68b53..f08ebd5d 100644
+--- a/modules/e2ee/Worker.ts
++++ b/modules/e2ee/Worker.ts
+@@ -65,6 +65,7 @@ interface IWorkerMessageEvent {
+     keyIndex?: number;
+     operation: string;
+     participantId?: string;
++    port?: MessagePort;
+     readableStream?: ReadableStream;
+     sharedKey?: ArrayBuffer;
+     writableStream?: WritableStream;
+@@ -88,30 +89,23 @@ declare const self: {
+     onrtctransform?: (event: IRTCTransformerEvent) => void;
+ };
+ 
+-onmessage = (event: MessageEvent<IWorkerMessageEvent>) => {
+-    const { operation } = event.data;
+-
+-    if (operation === 'initialize') {
+-        const { sharedKey } = event.data;
+-
+-        if (sharedKey) {
+-            sharedContext = new Context({ sharedKey });
+-        }
+-    } else if (operation === 'encode' || operation === 'decode') {
+-        const { readableStream, writableStream, participantId } = event.data;
+-
+-        if (!readableStream || !writableStream || !participantId) {
+-            throw new Error('Missing required data: readableStream, writableStream, or participantId');
+-        }
+-        const context = getParticipantContext(participantId);
++/**
++ * Whether the media keys come from the key vault's port. Once they do, keys
++ * from the page are ignored.
++ */
++let keysFromVault = false;
+ 
+-        handleTransform(context, operation, readableStream, writableStream);
++/**
++ * Handles a key operation: setKey, cleanup or cleanupAll.
++ *
++ * @param {IWorkerMessageEvent} data - The message.
++ * @returns {boolean} Whether it was a key operation.
++ */
++function handleKeyOperation(data: IWorkerMessageEvent): boolean {
++    const { operation } = data;
+ 
+-    } else if (operation === 'setEnabled') {
+-        enabled = event.data.enabled;
+-        contexts.forEach(context => context.setEnabled(enabled));
+-    } else if (operation === 'setKey') {
+-        const { participantId, key, keyIndex } = event.data;
++    if (operation === 'setKey') {
++        const { participantId, key, keyIndex } = data;
+ 
+         if (!participantId || keyIndex === undefined) {
+             throw new Error('Missing required data: participantId or keyIndex');
+@@ -124,7 +118,7 @@ onmessage = (event: MessageEvent<IWorkerMessageEvent>) => {
+             context.setKey(false, keyIndex);
+         }
+     } else if (operation === 'cleanup') {
+-        const { participantId } = event.data;
++        const { participantId } = data;
+ 
+         if (!participantId) {
+             throw new Error('Missing required data: participantId');
+@@ -133,6 +127,47 @@ onmessage = (event: MessageEvent<IWorkerMessageEvent>) => {
+     } else if (operation === 'cleanupAll') {
+         contexts.clear();
+     } else {
++        return false;
++    }
++
++    return true;
++}
++
++onmessage = (event: MessageEvent<IWorkerMessageEvent>) => {
++    const { operation } = event.data;
++
++    if (operation === 'keyPort') {
++        const { port } = event.data;
++
++        if (!port || keysFromVault) {
++            return;
++        }
++        keysFromVault = true;
++        port.onmessage = (e: MessageEvent<IWorkerMessageEvent>) => {
++            handleKeyOperation(e.data) || console.error('e2ee worker: unexpected message from the key vault');
++        };
++    } else if (keysFromVault && operation === 'setKey') {
++        console.error('e2ee worker: ignoring a media key from the page; keys come from the key vault');
++    } else if (operation === 'initialize') {
++        const { sharedKey } = event.data;
++
++        if (sharedKey) {
++            sharedContext = new Context({ sharedKey });
++        }
++    } else if (operation === 'encode' || operation === 'decode') {
++        const { readableStream, writableStream, participantId } = event.data;
++
++        if (!readableStream || !writableStream || !participantId) {
++            throw new Error('Missing required data: readableStream, writableStream, or participantId');
++        }
++        const context = getParticipantContext(participantId);
++
++        handleTransform(context, operation, readableStream, writableStream);
++
++    } else if (operation === 'setEnabled') {
++        enabled = event.data.enabled;
++        contexts.forEach(context => context.setEnabled(enabled));
++    } else if (!handleKeyOperation(event.data)) {
+         console.error('e2ee worker', operation);
+     }
+ };
+diff --git a/modules/e2ee/vault/VaultConference.js b/modules/e2ee/vault/VaultConference.js
+new file mode 100644
+index 00000000..24a524dd
+--- /dev/null
++++ b/modules/e2ee/vault/VaultConference.js
+@@ -0,0 +1,208 @@
++import { JitsiConferenceEvents } from '../../../JitsiConferenceEvents';
++import EventEmitter from '../../util/EventEmitter';
++
++/**
++ * A participant as the key vault knows it: what the page reports of the real
++ * JitsiParticipant (ID, hidden, features and the E2EE presence properties).
++ */
++class VaultParticipant {
++    /**
++     * @param {Object} description - { id, hidden, features, properties }.
++     */
++    constructor({ id, hidden, features = [], properties = {} }) {
++        this._id = id;
++        this._hidden = Boolean(hidden);
++        this._features = new Set(features);
++        this._properties = new Map(Object.entries(properties));
++    }
++
++    /**
++     * @returns {string}
++     */
++    getId() {
++        return this._id;
++    }
++
++    /**
++     * @returns {boolean}
++     */
++    isHidden() {
++        return this._hidden;
++    }
++
++    /**
++     * @param {string} feature - The feature.
++     * @returns {boolean}
++     */
++    hasFeature(feature) {
++        return this._features.has(feature);
++    }
++
++    /**
++     * @returns {Promise<Set<string>>}
++     */
++    getFeatures() {
++        return Promise.resolve(this._features);
++    }
++
++    /**
++     * @param {string} name - The property.
++     * @returns {*}
++     */
++    getProperty(name) {
++        return this._properties.get(name);
++    }
++}
++
++/**
++ * Stands in for JitsiConference inside the key vault, so the unchanged Olm
++ * adapter and managed key handler run there. It knows only what the page
++ * reports (participants, their E2EE properties, Olm messages), and everything
++ * the key code sends out goes back to the page as data: Olm messages (already
++ * encrypted), our public identity keys, and E2EE events. Media keys never go
++ * through it: they go to the encryption worker over their own port.
++ */
++export default class VaultConference {
++    /**
++     * @param {Function} send - Sends a message to the page.
++     */
++    constructor(send) {
++        this._send = send;
++        this._participants = new Map();
++        this._myId = null;
++        this._e2eeEnabled = false;
++        this.eventEmitter = new EventEmitter();
++
++        // KeyHandler subscribes to media events; the vault has no media.
++        this.rtc = { on: () => undefined };
++    }
++
++    /**
++     * @param {string} event - The event.
++     * @param {Function} listener - The listener.
++     * @returns {void}
++     */
++    on(event, listener) {
++        this.eventEmitter.on(event, listener);
++    }
++
++    /**
++     * @returns {string|null}
++     */
++    myUserId() {
++        return this._myId;
++    }
++
++    /**
++     * @returns {Array<VaultParticipant>}
++     */
++    getParticipants() {
++        return [ ...this._participants.values() ];
++    }
++
++    /**
++     * @param {string} id - The participant ID.
++     * @returns {VaultParticipant|undefined}
++     */
++    getParticipantById(id) {
++        return this._participants.get(id);
++    }
++
++    /**
++     * @returns {boolean}
++     */
++    isE2EEEnabled() {
++        return this._e2eeEnabled;
++    }
++
++    /**
++     * Sends an Olm message to a participant, through the page.
++     *
++     * @param {Object} payload - The message.
++     * @param {string} to - The participant ID.
++     * @returns {void}
++     */
++    sendMessage(payload, to) {
++        this._send({
++            payload,
++            to,
++            type: 'send'
++        });
++    }
++
++    /**
++     * Publishes one of our presence properties, through the page.
++     *
++     * @param {string} name - The property.
++     * @param {*} value - The value.
++     * @returns {void}
++     */
++    setLocalParticipantProperty(name, value) {
++        this._send({
++            name,
++            type: 'set-property',
++            value
++        });
++    }
++
++    /**
++     * Applies a message from the page.
++     *
++     * @param {Object} msg - The message.
++     * @returns {void}
++     */
++    onPageMessage(msg) {
++        switch (msg.type) {
++        case 'conference-joined':
++            this._myId = msg.myId;
++            for (const description of msg.participants ?? []) {
++                this._participants.has(description.id)
++                    || this._participants.set(description.id, new VaultParticipant(description));
++            }
++            this.eventEmitter.emit(JitsiConferenceEvents.CONFERENCE_JOINED);
++            break;
++        case 'conference-left':
++            this.eventEmitter.emit(JitsiConferenceEvents.CONFERENCE_LEFT);
++            break;
++        case 'participant-joined': {
++            const participant = new VaultParticipant(msg.participant);
++
++            this._participants.set(participant.getId(), participant);
++            this.eventEmitter.emit(JitsiConferenceEvents.USER_JOINED, participant.getId(), participant);
++            break;
++        }
++        case 'participant-features': {
++            const participant = this._participants.get(msg.id);
++
++            participant && (participant._features = new Set(msg.features));
++            break;
++        }
++        case 'participant-left': {
++            const participant = this._participants.get(msg.id);
++
++            if (participant) {
++                this.eventEmitter.emit(JitsiConferenceEvents.USER_LEFT, msg.id, participant);
++                this._participants.delete(msg.id);
++            }
++            break;
++        }
++        case 'property-changed': {
++            const participant = this._participants.get(msg.id);
++
++            if (participant) {
++                participant._properties.set(msg.name, msg.newValue);
++                this.eventEmitter.emit(JitsiConferenceEvents.PARTICIPANT_PROPERTY_CHANGED,
++                    participant, msg.name, msg.oldValue, msg.newValue);
++            }
++            break;
++        }
++        case 'endpoint-message': {
++            const participant = this._participants.get(msg.from);
++
++            participant && this.eventEmitter.emit(JitsiConferenceEvents.ENDPOINT_MESSAGE_RECEIVED,
++                participant, msg.payload);
++            break;
++        }
++        }
++    }
++}
+diff --git a/modules/e2ee/vault/index.js b/modules/e2ee/vault/index.js
+new file mode 100644
+index 00000000..0ac274a9
+--- /dev/null
++++ b/modules/e2ee/vault/index.js
+@@ -0,0 +1,121 @@
++/* global Olm */
++
++// The E2EE key vault: runs in a sandboxed frame (its own, opaque origin), so the
++// page that embeds it can't reach anything in it.
++//
++// It holds everything that knows a key: the Olm account and sessions, our media
++// key and its ratchets, emoji (SAS) verification and the group safety number
++// (the unchanged OlmAdapter and ManagedKeyHandler, running on VaultConference).
++// The page relays Olm messages, which are already encrypted, and receives
++// public identity keys and E2EE events. Media keys go only to the page's
++// encryption worker, over a port the page hands over without keeping.
++//
++// Messages from the page, on the RPC port:
++//   conference-joined { myId, participants }, conference-left,
++//   participant-joined { participant }, participant-left { id },
++//   participant-features { id, features }, property-changed { id, name, oldValue, newValue },
++//   endpoint-message { from, payload }, set-enabled { requestId, enabled },
++//   start-verification { id }, mark-verified { id, verified },
++//   start-group-verification, report-group-verification { roundId, matches }
++// Messages to the page:
++//   ready, send { to, payload }, set-property { name, value },
++//   event { name, args }, done { requestId }
++
++import { JitsiConferenceEvents } from '../../../JitsiConferenceEvents';
++import { ManagedKeyHandler } from '../ManagedKeyHandler';
++
++import VaultConference from './VaultConference';
++
++/**
++ * The conference events the key code emits that the page re-emits.
++ */
++const FORWARDED_EVENTS = [
++    JitsiConferenceEvents.E2EE_GROUP_VERIFICATION_FAILED,
++    JitsiConferenceEvents.E2EE_GROUP_VERIFICATION_OUTDATED,
++    JitsiConferenceEvents.E2EE_GROUP_VERIFICATION_READY,
++    JitsiConferenceEvents.E2EE_GROUP_VERIFICATION_REPORTED,
++    JitsiConferenceEvents.E2EE_KEY_RECIPIENTS_CHANGED,
++    JitsiConferenceEvents.E2EE_VERIFICATION_AVAILABLE,
++    JitsiConferenceEvents.E2EE_VERIFICATION_COMPLETED,
++    JitsiConferenceEvents.E2EE_VERIFICATION_READY
++];
++
++/**
++ * Starts the vault once the page has handed over its two ports.
++ *
++ * @param {MessagePort} rpc - Messages with the page.
++ * @param {MessagePort} keyPort - Media keys to the encryption worker.
++ * @returns {void}
++ */
++function start(rpc, keyPort) {
++    const send = msg => rpc.postMessage(msg);
++    const conference = new VaultConference(send);
++
++    // Where ManagedKeyHandler would talk to an E2EEContext: keys to the worker.
++    const keysToWorker = {
++        cleanup: participantId => keyPort.postMessage({
++            operation: 'cleanup',
++            participantId
++        }),
++        cleanupAll: () => keyPort.postMessage({ operation: 'cleanupAll' }),
++        setEnabled: () => undefined,
++        setKey: (participantId, key, keyIndex) => keyPort.postMessage({
++            key,
++            keyIndex,
++            operation: 'setKey',
++            participantId
++        })
++    };
++    const keys = new ManagedKeyHandler(conference, { e2eeCtx: keysToWorker });
++
++    for (const name of FORWARDED_EVENTS) {
++        conference.eventEmitter.on(name, (...args) => send({
++            args,
++            name,
++            type: 'event'
++        }));
++    }
++
++    rpc.onmessage = async ({ data: msg }) => {
++        const participant = id => conference.getParticipantById(id);
++
++        switch (msg?.type) {
++        case 'set-enabled':
++            // What KeyHandler.setEnabled does with keys; the page does the media part.
++            keys.enabled = msg.enabled;
++            conference._e2eeEnabled = msg.enabled;
++            await keys._setEnabled(msg.enabled);
++            send({
++                requestId: msg.requestId,
++                type: 'done'
++            });
++            break;
++        case 'start-verification':
++            participant(msg.id) && keys.sasVerification.startVerification(participant(msg.id));
++            break;
++        case 'mark-verified':
++            participant(msg.id) && keys.sasVerification.markParticipantVerified(participant(msg.id), msg.verified);
++            break;
++        case 'start-group-verification':
++            keys.sasVerification.startGroupVerification();
++            break;
++        case 'report-group-verification':
++            keys.sasVerification.reportGroupVerification(msg.roundId, msg.matches);
++            break;
++        default:
++            msg && conference.onPageMessage(msg);
++        }
++    };
++    send({ type: 'ready' });
++}
++
++window.addEventListener('message', function init(event) {
++    if (event.source !== window.parent || event.data?.type !== 'apespace-e2ee-vault-init' || event.ports.length !== 2) {
++        return;
++    }
++    window.removeEventListener('message', init);
++    if (typeof Olm === 'undefined') {
++        throw new Error('E2EE key vault: Olm is not loaded');
++    }
++    start(event.ports[0], event.ports[1]);
++});
+diff --git a/modules/e2ee/vault/vault.html b/modules/e2ee/vault/vault.html
+new file mode 100644
+index 00000000..b5002fb3
+--- /dev/null
++++ b/modules/e2ee/vault/vault.html
+@@ -0,0 +1,12 @@
++<!DOCTYPE html>
++<html>
++<head>
++    <meta charset="utf-8">
++    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'">
++    <title>E2EE key vault</title>
++    <!-- Olm from @matrix-org/olm, served next to this page. -->
++    <script src="olm.js"></script>
++    <script src="lib-jitsi-meet.e2ee-vault.js"></script>
++</head>
++<body></body>
++</html>
+diff --git a/modules/xmpp/constants.ts b/modules/xmpp/constants.ts
+new file mode 100644
+index 00000000..f4193515
+--- /dev/null
++++ b/modules/xmpp/constants.ts
+@@ -0,0 +1,18 @@
++/**
++ * Constants shared with code that must not load the XMPP stack (the E2EE key vault).
++ */
++
++/**
++ * The name of the field used to recognize a chat message as carrying a JSON
++ * payload from another endpoint.
++ * If the json-message of a chat message contains a valid JSON object, and
++ * the JSON has this key, then it is a valid json-message to be sent.
++ */
++export const JITSI_MEET_MUC_TYPE: string = 'type';
++
++/**
++ * The feature used by the lib to mark support for e2ee. We use the feature by putting it in the presence
++ * to avoid additional signaling (disco-info).
++ * @type {string}
++ */
++export const FEATURE_E2EE: string = 'https://jitsi.org/meet/e2ee';
+diff --git a/modules/xmpp/xmpp.ts b/modules/xmpp/xmpp.ts
+index d5423c0a..4d48c63b 100644
+--- a/modules/xmpp/xmpp.ts
++++ b/modules/xmpp/xmpp.ts
+@@ -21,6 +21,7 @@ import Caps, { parseDiscoInfo } from './Caps';
+ import ChatRoom from './ChatRoom';
+ import { IDENTITY_TYPE as FILE_SHARING_IDENTITY_TYPE } from './FileSharing';
+ import XmppConnection from './XmppConnection';
++import { FEATURE_E2EE, JITSI_MEET_MUC_TYPE } from './constants';
+ import Moderator from './moderator';
+ import './strophe.disco';
+ import MucConnectionPlugin from './strophe.emuc';
+@@ -216,13 +217,7 @@ export const DEFAULT_STUN_SERVERS: Array<{ urls: string; }> = [
+     { urls: 'stun:meet-jit-si-turnrelay.jitsi.net:443' }
+ ];
+ 
+-/**
+- * The name of the field used to recognize a chat message as carrying a JSON
+- * payload from another endpoint.
+- * If the json-message of a chat message contains a valid JSON object, and
+- * the JSON has this key, then it is a valid json-message to be sent.
+- */
+-export const JITSI_MEET_MUC_TYPE: string = 'type';
++export { FEATURE_E2EE, JITSI_MEET_MUC_TYPE };
+ 
+ /**
+  * The feature used by jigasi participants.
+@@ -242,12 +237,6 @@ export const FEATURE_JIBRI: string = 'http://jitsi.org/protocol/jibri';
+  */
+ export const FEATURE_TRANSCRIBER: string = 'http://jitsi.org/protocol/transcriber';
+ 
+-/**
+- * The feature used by the lib to mark support for e2ee. We use the feature by putting it in the presence
+- * to avoid additional signaling (disco-info).
+- * @type {string}
+- */
+-export const FEATURE_E2EE: string = 'https://jitsi.org/meet/e2ee';
+ 
+ /**
+  * @internal
+diff --git a/webpack.config.js b/webpack.config.js
+index f16784f0..01e83b9a 100644
+--- a/webpack.config.js
++++ b/webpack.config.js
+@@ -1,3 +1,4 @@
++const fs = require('fs');
+ const path = require('path');
+ const process = require('process');
+ 
+@@ -32,6 +33,28 @@ module.exports = (_env, argv) => {
+                 path: path.join(process.cwd(), 'dist', 'umd')
+             },
+             resolve: config.resolve
++        },
++        {
++            // The E2EE key vault: a page loaded in a sandboxed frame, and its script.
++            entry: {
++                vault: './modules/e2ee/vault/index.js'
++            },
++            mode,
++            module: config.module,
++            optimization: {
++                minimize: false
++            },
++            output: {
++                filename: 'lib-jitsi-meet.e2ee-vault.js',
++                path: path.join(process.cwd(), 'dist', 'umd')
++            },
++            plugins: [ {
++                apply: compiler => compiler.hooks.afterEmit.tap('E2EEVaultPage', () => {
++                    fs.copyFileSync(path.join(process.cwd(), 'modules', 'e2ee', 'vault', 'vault.html'),
++                        path.join(process.cwd(), 'dist', 'umd', 'lib-jitsi-meet.e2ee-vault.html'));
++                })
++            } ],
++            resolve: config.resolve
+         }
+     ];
+ };

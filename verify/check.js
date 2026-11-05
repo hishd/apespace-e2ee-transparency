@@ -36,7 +36,9 @@ export async function checkEnvironment(env, config, loader, progress = () => {})
         return result;
     }
 
-    const queue = Object.entries(result.release.files).filter(([ p ]) => COMPARED.test(p) && !GENERATED.includes(p));
+    const encryptionCode = new Set(Object.keys(config.encryptionLibrary.files ?? {}));
+    const queue = Object.entries(result.release.files).filter(([ p ]) =>
+        (COMPARED.test(p) && !GENERATED.includes(p)) || encryptionCode.has(p));
 
     result.compared = queue.length;
     await Promise.all(Array.from({ length: 6 }, async () => {
@@ -62,10 +64,14 @@ export async function checkEnvironment(env, config, loader, progress = () => {})
     result.mismatches.sort();
     result.unreadable.sort();
 
+    // Every file of the encryption code (the library, its worker, the key vault and Olm)
+    // must be in the release with the fingerprint the public rebuild gives, and be served so.
     const lib = config.encryptionLibrary;
+    const expected = Object.entries(lib.files ?? { [lib.path]: lib.sha256 });
 
-    result.encryptionLibrary = result.release.files[lib.path]?.sha256 === lib.sha256
-        && !result.mismatches.includes(lib.path);
+    result.encryptionLibraryFiles = expected.length;
+    result.encryptionLibrary = expected.every(([ path, sha256 ]) =>
+        result.release.files[path]?.sha256 === sha256 && !result.mismatches.includes(path));
 
     return result;
 }
