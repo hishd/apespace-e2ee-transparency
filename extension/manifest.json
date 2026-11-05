@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "APESpace Verify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Checks that the APESpace meeting you are in runs a signed, published release, and lets you inspect its end-to-end encryption.",
   "permissions": [
     "scripting",

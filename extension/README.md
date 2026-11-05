@@ -36,6 +36,7 @@ Switch on **Inspector mode** in the popup, then join or reload a meeting. While 
 - what you received, before and after E2EE was switched on, and the same media decrypted with the received keys;
 - the media keys your browser received, and every key-exchange message the server relayed;
 - whether a media key left your browser: every outgoing WebSocket message, data-channel message and HTTP request is searched for the keys;
+- who received your media key: every participant your browser sent it to, checked against the participant list you see (a recorder or other hidden participant receiving it would be flagged);
 - with another participant's capture: that each of you holds the other's genuine identity key (no one sat in the middle of the key exchange) and the same media keys.
 
 By default the HTTP part of the leak check covers requests to the meeting site. Tick **Check requests to all sites for leaked keys** to cover every site: Chrome then asks for access to all sites, which the extension gives back when Inspector mode is switched off.

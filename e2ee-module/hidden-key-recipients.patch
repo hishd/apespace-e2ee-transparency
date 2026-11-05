@@ -1,0 +1,169 @@
+diff --git a/JitsiConferenceEvents.ts b/JitsiConferenceEvents.ts
+index 959416ab..df6756a6 100644
+--- a/JitsiConferenceEvents.ts
++++ b/JitsiConferenceEvents.ts
+@@ -176,6 +176,12 @@ export enum JitsiConferenceEvents {
+      */
+     DTMF_SUPPORT_CHANGED = 'conference.dtmfSupportChanged',
+ 
++    /**
++     * The participants who hold our media key changed. The listener receives the IDs of every participant we
++     * share our media key with.
++     */
++    E2EE_KEY_RECIPIENTS_CHANGED = 'conference.e2ee.keyRecipientsChanged',
++
+     E2EE_VERIFICATION_AVAILABLE = 'conference.e2ee.verification.available',
+ 
+     E2EE_VERIFICATION_COMPLETED = 'conference.e2ee.verification.completed',
+diff --git a/modules/e2ee/E2EEErrors.ts b/modules/e2ee/E2EEErrors.ts
+index 112c28da..8de2296a 100644
+--- a/modules/e2ee/E2EEErrors.ts
++++ b/modules/e2ee/E2EEErrors.ts
+@@ -8,6 +8,7 @@ export enum E2EEErrors {
+     E2EE_SAS_KEYS_MAC_MISMATCH = 'e2ee.sas.keys-mac-mismatch',
+     E2EE_SAS_MAC_MISMATCH = 'e2ee.sas.mac-mismatch',
+     E2EE_SAS_MISSING_KEY = 'e2ee.sas.missing-key',
++    E2EE_SESSION_HIDDEN_PARTICIPANT = 'e2ee.session.hidden-participant',
+     E2EE_SESSION_INVALID_KEY_SIGNATURE = 'e2ee.session.invalid-key-signature',
+     E2EE_SESSION_MISSING_KEY = 'e2ee.session.missing-key'
+ }
+diff --git a/modules/e2ee/ManagedKeyHandler.js b/modules/e2ee/ManagedKeyHandler.js
+index 8adcf1fb..d38d6e72 100644
+--- a/modules/e2ee/ManagedKeyHandler.js
++++ b/modules/e2ee/ManagedKeyHandler.js
+@@ -32,6 +32,10 @@ export class ManagedKeyHandler extends KeyHandler {
+         this._ratchetKey = debounce(this._ratchetKeyImpl, DEBOUNCE_PERIOD);
+ 
+         // Olm signalling events.
++        this._olmAdapter.on(
++            OlmAdapter.events.KEY_RECIPIENTS_CHANGED,
++            this._onKeyRecipientsChanged.bind(this));
++
+         this._olmAdapter.on(
+             OlmAdapter.events.PARTICIPANT_KEY_UPDATED,
+             this._onParticipantKeyUpdated.bind(this));
+@@ -188,6 +192,16 @@ export class ManagedKeyHandler extends KeyHandler {
+         this.e2eeCtx.setKey(id, key, index);
+     }
+ 
++    /**
++     * Handles a change in the participants who hold our media key.
++     *
++     * @param {Array<string>} recipients - The IDs of the participants we have an Olm session with.
++     * @private
++     */
++    _onKeyRecipientsChanged(recipients) {
++        this.conference.eventEmitter.emit(JitsiConferenceEvents.E2EE_KEY_RECIPIENTS_CHANGED, recipients);
++    }
++
+     /**
+      * Handles the SAS ready event.
+      *
+diff --git a/modules/e2ee/OlmAdapter.js b/modules/e2ee/OlmAdapter.js
+index d4216083..8a9716ed 100644
+--- a/modules/e2ee/OlmAdapter.js
++++ b/modules/e2ee/OlmAdapter.js
+@@ -37,6 +37,7 @@ const OLM_KEY_VERIFICATION_MAC_KEY_IDS = 'Jitsi-KEY_IDS';
+ const kOlmData = Symbol('OlmData');
+ 
+ const OlmAdapterEvents = {
++    KEY_RECIPIENTS_CHANGED: 'olm.key_recipients_changed',
+     PARTICIPANT_E2EE_CHANNEL_READY: 'olm.participant_e2ee_channel_ready',
+     PARTICIPANT_KEY_UPDATED: 'olm.partitipant_key_updated',
+     PARTICIPANT_SAS_AVAILABLE: 'olm.participant_sas_available',
+@@ -116,7 +117,11 @@ export class OlmAdapter extends Listenable {
+         await this._init;
+ 
+         const localParticipantId = this._conf.myUserId();
+-        const e2eeParticipants = this._conf.getParticipants().filter(p => p.hasFeature(FEATURE_E2EE));
++
++        // Hidden participants (recorders, transcribers, anything on the hidden domain) are not shown in the
++        // participant list, so they never get an Olm session and therefore never receive a media key.
++        const e2eeParticipants = this._conf.getParticipants()
++            .filter(p => p.hasFeature(FEATURE_E2EE) && !p.isHidden());
+         const outgoingParticipants = e2eeParticipants.filter(p => localParticipantId < p.getId());
+ 
+         // Send session-init to participants with higher IDs (outgoing sessions)
+@@ -171,6 +176,18 @@ export class OlmAdapter extends Listenable {
+         return typeof window.Olm !== 'undefined';
+     }
+ 
++    /**
++     * Returns the IDs of the participants we have an Olm session with. Our media key is sent only over these
++     * sessions, so these are exactly the participants who can decrypt our media.
++     *
++     * @returns {Array<string>}
++     */
++    getKeyRecipients() {
++        return this._conf.getParticipants()
++            .filter(p => this._getParticipantOlmData(p).session)
++            .map(p => p.getId());
++    }
++
+     /**
+      * Updates the current participant key and distributes it to all participants in the conference
+      * by sending a key-info message.
+@@ -249,6 +266,7 @@ export class OlmAdapter extends Listenable {
+         if (olmData.session) {
+             olmData.session.free();
+             olmData.session = undefined;
++            this.eventEmitter.emit(OlmAdapterEvents.KEY_RECIPIENTS_CHANGED, this.getKeyRecipients());
+         }
+ 
+         // Clear all session-related state to allow clean re-initialization
+@@ -437,6 +455,8 @@ export class OlmAdapter extends Listenable {
+     _onParticipantE2EEChannelReady(id) {
+         logger.debug(`E2EE channel with participant ${id} is ready`);
+ 
++        this.eventEmitter.emit(OlmAdapterEvents.KEY_RECIPIENTS_CHANGED, this.getKeyRecipients());
++
+         // Notify any waiting promises that this session is ready
+         const callback = this._sessionReadyCallbacks.get(id);
+ 
+@@ -527,7 +547,10 @@ export class OlmAdapter extends Listenable {
+ 
+         switch (msg.type) {
+         case OLM_MESSAGE_TYPES.SESSION_INIT: {
+-            if (olmData.session) {
++            if (participant.isHidden()) {
++                logger.warn(`Refusing session-init from hidden participant ${pId}`);
++                this._sendError(participant, E2EEErrors.E2EE_SESSION_HIDDEN_PARTICIPANT);
++            } else if (olmData.session) {
+                 logger.warn(`Participant ${pId} already has a session`);
+ 
+                 this._sendError(participant, 'Session already established');
+@@ -591,7 +614,10 @@ export class OlmAdapter extends Listenable {
+             break;
+         }
+         case OLM_MESSAGE_TYPES.SESSION_ACK: {
+-            if (olmData.session) {
++            if (participant.isHidden()) {
++                logger.warn(`Refusing session-ack from hidden participant ${pId}`);
++                this._sendError(participant, E2EEErrors.E2EE_SESSION_HIDDEN_PARTICIPANT);
++            } else if (olmData.session) {
+                 logger.warn(`Participant ${pId} already has a session`);
+ 
+                 this._sendError(participant, 'No session found');
+@@ -1064,7 +1090,8 @@ export class OlmAdapter extends Listenable {
+                 const localParticipantId = this._conf.myUserId();
+                 const participantFeatures = await participant.getFeatures();
+ 
+-                if (participantFeatures.has(FEATURE_E2EE) && localParticipantId < participantId) {
++                if (participantFeatures.has(FEATURE_E2EE) && !participant.isHidden()
++                        && localParticipantId < participantId) {
+                     let sessionEstablished = false;
+ 
+                     try {
+@@ -1179,6 +1206,12 @@ export class OlmAdapter extends Listenable {
+             return Promise.reject(new Error(E2EEErrors.E2EE_OLM_SESSION_INIT_PENDING));
+         }
+ 
++        if (participant.isHidden()) {
++            logger.warn(`Refusing to send session-init to hidden participant ${pId}`);
++
++            return Promise.reject(new Error(E2EEErrors.E2EE_SESSION_HIDDEN_PARTICIPANT));
++        }
++
+         // Generate a One Time Key.
+         this._olmAccount.generate_one_time_keys(1);
+ 

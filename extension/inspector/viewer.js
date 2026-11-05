@@ -372,6 +372,7 @@ async function render(meta, streams) {
             el('td', {}, el('code', { textContent: r.detail })))));
 
     renderLeaks(meta, name, rel);
+    renderRecipients(meta, name, rel);
 
     return report;
 }
@@ -407,6 +408,33 @@ function renderSwitchover(meta, streams, rel) {
             + `and encrypted media started at ${rel(firstEnc)}.` }));
 
     return result;
+}
+
+function renderRecipients(meta, name, rel) {
+    const c = meta.recipientCheck;
+
+    if (!c) {
+        $('recipients').replaceChildren(el('p', { textContent: 'This capture was made before this check existed.' }));
+
+        return;
+    }
+    const verdict = c.notListed.length
+        ? el('div', { className: 'verdict fail', textContent: `Your media key was sent to ${c.notListed.length} `
+            + 'participant(s) who are not in the participant list.' })
+        : el('div', { className: 'verdict pass', textContent: c.recipients.length
+            ? `Your media key was sent to ${c.recipients.length} participant(s), all in the participant list.`
+            : 'Your browser did not send its media key to anyone during the capture.' });
+    const nodes = [ verdict ];
+
+    if (c.recipients.length) {
+        nodes.push(el('table', {}, el('tr', {}, ...[ 'First sent', 'Participant', 'In the participant list' ]
+            .map(h => el('th', { textContent: h }))),
+        ...c.recipients.map(r => el('tr', {}, el('td', { textContent: rel(r.t) }),
+            el('td', { textContent: name(r.participantId) }),
+            el('td', { className: r.listed === false ? 'fail' : '',
+                textContent: r.listed === null ? 'unknown' : r.listed ? 'yes' : 'NO' })))));
+    }
+    $('recipients').replaceChildren(...nodes);
 }
 
 function renderLeaks(meta, name, rel) {
