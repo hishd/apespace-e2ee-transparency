@@ -25,7 +25,9 @@ The toolbar icon shows:
 
 Unlike the verification page, this checks the meeting **you** are in, so it would also notice code served to you alone.
 
-Not compared: the meeting page and `config.js`, which each server generates for its own deployment (addresses, settings).
+The meeting page itself, in the tab or in an embedding site's frame, is checked too when the release's pages are static files (releases that include `static/load-config.js`). Such a page carries a Content Security Policy that lets only the release's own scripts run, and reads `config.js` and `interface_config.js` as data, without running them in the page. In earlier releases each server assembled the page, so it is not compared.
+
+Not compared: `config.js` and `interface_config.js`, which each server generates for its own deployment (addresses, settings).
 
 How it reads the files: Chrome does not let extensions read what a page downloaded, so the extension downloads each file again and fingerprints it. To deceive the check, a server would have to recognise the extension's download and answer it differently from the page's.
 
