@@ -12,7 +12,8 @@ function showCode(state, origins) {
 
         return;
     }
-    const files = state.files ?? [];
+    const pages = (state.files ?? []).filter(f => f.type === 'page');
+    const files = (state.files ?? []).filter(f => f.type !== 'page');
     const count = s => files.filter(f => f.status === s).length;
     const verdict = {
         ok: [ 'ok', `✓ This meeting runs a signed APESpace release` ],
@@ -45,6 +46,13 @@ function showCode(state, origins) {
 
     const summary = el('ul');
 
+    for (const p of pages) {
+        summary.append(p.status === 'ok' ? el('li', 'ok', `The meeting page (${p.path}) matches the signed release, with its security policy`)
+            : p.status === 'server-assembled' ? el('li', 'muted', `The meeting page (${p.path}) is assembled by the server in this release, so it is not compared`)
+                : p.status === 'pending' ? el('li', 'muted', `Checking the meeting page (${p.path})…`)
+                    : el('li', 'bad mono', `${p.path}: ${{ mismatch: 'the meeting page differs from the release',
+                        unpublished: 'the meeting page is not part of the release', error: 'the meeting page could not be checked' }[p.status]}`));
+    }
     summary.append(el('li', '', `${count('ok')} of ${files.length} scripts, WebAssembly modules and stylesheets this meeting loaded match the signed release`));
     for (const f of files.filter(x => [ 'mismatch', 'unpublished', 'error' ].includes(x.status))) {
         summary.append(el('li', 'bad mono', `${f.path}: ${{ mismatch: 'differs from the release',
