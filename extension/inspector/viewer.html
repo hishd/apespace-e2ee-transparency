@@ -53,7 +53,16 @@
   </section>
 
   <section>
-    <h2>5. Compare with the other participant's capture</h2>
+    <h2>5. Who received your media key?</h2>
+    <p class="lead">Your browser sends its media key only inside the key-exchange channel it opens with each
+      participant. Everyone it sent the key to can decrypt your audio and video, so each of them must be in the
+      participant list you see. Recorders, transcribers and other hidden participants are not listed: a key sent
+      to one of them would mean someone could listen without being shown.</p>
+    <div id="recipients"></div>
+  </section>
+
+  <section>
+    <h2>6. Compare with the other participant's capture</h2>
     <p class="lead">Load the capture the other person exported from the same meeting. If the server had
       secretly put itself between you during the key exchange, your two browsers would hold different identity
       keys for each other. This is the same protection as the emoji check, done by comparing the files.</p>

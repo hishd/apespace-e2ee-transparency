@@ -217,6 +217,10 @@
 
     // 5. Olm key-exchange messages as they cross the XMPP WebSocket.
     const OLM = /<json-message[^>]*>([\s\S]*?)<\/json-message>/;
+
+    // These messages carry this browser's media key, encrypted for their recipient.
+    const CARRIES_OUR_KEY = [ 'session-ack', 'key-info', 'key-info-ack' ];
+    const keySentTo = new Map(); // endpoint ID -> first time; kept even when the capture is discarded
     const noteStanza = (direction, text) => {
         if (typeof text !== 'string' || !text.includes('json-message') || !text.includes('olm')) {
             return;
@@ -230,12 +234,19 @@
                 return;
             }
             const ct = JSON.stringify(body.olm?.data ?? '');
+            const to = /to=['"]([^'"]+)/.exec(text)?.[1] ?? null;
+
+            if (direction === 'sent' && CARRIES_OUR_KEY.includes(body.olm?.type) && to?.includes('/')) {
+                const id = to.slice(to.lastIndexOf('/') + 1);
+
+                keySentTo.has(id) || keySentTo.set(id, Date.now());
+            }
 
             state.keyExchange.push({
                 t: Date.now(),
                 direction,
                 from: /from=['"]([^'"]+)/.exec(text)?.[1] ?? null,
-                to: /to=['"]([^'"]+)/.exec(text)?.[1] ?? null,
+                to,
                 olmType: body.olm?.type,
                 ciphertextBytes: ct.length,
                 sample: ct.slice(0, 160),
@@ -376,6 +387,24 @@
         findings: [ ...leak.findings, ...(leak.http?.findings ?? []) ].sort((a, b) => a.t - b.t)
     });
 
+    // Key recipients: everyone this browser sent its media key to must be in the
+    // participant list the user sees. Recorders and other hidden participants are
+    // not listed, so a key sent to one of them means someone can decrypt the media
+    // without being shown.
+    const recipientCheck = () => {
+        const listed = window.APP?.store?.getState()['features/base/participants']?.remote;
+
+        return {
+            recipients: [ ...keySentTo ].map(([ id, t ]) => ({
+                t,
+                participantId: id,
+                name: state.participants[id] ?? '',
+                listed: listed ? listed.has(id) : null
+            })),
+            notListed: listed ? [ ...keySentTo.keys() ].filter(id => !listed.has(id)) : []
+        };
+    };
+
     // 7. Meeting state: who is who, when E2EE switched, and the notice to everyone.
     const NOTICE = 'E2EE Inspector is ON for this participant: their browser is recording the media '
         + 'it receives (before decryption) and the media keys it receives, for an encryption test. '
@@ -454,6 +483,7 @@
         participants: state.participants,
         identity: state.identity,
         leakCheck: leakCheck(),
+        recipientCheck: recipientCheck(),
         events: state.events,
         dropped: state.dropped,
         keys: state.keys,
@@ -552,6 +582,7 @@
                 ? ` · <span class="warn">full, ${state.dropped} frames not kept</span>` : ''}
                 ${state.recording ? '' : ' · <span class="warn">paused</span>'}</div>
             <div>Everyone was told in chat: <b>${noticeRoom ? 'yes' : 'not yet'}</b></div>
+            ${recipientLine()}
             ${leakLine()}`;
         panel.getElementById('pause').textContent = state.recording ? 'Pause' : 'Resume';
     };
@@ -565,6 +596,14 @@
             ? `<div class="leak">⚠ Media key found in ${c.findings.length} outgoing message(s): ${
                 escape([ ...new Set(c.findings.map(f => f.channel)) ].join(', '))}</div>`
             : `<div>Key leak check: <b>no key</b> in ${n} outgoing messages <span class="dim">(${where})</span></div>`;
+    };
+    const recipientLine = () => {
+        const c = recipientCheck();
+
+        return c.notListed.length
+            ? `<div class="leak">⚠ Media key sent to ${c.notListed.length} participant(s) not in the participant list: ${
+                escape(c.notListed.join(', '))}</div>`
+            : `<div>Media key sent to: <b>${c.recipients.length}</b> participant(s), all in the participant list</div>`;
     };
     const escape = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
 
@@ -589,6 +628,7 @@
         exportMeta,
         exportCapture,
         leakCheck,
+        recipientCheck,
 
         // Frames of one stream, [from, to), data as base64.
         exportFrames: (id, from, to) => state.streams[id].frames.slice(from, to).map(f => ({

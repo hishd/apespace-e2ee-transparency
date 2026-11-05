@@ -13,7 +13,7 @@
   "signer": "^https://github\\.com/Advantage-Group/APESpace-Jitsi-Meet/\\.github/workflows/build-docker-image\\.yml@refs/heads/(develop|main|master)$",
   "encryptionLibrary": {
     "path": "/libs/lib-jitsi-meet.min.js",
-    "sha256": "72eb1f6e6398c8dbcb064865084bbdbd9ab1e3f71da06b8715fbb7ad05c552f2",
+    "sha256": "0133cb8aededd3595bcb538fb5030540337012906c2f6d2a3855f6a30039e0ed",
     "source": "e2ee-module/"
   },
   "trust": {
