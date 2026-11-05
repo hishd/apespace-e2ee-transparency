@@ -42,8 +42,9 @@ for (const r of results) {
         : `  ✓ all ${r.compared} files identical to the signed release`);
     r.unreadable.length && console.log(`  · ${r.unreadable.length} files could not be downloaded: ${r.unreadable.join(', ')}`);
     console.log(r.encryptionLibrary
-        ? `  ✓ encryption library is the published build (${short(config.encryptionLibrary.sha256)}…)`
-        : '  ✗ encryption library differs from the published build');
+        ? `  ✓ encryption code is the published, rebuildable build (${r.encryptionLibraryFiles} files, library ${
+            short(config.encryptionLibrary.sha256)}…)`
+        : '  ✗ encryption code differs from the published build');
 }
 
 console.log(`\n${sameRelease

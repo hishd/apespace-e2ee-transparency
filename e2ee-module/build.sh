@@ -1,18 +1,27 @@
 #!/bin/sh
-# Rebuilds APESpace's encryption library from Jitsi's public source:
-# lib-jitsi-meet v2118.0.0 plus olm-key-auth.patch (upstream commit 4a958bc1)
-# hidden-key-recipients.patch and group-safety-number.patch.
+# Rebuilds APESpace's encryption code from public source, and prints the SHA-256
+# of every file of it that APESpace serves:
+#
+#   lib-jitsi-meet v2118.0.0 plus olm-key-auth.patch (upstream commit 4a958bc1),
+#   hidden-key-recipients.patch, group-safety-number.patch and e2ee-key-vault.patch:
+#     /libs/lib-jitsi-meet.min.js            the library
+#     /libs/lib-jitsi-meet.e2ee-worker.js    encrypts and decrypts media frames
+#     /libs/lib-jitsi-meet.e2ee-vault.html   the key vault (sandboxed frame)
+#     /libs/lib-jitsi-meet.e2ee-vault.js
+#   @matrix-org/olm 3.2.15 from the npm registry, used by the key vault:
+#     /libs/olm.js
+#     /libs/olm.wasm
 #
 #   ./build.sh [workdir]
 #
-# Needs git and Docker. Prints the SHA-256 of the built lib-jitsi-meet.min.js,
-# the file APESpace serves. It must be
-#   ecaa50d76b6926ff71eb5878676d1b423145af938471c093906ab8655b4e823b
+# Needs git and Docker. The output must match "encryptionLibrary" in
+# ../extension/config.json, which the verification page checks the servers serve.
 
 set -eu
 
 BASE=67fd2c84  # upstream v2118.0.0
 FIX=4a958bc1   # feat(e2ee): authenticate Olm curve25519 keys and bind them to SAS
+OLM=3.2.15
 HERE=$(cd "$(dirname "$0")" && pwd)
 WORK=${1:-$(mktemp -d)}
 
@@ -21,8 +30,14 @@ git -C "$WORK/src" checkout -q "$BASE"
 git -C "$WORK/src" apply "$HERE/olm-key-auth.patch"
 git -C "$WORK/src" apply "$HERE/hidden-key-recipients.patch"
 git -C "$WORK/src" apply "$HERE/group-safety-number.patch"
+git -C "$WORK/src" apply "$HERE/e2ee-key-vault.patch"
 
 docker run --rm -v "$WORK/src":/src -w /src -e LIB_JITSI_MEET_COMMIT_HASH="$BASE+$FIX+apespace" node:20 \
-    sh -c 'npm ci --no-audit --no-fund >/dev/null && npm pack >/dev/null'
+    sh -c "npm ci --no-audit --no-fund >/dev/null && npm pack >/dev/null && npm pack @matrix-org/olm@$OLM >/dev/null"
 
-tar xzOf "$WORK/src/lib-jitsi-meet-0.0.0.tgz" package/dist/umd/lib-jitsi-meet.min.js | shasum -a 256
+for f in lib-jitsi-meet.min.js lib-jitsi-meet.e2ee-worker.js lib-jitsi-meet.e2ee-vault.html lib-jitsi-meet.e2ee-vault.js; do
+    printf '%s  /libs/%s\n' "$(tar xzOf "$WORK/src/lib-jitsi-meet-0.0.0.tgz" "package/dist/umd/$f" | shasum -a 256 | cut -c1-64)" "$f"
+done
+for f in olm.js olm.wasm; do
+    printf '%s  /libs/%s\n' "$(tar xzOf "$WORK/src/matrix-org-olm-$OLM.tgz" "package/$f" | shasum -a 256 | cut -c1-64)" "$f"
+done

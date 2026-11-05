@@ -186,8 +186,8 @@ node verify/cli.mjs</code></pre>
           : item(list, 'ok', `${r.identical} of ${r.compared} files are identical to the signed release`);
         r.unreadable.length && item(list, 'info', `${r.unreadable.join(', ')}: this server does not let other sites read ${r.unreadable.length === 1 ? 'this file' : 'these files'}, so your browser could not check ${r.unreadable.length === 1 ? 'it' : 'them'}. The command-line check below covers ${r.unreadable.length === 1 ? 'it' : 'them'}.`);
         r.encryptionLibrary
-          ? item(list, 'ok', `Encryption library is the published, rebuildable build (${short(config.encryptionLibrary.sha256)})`)
-          : item(list, 'bad', 'Encryption library differs from the published build');
+          ? item(list, 'ok', `Encryption code is the published, rebuildable build: the library, its worker, the key vault and Olm (${r.encryptionLibraryFiles} files)`)
+          : item(list, 'bad', 'Encryption code differs from the published build');
       }
 
       $('#verdict').className = `verdict ${sameRelease ? 'ok' : 'bad'}`;

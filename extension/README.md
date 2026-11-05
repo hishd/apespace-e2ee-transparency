@@ -41,6 +41,8 @@ Switch on **Inspector mode** in the popup, then join or reload a meeting. While 
 
 By default the HTTP part of the leak check covers requests to the meeting site. Tick **Check requests to all sites for leaked keys** to cover every site: Chrome then asks for access to all sites, which the extension gives back when Inspector mode is switched off.
 
+With the key vault, the media keys never pass through the meeting page: the Inspector also runs inside the vault frame and reports each key sent to the encryption worker to the page's Inspector. Inspector mode therefore makes the keys visible to the page, on purpose, for the test meeting.
+
 Inspector mode turns itself off when Chrome restarts. A capture file contains that meeting's media keys: anyone with the file can play back the recorded part. Use test meetings, and delete captures when done.
 
 While Inspector mode is on, the meeting uses Chrome's older frame-processing API so the extension can see frames before decryption. Media is not altered.

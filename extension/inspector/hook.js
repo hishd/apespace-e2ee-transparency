@@ -12,8 +12,37 @@
 // Frames pass through unchanged. Nothing leaves the browser except the file the
 // user exports from the on-page panel (or window.__e2eeInspector.export*()).
 // Everyone in the meeting is told in chat that the Inspector is on.
+//
+// With the E2EE key vault (a sandboxed frame that holds the keys and sends them
+// straight to the encryption worker), this hook also runs in the vault frame.
+// There it only reports each media key sent to the worker to the meeting page's
+// hook, which records it like any other.
 (() => {
     if (window.__e2eeInspector) {
+        return;
+    }
+
+    if (/\/lib-jitsi-meet\.e2ee-vault\.html$/.test(location.pathname)) {
+        const origPortPost = MessagePort.prototype.postMessage;
+
+        MessagePort.prototype.postMessage = function(msg, ...rest) {
+            try {
+                if (msg?.operation === 'setKey') {
+                    const k = msg.key;
+
+                    window.parent.postMessage({
+                        __e2eeInspectorVault: 'setKey',
+                        key: k ? Array.from(k instanceof ArrayBuffer ? new Uint8Array(k) : k) : null,
+                        keyIndex: msg.keyIndex,
+                        participantId: msg.participantId
+                    }, '*');
+                }
+            } catch {}
+
+            return origPortPost.call(this, msg, ...rest);
+        };
+        window.__e2eeInspector = { vault: true };
+
         return;
     }
 
@@ -113,29 +142,40 @@
         return { readable, writable: streams.writable };
     };
 
-    // 3. Keys and the receiver -> participant mapping, from messages to the worker.
+    // 3. Keys and the receiver -> participant mapping, from messages to the worker,
+    //    or, with the key vault, as reported by this hook running in the vault frame.
+    const noteKey = ({ participantId, keyIndex, key }) => {
+        if (key) {
+            const k = key instanceof ArrayBuffer ? new Uint8Array(key)
+                : Array.isArray(key) ? Uint8Array.from(key)
+                    : new Uint8Array(key.buffer, key.byteOffset, key.byteLength);
+            const entry = {
+                t: Date.now(),
+                participantId,
+                keyIndex,
+                key: Array.from(k),
+                cleared: false
+            };
+
+            state.keys.push(entry);
+            addScanKey(entry);
+        } else {
+            state.keys.push({ t: Date.now(), participantId, keyIndex, key: null, cleared: true });
+        }
+    };
+
+    window.addEventListener('message', e => {
+        if (e.source !== window && e.data?.__e2eeInspectorVault === 'setKey') {
+            state.keysFromVault = true;
+            noteKey(e.data);
+        }
+    });
     const origPost = Worker.prototype.postMessage;
 
     Worker.prototype.postMessage = function(msg, ...rest) {
         try {
-            if (msg?.operation === 'setKey' && msg.key) {
-                const k = msg.key instanceof ArrayBuffer
-                    ? new Uint8Array(msg.key)
-                    : new Uint8Array(msg.key.buffer, msg.key.byteOffset, msg.key.byteLength);
-
-                const entry = {
-                    t: Date.now(),
-                    participantId: msg.participantId,
-                    keyIndex: msg.keyIndex,
-                    key: Array.from(k),
-                    cleared: false
-                };
-
-                state.keys.push(entry);
-                addScanKey(entry);
-            } else if (msg?.operation === 'setKey') {
-                state.keys.push({ t: Date.now(), participantId: msg.participantId, keyIndex: msg.keyIndex,
-                    key: null, cleared: true });
+            if (msg?.operation === 'setKey') {
+                noteKey(msg);
             } else if (msg?.operation === 'decode' && msg.readableStream) {
                 const s = tappedReadable.get(msg.readableStream);
 
