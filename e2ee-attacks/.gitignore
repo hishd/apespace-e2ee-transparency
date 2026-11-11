@@ -1,0 +1,4 @@
+node_modules/
+attacks/results/
+token.txt
+old-lib/
