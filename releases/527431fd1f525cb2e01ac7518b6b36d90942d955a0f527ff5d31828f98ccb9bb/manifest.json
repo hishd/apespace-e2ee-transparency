@@ -1,0 +1,2933 @@
+{
+  "schema": "apespace-web-manifest/v1",
+  "files": {
+    "/base.html": {
+      "sha256": "c6639163017cb57eb2a3fef34f426c4460e4ef34b38ea39cfc68afd9825c95a4",
+      "size": 18
+    },
+    "/body.html": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/css/all.css": {
+      "sha256": "76a3223ec081decb55bc7c94875deb8dc13ad33b46c8256ae4f5945e79615363",
+      "size": 97441
+    },
+    "/fonts.html": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/fonts/.placeholder": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/head.html": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/images/GIPHY_icon.png": {
+      "sha256": "2dc8a97b1a6b18a6c8feaee5ba8694c13a309392e9414059554cde8ed904f6a5",
+      "size": 284
+    },
+    "/images/GIPHY_logo.png": {
+      "sha256": "fce7680349b3ecb63ee9999d172fcc88d17a50374a0800abcb16a9d17777b835",
+      "size": 1066
+    },
+    "/images/ape_space_logo.png": {
+      "sha256": "5cc4a9f7fcecdb2986fe874961d44a8e6be072290641eb9139e1d6735ef47f33",
+      "size": 33054
+    },
+    "/images/app-store-badge.png": {
+      "sha256": "a733c340b55cc249943b034d2cdc8008c2221f217945db22a7696b65fa73a17b",
+      "size": 2091
+    },
+    "/images/apple-touch-icon.png": {
+      "sha256": "b6d1a1dc4eb688ec8b65bc7c6b4357ce091a63ae5e3726461e258a3a08b3cbef",
+      "size": 17146
+    },
+    "/images/avatar.png": {
+      "sha256": "2907a72de8880dd10c8c52e931c7ef9f2292268a02b2a16119cce50d49b0aeb4",
+      "size": 5995
+    },
+    "/images/btn_google_signin_dark_normal.png": {
+      "sha256": "dd0f9aec029e53d3af24b2dcdf19cbfbcab46b1f1a6711c6162bd3b192ffcb42",
+      "size": 8001
+    },
+    "/images/calendar.svg": {
+      "sha256": "27aff59735403e8949c43fbb1d6f3161515cb5cab218cc5c7d76ef5d7397a080",
+      "size": 1380
+    },
+    "/images/chromeLogo.svg": {
+      "sha256": "237f9c2b43cd76361ae098a2e7a3c5f55f15d3b65003e67da5e812aaaa3d7d8f",
+      "size": 136926
+    },
+    "/images/downloadLocalRecording.png": {
+      "sha256": "b4f53ec835330b785228da59a33d034fdd5ea32176960d76d793fed838a507b4",
+      "size": 490
+    },
+    "/images/dropboxLogo_square.png": {
+      "sha256": "75d3b475c9325b4e9c28ea35fb4d5579a92095e56b685ad1bf775b6a502b2054",
+      "size": 1770
+    },
+    "/images/f-droid-badge.png": {
+      "sha256": "f74ce388db58f3d6ad576adcb4be248fe799697161ae54f5af534611eaf9e8cb",
+      "size": 4058
+    },
+    "/images/favicon.svg": {
+      "sha256": "13e3d67ae763585b36bc6dc6adaa6bdaa2702dcbff7be793a30be2c8caecfd6a",
+      "size": 8696
+    },
+    "/images/flags.png": {
+      "sha256": "e7fcdc798b2a9b8261d4e27edaa05bda02d1249a7563c10894f1c34b55ee4551",
+      "size": 87503
+    },
+    "/images/flags@2x.png": {
+      "sha256": "a6cdac76b964621d778baf1c9f727a12303247a0467cffec838c169000c374a1",
+      "size": 256575
+    },
+    "/images/google-play-badge.png": {
+      "sha256": "7163f68ee3382f8bf573156995b6a2e4388fc7c4922b0c8f9945dc082dabf5d8",
+      "size": 2729
+    },
+    "/images/googleLogo.svg": {
+      "sha256": "93c482309305dca376dfe4f95325573ccde8cfd1f0636f0d26862d7a97191316",
+      "size": 909
+    },
+    "/images/icon-cloud.png": {
+      "sha256": "40af9762d83b83f152c2620a2ec63b6a4eb6fbc5fc00015e46d4c56815a60472",
+      "size": 349
+    },
+    "/images/icon-info.png": {
+      "sha256": "f9bf97afee0aad68e304212cb6a6a1155870bd894b2fdd9fb4efd7ee8664015e",
+      "size": 14344
+    },
+    "/images/icon-users.png": {
+      "sha256": "bbe5d0b033123b05dbf0519a967971e0851b2a19687a59f56cd8ba28892b3260",
+      "size": 4717
+    },
+    "/images/jitsilogo.png": {
+      "sha256": "f2c34d2c006d11710058e6486e62a5ac5df1254ebf5384801add868af9c3c9d1",
+      "size": 3376
+    },
+    "/images/logo-deep-linking-mobile.png": {
+      "sha256": "a665396933ced3a7a0675e8e544d14e81d0f3ad8e53162be0f988c186c54e5fb",
+      "size": 1986
+    },
+    "/images/logo-deep-linking.png": {
+      "sha256": "297693d0e279bba52d1adc8a7edec48c82ed33f3b8fc7e5a1b2e5c71eb7290e7",
+      "size": 6436
+    },
+    "/images/microsoftLogo.svg": {
+      "sha256": "929f48f88c8ca7f3f5d294be47ec4caf51acc28ac25340c19a903125d7ecd84a",
+      "size": 343
+    },
+    "/images/share-audio.gif": {
+      "sha256": "fc465750420941504ca8072d91caaba9b6be947a8a38677b3957b430aa42f299",
+      "size": 206675
+    },
+    "/images/virtual-background/background-1.jpg": {
+      "sha256": "178355af66c551481155fc335733a031814e71583ca3ddbfd1aa7e46cf19aeef",
+      "size": 473714
+    },
+    "/images/virtual-background/background-2.jpg": {
+      "sha256": "cad604859427c23f55d04704e4202f53a0b033330d88981d219793f25936cc3b",
+      "size": 346667
+    },
+    "/images/virtual-background/background-3.jpg": {
+      "sha256": "6edb35603f4799260a648dc7246edbc362766fb7b8449dae8650c63a8834e66e",
+      "size": 162595
+    },
+    "/images/virtual-background/background-4.jpg": {
+      "sha256": "2bffac65c60e27ac35e20f258c688a06878987a6b0e53b1f52da88f68b8eaf56",
+      "size": 701637
+    },
+    "/images/virtual-background/background-5.jpg": {
+      "sha256": "ec0ac644a7930451f7b856f41947310ba217c49109ffa5ac052c62e5dbfa1962",
+      "size": 150458
+    },
+    "/images/virtual-background/background-6.jpg": {
+      "sha256": "cf0973b1f715e8a670a655711dab13d1166e27ac1d6f3ffc6ad0690dae0381e5",
+      "size": 613424
+    },
+    "/images/virtual-background/background-7.jpg": {
+      "sha256": "75a09857ec3917cce5dc2376f5016b971a8692e0342b0c8736bfdbf54eab0d3e",
+      "size": 915156
+    },
+    "/images/virtual-background/background-8.jpg": {
+      "sha256": "381c5bb9dfde4139d772a438fb028260119df0fce0e9b17c788d21ccdf87cff3",
+      "size": 97836
+    },
+    "/images/watermark.svg": {
+      "sha256": "182486574e317f5b50cfa157828b74e6ea2f90c4f2ae09c4c6650268e95ec469",
+      "size": 12312
+    },
+    "/images/welcome-background.png": {
+      "sha256": "764681e1c455e5ac1a66422739107516631cd6f41f153273e74a833e5805faf7",
+      "size": 730077
+    },
+    "/index.html": {
+      "sha256": "f7064a6a4f4eee2adc9fd6027cb0c8976ff546a3a3e813d5f198cb8696c70026",
+      "size": 11004
+    },
+    "/interface_config.js": {
+      "sha256": "995fed6b6ddd1735fbe0cb4df787032246916869604a1a1cb054adb22c66756e",
+      "size": 8106
+    },
+    "/lang/countries-af.json": {
+      "sha256": "5a90087a537685bd148c0db631854502c8c45aedb1925de36477a89c7b015112",
+      "size": 6098
+    },
+    "/lang/countries-ar.json": {
+      "sha256": "8b2f081205e67b038a618f7ae509e323c69aa36f14cc68bc07ab48cb3a795025",
+      "size": 8101
+    },
+    "/lang/countries-be.json": {
+      "sha256": "082ed9b5b0fc63fb9f7d9a1948c928b800d1ab84e54c73ac266fa47c06bfcc24",
+      "size": 8572
+    },
+    "/lang/countries-bg.json": {
+      "sha256": "5c8b04b22de7a6b4de3073069fe85e140c68403233d07716d5c0fda78e78e705",
+      "size": 8384
+    },
+    "/lang/countries-ca.json": {
+      "sha256": "0f51ec4a7837957b8075a545823a5c0c4746ff027fcb26e58d809bad988d609a",
+      "size": 6162
+    },
+    "/lang/countries-cs.json": {
+      "sha256": "d991bd43fd8ef1c565af598185841b75e9aaddfa2008b76fc7a62e6043bba874",
+      "size": 6275
+    },
+    "/lang/countries-da.json": {
+      "sha256": "23f588be450c566ba21507d64bf617e015eb1016c494c48d2e3dde0a988ba222",
+      "size": 6002
+    },
+    "/lang/countries-de.json": {
+      "sha256": "75db0aae10567646fcf481ae07230695da84741d9a6dc60cbfc12638d19f9794",
+      "size": 6185
+    },
+    "/lang/countries-el.json": {
+      "sha256": "aeefb0eb5c1e5ee9d7e44d8fd53da0c0d8141326fb973f5d27842e703cff986d",
+      "size": 9541
+    },
+    "/lang/countries-en.json": {
+      "sha256": "9f5bf5eff1f6362c7529e41c29b791ad868b65e31de4543d38704bce97121242",
+      "size": 6331
+    },
+    "/lang/countries-es-US.json": {
+      "sha256": "93f600b2e0508f4d476d2be8182ff7bd4aae94d70052db5ca6862beaffaba9e4",
+      "size": 6252
+    },
+    "/lang/countries-es.json": {
+      "sha256": "93f600b2e0508f4d476d2be8182ff7bd4aae94d70052db5ca6862beaffaba9e4",
+      "size": 6252
+    },
+    "/lang/countries-et.json": {
+      "sha256": "187fde2d94f98e63d2b3ab14cf16d2b6053e669bb2bd5341e480e595315ec219",
+      "size": 6038
+    },
+    "/lang/countries-eu.json": {
+      "sha256": "e1e77f7a933ba18ee426db40eec4138601772e39669db099531c928573fb1bf3",
+      "size": 6173
+    },
+    "/lang/countries-fa.json": {
+      "sha256": "5d5a867135d6b4d3513309ff204fe630f5f35f5d1431ecc97b9483e8e1fb20bb",
+      "size": 7641
+    },
+    "/lang/countries-fi.json": {
+      "sha256": "262341d4f2335f905ea292dc9024f2f8eb028c86d9ceb835607954308a659786",
+      "size": 6052
+    },
+    "/lang/countries-fr-CA.json": {
+      "sha256": "f8dcf21ee7ba68604ff42df49975c40af8c590f5e65e0961e115f78b91b0ac4b",
+      "size": 6246
+    },
+    "/lang/countries-fr.json": {
+      "sha256": "f8dcf21ee7ba68604ff42df49975c40af8c590f5e65e0961e115f78b91b0ac4b",
+      "size": 6246
+    },
+    "/lang/countries-gl.json": {
+      "sha256": "5ed9eff9da8495a1416264c776b6d350928d64f0be116f258e9acc28ae7051c6",
+      "size": 6318
+    },
+    "/lang/countries-he.json": {
+      "sha256": "1f4a7091e15d585c73ba1cab1bc21e33cbd3314087e011f2c27f209ebe13f640",
+      "size": 7750
+    },
+    "/lang/countries-hi.json": {
+      "sha256": "4992a3bbd6c61bff2f1c1d3de32f70aa7f0695653345ba2ef8b304c2ac1350d8",
+      "size": 10700
+    },
+    "/lang/countries-hr.json": {
+      "sha256": "20b0e5b43ca682118f7ce2cdeb4928ecf97098e68afc06ffaaf25c96e6e4be83",
+      "size": 6131
+    },
+    "/lang/countries-hu.json": {
+      "sha256": "2ad0962c36feb18cb77225355b5f2e8e3fda1fac08f0ca50b2352a7a8023fb7c",
+      "size": 6433
+    },
+    "/lang/countries-hy.json": {
+      "sha256": "feee0eff058eafd481cccc62f939c7736614924855cd2bd83f76cd3551241735",
+      "size": 8653
+    },
+    "/lang/countries-id.json": {
+      "sha256": "018f9d26a80cfe967e01ac2e8251c073d87cc9338c257b2c15e92db6048614d7",
+      "size": 6049
+    },
+    "/lang/countries-is.json": {
+      "sha256": "20418e8f288e032b1afaa597bebe7219171981f0a77244b1731cc3620ce47644",
+      "size": 6186
+    },
+    "/lang/countries-it.json": {
+      "sha256": "4f197eddce05ee6ebd79ee6fa15073de80f6c2560d96285e1b628d0fed138874",
+      "size": 6127
+    },
+    "/lang/countries-ja.json": {
+      "sha256": "926b92040762d5d614734bce125eb1190fdbbb423b382305db9f366ed41e89d2",
+      "size": 7976
+    },
+    "/lang/countries-kab.json": {
+      "sha256": "ad0a544fc079579792726ba510f917632264ff604aa2f596a78caebbc5af867b",
+      "size": 11257
+    },
+    "/lang/countries-kk.json": {
+      "sha256": "c595f57a90a674750019cf9cd336b44680a191e3972e3a7cdd238d1ce4851b6b",
+      "size": 8513
+    },
+    "/lang/countries-ko.json": {
+      "sha256": "861f67dcc4478d37fd76209fc4b8b02b1ee76d8cda8c633534ed45743d09bddd",
+      "size": 7112
+    },
+    "/lang/countries-lt.json": {
+      "sha256": "46163cbb1e9b23914af70a5053539ee08d98b2dc0a193b4d175afd0cb7c1d8b7",
+      "size": 6326
+    },
+    "/lang/countries-lv.json": {
+      "sha256": "b6d852321aa40da892e2036979c024855bc2f98ced4235d2fb093bc8ad9ce11c",
+      "size": 6280
+    },
+    "/lang/countries-ml.json": {
+      "sha256": "c0ef8f6128ea2a98abf01a40ee97f427d238c1a42a976cda77fb6ce00b3eaefb",
+      "size": 11238
+    },
+    "/lang/countries-mn.json": {
+      "sha256": "1bec63877203d80cb83ee675df2619605fc7172a5ac4bfbcc867daabb7993570",
+      "size": 8060
+    },
+    "/lang/countries-nb.json": {
+      "sha256": "a79b8eea02a77b92dc98f16671e7fb8e9f52382099ce31a42e19b922d400a511",
+      "size": 5963
+    },
+    "/lang/countries-nl.json": {
+      "sha256": "a8eeb341dfa4c644a73634fc89c84ee42ce71564caf1f36116efb05e174836b7",
+      "size": 6218
+    },
+    "/lang/countries-no.json": {
+      "sha256": "670aa449a7142cdaae6f18453b2d7b470518d64f514b70fad70be8ded03def72",
+      "size": 5937
+    },
+    "/lang/countries-pl.json": {
+      "sha256": "78ce888f58f5563e007f51d292b9ce929184d71835f42f3c7787e05f69b22bb6",
+      "size": 6129
+    },
+    "/lang/countries-pt-BR.json": {
+      "sha256": "50ae8323b0c7c97c774fc19896533a80aca8b8351c9f062d652bb125c79006ac",
+      "size": 6213
+    },
+    "/lang/countries-pt.json": {
+      "sha256": "50ae8323b0c7c97c774fc19896533a80aca8b8351c9f062d652bb125c79006ac",
+      "size": 6213
+    },
+    "/lang/countries-ro.json": {
+      "sha256": "d37a72fb7fda50d7cebc84d79c185a7cd1afcf83dce0914d602293eff9cfb8c7",
+      "size": 6183
+    },
+    "/lang/countries-ru.json": {
+      "sha256": "755669a48df17aed41a8e0df088ff9941fc227c4b82ac0644a956ac25c1e3a9f",
+      "size": 8469
+    },
+    "/lang/countries-sk.json": {
+      "sha256": "a46019c11ddf9a4da2a6fbc9058500f7a3874d02b54cfdd2645571e7f91cacc9",
+      "size": 6223
+    },
+    "/lang/countries-sl.json": {
+      "sha256": "2827d154cc1e751b21183f9bbca72a86d1b76daa1eb5280a06713f88e7c485c8",
+      "size": 6112
+    },
+    "/lang/countries-sq.json": {
+      "sha256": "e9b0afce6c868c37828783e7d98c87d3536da49a098fa76ad520de416a37d076",
+      "size": 6063
+    },
+    "/lang/countries-sr.json": {
+      "sha256": "90563d7ef54b142cc21c9bcfc9fcc162ba9eb78b6050066b4c2a785c660c9954",
+      "size": 8454
+    },
+    "/lang/countries-sv.json": {
+      "sha256": "7afa5b3dac09b7eba411f24c186e990fa057b3f0a6e1fd05d48866de34d1c309",
+      "size": 6063
+    },
+    "/lang/countries-tr.json": {
+      "sha256": "e8d82260f667733f53815b75cb3b6dcefcaa178aceeaeee542a1249543084d23",
+      "size": 6101
+    },
+    "/lang/countries-uk.json": {
+      "sha256": "5526bde6ec9367c604fe5d4d9f5746a9aa9faff75a160607e818118b50006d31",
+      "size": 8592
+    },
+    "/lang/countries-vi.json": {
+      "sha256": "02420786675cf144fa5f363bc8a0156807e67d349500f5b65620a25e01e50934",
+      "size": 6545
+    },
+    "/lang/countries-zh-CN.json": {
+      "sha256": "08f8eb58284848e80fe1c2f4ddc766a22d049592d126293bbbbebce1bbd45218",
+      "size": 6372
+    },
+    "/lang/countries-zh-TW.json": {
+      "sha256": "08f8eb58284848e80fe1c2f4ddc766a22d049592d126293bbbbebce1bbd45218",
+      "size": 6372
+    },
+    "/lang/languages.json": {
+      "sha256": "058224a0025b3b3741f4e3b82d3e392ec398cc837eecc5e7528919d25d1d76d9",
+      "size": 1504
+    },
+    "/lang/main-af.json": {
+      "sha256": "6996def43c3fc6b5d7d160647e8e5bec5470556329d1f3be7c13217f316e6ec9",
+      "size": 29493
+    },
+    "/lang/main-ar.json": {
+      "sha256": "18a2b05441718023477cebd92dc2d2d8946d7c4571a1ae16f0f62ece50592c02",
+      "size": 92044
+    },
+    "/lang/main-be.json": {
+      "sha256": "d684fd9c82bbfb438a7ae6ca9fd4fd845e0e18e12e920428641afa87711d7aa3",
+      "size": 57227
+    },
+    "/lang/main-bg.json": {
+      "sha256": "cf03f7db4d959471f045907d6204b687832d7fc787240ed9a1fe438d896a8b2d",
+      "size": 132385
+    },
+    "/lang/main-ca.json": {
+      "sha256": "799ebe8de8336e42f1920dd33e2b444ea2c1846f5de3ce999ee510d318334a1c",
+      "size": 80318
+    },
+    "/lang/main-cs.json": {
+      "sha256": "e17f05db58a11dc89b3bd50756a079fba6e5e70377c3db03948107b07f12c8ca",
+      "size": 89963
+    },
+    "/lang/main-da.json": {
+      "sha256": "a67fdfa1da40b006bae12ee09a6fa20814087aee566161c8a6882c476e89833f",
+      "size": 38344
+    },
+    "/lang/main-de.json": {
+      "sha256": "4ec30337faba718336355ad165eb5e08096d55908a9b9601205710a56af2b331",
+      "size": 101705
+    },
+    "/lang/main-dsb.json": {
+      "sha256": "ba84460ab1f9de296835682e1af3fddac8368b0e48de985dc5bb2985b7e26fb2",
+      "size": 82427
+    },
+    "/lang/main-el.json": {
+      "sha256": "8f04423583b87a1f7b3d51d3215746a0f6dba751679a01f3f3a9cbdb338645f8",
+      "size": 116648
+    },
+    "/lang/main-eo.json": {
+      "sha256": "e3ae67df9e80e26d16d9b0b9d69fd551f7c283057c49cb62ff1254a5dbf038db",
+      "size": 83836
+    },
+    "/lang/main-es-US.json": {
+      "sha256": "dc245df0fe17af659957b7c1172d50f43f07f364afb4df8b10e3d72c0a3e0286",
+      "size": 69927
+    },
+    "/lang/main-es.json": {
+      "sha256": "2d81114298daaa739d111c350cb8fac6d7f740319f6e463e0efb7aec23611582",
+      "size": 83751
+    },
+    "/lang/main-et.json": {
+      "sha256": "02e0522e16dd69fad7c25125c01157301097de2b560b094c24c1aafd27598868",
+      "size": 39002
+    },
+    "/lang/main-eu.json": {
+      "sha256": "066c0cf613c0a1a9683b50682f3073f7f2ecc39c571cb55d18d7ded25b2d4d04",
+      "size": 56300
+    },
+    "/lang/main-fa.json": {
+      "sha256": "ebc5c0d3127060ac21d9b2bc1697084e1f76c5e4b925e2a847fd8ac5980b30cb",
+      "size": 110320
+    },
+    "/lang/main-fi.json": {
+      "sha256": "5a635992b0d22269d995d33c902898965c2956303fba289ef06c5a71abcbcaa3",
+      "size": 34631
+    },
+    "/lang/main-fr-CA.json": {
+      "sha256": "95126399647c7d8b2832b8922432e78b4be7ec1088639f5cdb8fd70fc3761f7d",
+      "size": 103519
+    },
+    "/lang/main-fr.json": {
+      "sha256": "b9141dc2eb2f102d08d728972d2a96edd4e6bc1560b5eb5f5bc596e4a7c0dbe8",
+      "size": 103638
+    },
+    "/lang/main-gl.json": {
+      "sha256": "b6c3358d7811c905ac02d70624eeccf4a3d7624f4d8af666eb03711bb33a3fc0",
+      "size": 40772
+    },
+    "/lang/main-he.json": {
+      "sha256": "7561195219a70190f419677a54a2281cb0addf67a324b060580aff547dc93d43",
+      "size": 45590
+    },
+    "/lang/main-hi.json": {
+      "sha256": "6a81ef868aa3ead6e5c21558002145bae59ec3455efddb58200b9e44c531e8cb",
+      "size": 94007
+    },
+    "/lang/main-hr.json": {
+      "sha256": "1259fbbbc1739d60b75b3e758abdc4aed4e2db585bcf862afbdcd6307b4e838d",
+      "size": 75885
+    },
+    "/lang/main-hsb.json": {
+      "sha256": "65d238f80462c5c53ae00e2c1df81fc37d599104c8b26815461fb17405baf87f",
+      "size": 74833
+    },
+    "/lang/main-hu.json": {
+      "sha256": "2a3efdc1f5107a4d8b81992888fddba54ee3d069835246bdf7a0a18beeae6a62",
+      "size": 62755
+    },
+    "/lang/main-hy.json": {
+      "sha256": "3de9059a1b0f33b13d89011713825d4e555eb1b243b601dc6fb8706f52af368c",
+      "size": 29755
+    },
+    "/lang/main-id.json": {
+      "sha256": "19f50016f5fdc539db7cbd6c89bbd2d2bf6363e42c20ed81f84994eb548aeec2",
+      "size": 87367
+    },
+    "/lang/main-is.json": {
+      "sha256": "98586f345e1741953f2f30ed59f716647bc00aa3eaf8996c518a9a926890f4bd",
+      "size": 89867
+    },
+    "/lang/main-it.json": {
+      "sha256": "8188058b55af5c16bcddb7266b9026a4768d555f7a62a74161f3ba0f7762af09",
+      "size": 99139
+    },
+    "/lang/main-ja.json": {
+      "sha256": "d13b862f152f26436f04fcb0cf82e9a7976dfa0411697f9b5dc0be941fdff0b2",
+      "size": 84040
+    },
+    "/lang/main-kab.json": {
+      "sha256": "2aa8406dc46e7538f4ff9b933a5433659e8faa0201aca33848f7efd78cdaf9d9",
+      "size": 66059
+    },
+    "/lang/main-kk.json": {
+      "sha256": "5d3bd108e7030b7894ff0be30c2fca7fc483dcef310fff8dbc2dd4704fedd41b",
+      "size": 131603
+    },
+    "/lang/main-ko.json": {
+      "sha256": "2227fec614e85b47f23dfbf1ffb8e163f0461098a0ba5bf9076ce5e146659c29",
+      "size": 94839
+    },
+    "/lang/main-lt.json": {
+      "sha256": "fb6297d874a4b9cdd9db8beb2564ffe3fe19230e44044c8c727806bfe003abb8",
+      "size": 42616
+    },
+    "/lang/main-lv.json": {
+      "sha256": "3bebb7ba233193c44a338abcf34cc8be8d39c87a8982de17378caac958974e64",
+      "size": 100160
+    },
+    "/lang/main-ml.json": {
+      "sha256": "a66be2942991c561bce3d26637daf68818d8451a2e40c7470ef651cbcf50a538",
+      "size": 96239
+    },
+    "/lang/main-mn.json": {
+      "sha256": "801138a657cc581e5126e7deabcb45d73d222d78fad491c60864093014890d8b",
+      "size": 105162
+    },
+    "/lang/main-mr.json": {
+      "sha256": "f1625409c37b0f3ef875fd76051ddcdf5eea016a4904414fb3458eb3f9bba96d",
+      "size": 73743
+    },
+    "/lang/main-nb.json": {
+      "sha256": "3d6a2160c923da764b8ae5873afc5da0684bf3d47c4f7505ed80b43e7659b5a7",
+      "size": 86459
+    },
+    "/lang/main-nl.json": {
+      "sha256": "bdd701cdcc0d0b28be745f8065925f3a35ddb2ce148338dca83fa9c7ad536cf3",
+      "size": 61385
+    },
+    "/lang/main-no.json": {
+      "sha256": "3d6a2160c923da764b8ae5873afc5da0684bf3d47c4f7505ed80b43e7659b5a7",
+      "size": 86459
+    },
+    "/lang/main-oc.json": {
+      "sha256": "12d8c70fe4ac6e7a202ebff70a87031ebf8c8b432d1835704d44ecf9d0be1a1f",
+      "size": 94468
+    },
+    "/lang/main-pl.json": {
+      "sha256": "0d49328c6a87237808e0a20fe0e45aa0b9b3e8287468fb3e94dc356f8da86fd2",
+      "size": 84169
+    },
+    "/lang/main-pt-BR.json": {
+      "sha256": "e59927bcd60037237f91f3f86e775adab187fb4ac5d5899b77b48d5fb7d6c411",
+      "size": 87487
+    },
+    "/lang/main-pt.json": {
+      "sha256": "3aec2232ae14032155eb1fa090aeae416127c6e403e02c0d70c399c50aab97c6",
+      "size": 99022
+    },
+    "/lang/main-ro.json": {
+      "sha256": "634d60f802d48f1e25a96dddaf239ea2cceee3b5d148c5f753bb0798896f49fd",
+      "size": 40644
+    },
+    "/lang/main-ru.json": {
+      "sha256": "b09b8ad60cb889150874de8ce17219a3df126041617172428d33ab091cbd830a",
+      "size": 122056
+    },
+    "/lang/main-sc.json": {
+      "sha256": "d5f53d2d25da07858dec9ee98bc6bbcec9149ea425525ffac095751ce645da05",
+      "size": 102753
+    },
+    "/lang/main-sk.json": {
+      "sha256": "a4b870c464a7c837634d75a26f37726ee019cf7ea8e60debbec2e41c7f549fd9",
+      "size": 50676
+    },
+    "/lang/main-sl.json": {
+      "sha256": "d9c9eee4bca2bf32b12f0b400900dcfd9c18e6d6e4f02b63b98847b01b5cdb08",
+      "size": 64283
+    },
+    "/lang/main-sq.json": {
+      "sha256": "af91cc43655ea49cba252afd7c53fb23834a5ccd405f07e8ff50a5c7e28e946e",
+      "size": 94176
+    },
+    "/lang/main-sr.json": {
+      "sha256": "43c4002dd7052d8a0bf88c6a93b0632db515cd50d69ce1e71a973f5c77a23cf1",
+      "size": 45003
+    },
+    "/lang/main-sv.json": {
+      "sha256": "0742d93015dfe0ee5bfca1102068964d01a6e9cc16299fa14dd286f8a706eaac",
+      "size": 93772
+    },
+    "/lang/main-te.json": {
+      "sha256": "54200b8e86fe5ab546dc67fc6dc405048bcbf9a6ff8ba9501bbcf29e45c69feb",
+      "size": 76609
+    },
+    "/lang/main-tr.json": {
+      "sha256": "00d0d41d9d439209d1477b3cd011518f5ec1710ffba4410bf1d52457889705a9",
+      "size": 91197
+    },
+    "/lang/main-uk.json": {
+      "sha256": "a6e95c98da5b443668b485ca6ee13a61c45cab9dc165c087c6c131281c17eace",
+      "size": 110998
+    },
+    "/lang/main-vi.json": {
+      "sha256": "67c8d936d597dd6d13dbe3c1cdffced507eb1958857000cfcfb021fb4627e5dd",
+      "size": 97205
+    },
+    "/lang/main-zh-CN.json": {
+      "sha256": "9317527c33e658fe7a69d65f0a459135a5988f709039b37bb3527193c6ec52c8",
+      "size": 87175
+    },
+    "/lang/main-zh-TW.json": {
+      "sha256": "657f29c8380296d04b202872fc9aca7e4a785cdc3dad696e9f37769f7af994ae",
+      "size": 88844
+    },
+    "/lang/main.json": {
+      "sha256": "a5692cb7638b315f8c2e729bfae7ae8c35407821c53c71525769f49037b7a902",
+      "size": 98738
+    },
+    "/lang/readme.md": {
+      "sha256": "164f42d9ff8b65227be15ffe1562bf9266d2a6820d02b00aea5f3b70312c7c7f",
+      "size": 1995
+    },
+    "/lang/translation-languages.json": {
+      "sha256": "ed730a7e3794c9f41082e23497e7604a82bdb197a0d18fdf47eec44c86550403",
+      "size": 2431
+    },
+    "/lang/update-translation.js": {
+      "sha256": "3d1e3f353064aedaa05b07dfdcc9ddf8fadad2b643afd89aa8c199f4ed3e38e4",
+      "size": 896
+    },
+    "/libs/alwaysontop.min.js": {
+      "sha256": "eb6a4a8c85b56c91f98aa56be93e3c8b2bd664cd2f033cbab3ea98c433b83526",
+      "size": 364260
+    },
+    "/libs/app.bundle.min.js": {
+      "sha256": "7a6696748608003a3eadf07992a41ca2a5999157fbf93537f8ac85e5c743bce3",
+      "size": 4995447
+    },
+    "/libs/blazeface-front.bin": {
+      "sha256": "3a358946b1b8f13fc0bbba54e20a57475b73efbe1500579b00cffec026a10236",
+      "size": 402048
+    },
+    "/libs/blazeface-front.json": {
+      "sha256": "050937ba1fd6e6a368c55333cab6ada95c44ee26ac654c1ffb5ea40be556150f",
+      "size": 51719
+    },
+    "/libs/chunks/1060.min.js": {
+      "sha256": "0699189d1a999567e26f2248730ffdccc7f20bda983874b6e8e77695fbc7f8c8",
+      "size": 613
+    },
+    "/libs/chunks/1080.min.js": {
+      "sha256": "83a4eeb25a83320dcce232d6d82b5a265127fd76c7e19ae7807f39f0c3e1c2a2",
+      "size": 3021
+    },
+    "/libs/chunks/1121.min.js": {
+      "sha256": "78df9c52733ca3890797897f0da4126e0fc8d7b075121a94b7f88aaefccc52b8",
+      "size": 1820204
+    },
+    "/libs/chunks/1329.min.js": {
+      "sha256": "aa2228c0a7ef0b265c7917743991b99bcca18ea2a3bc8eb474d9d5a694f70d21",
+      "size": 35479
+    },
+    "/libs/chunks/141.min.js": {
+      "sha256": "ada836d45ab9e5f0f41790a1ef0fcaaaa3bd17ddddf40dcbe321960be5bb1924",
+      "size": 4512
+    },
+    "/libs/chunks/1455.min.js": {
+      "sha256": "8e4c36efbf113f430ca007b56b1b00e0fa697a9093226f83ef2a9a128cc9618c",
+      "size": 866
+    },
+    "/libs/chunks/1489.min.js": {
+      "sha256": "fb41d0ef46ea9381c93cd333b6f3c93ff7985050e0aff31c8f5204da7b4954ba",
+      "size": 20919
+    },
+    "/libs/chunks/167.min.js": {
+      "sha256": "dba7a4e9b0373477761c2e32d083312aa1f174d682d2989ae60f1496900e64aa",
+      "size": 23755
+    },
+    "/libs/chunks/1689.min.js": {
+      "sha256": "2fa836d5adb700e83f15f0b933fc0899eb004f786f4e46240537a16c8076788a",
+      "size": 10687
+    },
+    "/libs/chunks/1818.min.js": {
+      "sha256": "0da96fbe17df01bfa7a25eb688d4612ca11f31a76b4689437216e0ba1e4f26e1",
+      "size": 1546389
+    },
+    "/libs/chunks/1818.min.js.LICENSE.txt": {
+      "sha256": "a8730dcad8d16150aeb865ac3913214b64ad0f2a80b455896d7e379bf23bcb3c",
+      "size": 531
+    },
+    "/libs/chunks/1987.min.js": {
+      "sha256": "eddd6ac3d337005a65ee61076f082bc1e297b3044cea9437d9e65e0d1ac9a3cb",
+      "size": 37253
+    },
+    "/libs/chunks/2130.min.js": {
+      "sha256": "bbd136957e6c0cd7c4ed8c885c4aed03895c9d4a9bbdd890979e4f8b3ec58a89",
+      "size": 266200
+    },
+    "/libs/chunks/2144.min.js": {
+      "sha256": "70e854c1282f8deacfb4e89a90a5f30512a3825143c9b73bd7ce79b4ad83b0cf",
+      "size": 22223
+    },
+    "/libs/chunks/2203.min.js": {
+      "sha256": "8ae8c490a4339acc6e910422833aacf9a0374fb30b503030ef0c0b042a64b879",
+      "size": 10321
+    },
+    "/libs/chunks/239.min.js": {
+      "sha256": "81b7145d1c9362ca55f170aa322fec8de3e0c17c896ef71835f91186f07bb481",
+      "size": 1037
+    },
+    "/libs/chunks/247.min.js": {
+      "sha256": "f72f15c0ffd11f7f8a4b326595c2357710adcb0f7cdcf5581ca860624ec522ce",
+      "size": 18243
+    },
+    "/libs/chunks/2603.min.js": {
+      "sha256": "06f5285ac77fc8b39a747c02d0dc1e72855e8b0e3f4189cda6dcc3d18dbbb087",
+      "size": 18945
+    },
+    "/libs/chunks/2725.min.js": {
+      "sha256": "556364b13e6ed5ece51d732da76ca0e704308354443f84bde799a16a7bc13407",
+      "size": 20268
+    },
+    "/libs/chunks/2775.min.js": {
+      "sha256": "0e70e0a200a8d7bafedcdce73370ed424cf14ca58a3895784e55c774c06beec9",
+      "size": 30907
+    },
+    "/libs/chunks/2783.min.js": {
+      "sha256": "c89787bbe30cdc36857b2066fee6df4bf2a1255a0e9d356a21f16b357607925b",
+      "size": 870
+    },
+    "/libs/chunks/2803.min.js": {
+      "sha256": "b3afab5d70592e058cbc796ae8f0cf434877f8c031f4194fc4d73d9de50659e3",
+      "size": 10278
+    },
+    "/libs/chunks/2886.min.js": {
+      "sha256": "5964d09f37a4da9b45800f850a350a8f3cb0b2fcabc4e8e40476bef2b66c2989",
+      "size": 8736
+    },
+    "/libs/chunks/3138.min.js": {
+      "sha256": "28f129618e982ddf21ca9878d88f82cfeb75d4f257538e88c06cc6ba390ca839",
+      "size": 19666
+    },
+    "/libs/chunks/3207.min.js": {
+      "sha256": "28c0a55d45bc9976af80f76a9be0b1a288e3941b74971065c571594eef78993f",
+      "size": 18565
+    },
+    "/libs/chunks/3259.min.js": {
+      "sha256": "32c623c21d0521fc598e22f9e7ba04edb1350d45cdd4a37449baa250f8d0e36a",
+      "size": 28134
+    },
+    "/libs/chunks/3292.min.js": {
+      "sha256": "16e5f5deb342d565cc1e969e281eda9ff8b264c1b61c67eb537e1e59a128b11c",
+      "size": 68022
+    },
+    "/libs/chunks/3347.min.js": {
+      "sha256": "da4d7b8bc705d6375005366261f0f4115fe21578185a22bd2243bbcc50ce0760",
+      "size": 8762
+    },
+    "/libs/chunks/3417.min.js": {
+      "sha256": "7c1f8372fce1248d29f7125283228cfaa5aa1c613b09b97076b58b1e85474fbb",
+      "size": 24141
+    },
+    "/libs/chunks/3471.min.js": {
+      "sha256": "416f9d3ec229ba70ba2e6ffe30ccc6f53ca2239055102abe8921565701463836",
+      "size": 694
+    },
+    "/libs/chunks/3567.min.js": {
+      "sha256": "c76d25b94e1d7236b85463583afd881b5250c9a2e8d3c1f293a1a95be185eced",
+      "size": 531
+    },
+    "/libs/chunks/3645.min.js": {
+      "sha256": "b758f75f60f01b2318e8edead3ba9856aa5c6f25b777b1eb428b869d24caceb1",
+      "size": 17729
+    },
+    "/libs/chunks/3659.min.js": {
+      "sha256": "0e98986529f91dada49760185a47492baa9ce2f67fa165fadc2c149f5908a118",
+      "size": 23605
+    },
+    "/libs/chunks/3687.min.js": {
+      "sha256": "db7ae3de91df02d09aeadae370f88fcb438266b29c3cb0cfdb5eb8f092bbe4ed",
+      "size": 83862
+    },
+    "/libs/chunks/3760.min.js": {
+      "sha256": "581425918c1b8c263548980e9acafae6d0792649c9ebb6dc052d77b775a620e9",
+      "size": 822
+    },
+    "/libs/chunks/4073.min.js": {
+      "sha256": "7fe23f53be25c3d1c71323daa232bb840cc4a7840e57f4852253a69cae750032",
+      "size": 38315
+    },
+    "/libs/chunks/4104.min.js": {
+      "sha256": "00d023efa4b1d10cb4284145ff5314d0d095de51929f7ca36a51cc6943216652",
+      "size": 1479792
+    },
+    "/libs/chunks/4106.min.js": {
+      "sha256": "76cc160e10a233d2ffa87d97bb9727d20dd0982cf1fd83247d564ffaae6e61f2",
+      "size": 42413
+    },
+    "/libs/chunks/4130.min.js": {
+      "sha256": "cb4ce225da184ab44bdeda38eb427a2408f40863d8b6c3b9694cf98e7c6004e3",
+      "size": 34011
+    },
+    "/libs/chunks/4207.min.js": {
+      "sha256": "5e9bb4479c2481f2d940254eae317affddcaae97af5e789c07444123ac55386c",
+      "size": 19550
+    },
+    "/libs/chunks/4226.min.js": {
+      "sha256": "3de63072030ce88d5ad78c47e918e4e4e76c1d7112c523140abc16d02004ad35",
+      "size": 19299
+    },
+    "/libs/chunks/4256.min.js": {
+      "sha256": "065002f4125f80c6bbca90b5a581c45dbf0fd16eef5f65deddfcb1ce7be2ab92",
+      "size": 16889
+    },
+    "/libs/chunks/4259.min.js": {
+      "sha256": "1938bda5a7772aa70d4557d4841fed82c7696d8f979a361fa38e72f09bb0cacd",
+      "size": 23311
+    },
+    "/libs/chunks/4337.min.js": {
+      "sha256": "d12ece9ea09fe46e0d1b5ab7dd822ee82041816d331010070f360bf52f155eb0",
+      "size": 530278
+    },
+    "/libs/chunks/4337.min.js.LICENSE.txt": {
+      "sha256": "417e4d9cd1c713dd76240fbcae19324fafce38cf4a98a6fa78ce59c19fe6d1f9",
+      "size": 485
+    },
+    "/libs/chunks/4564.min.js": {
+      "sha256": "b3d7fe3be8c9889e11735b4cddc7b3ef58b3b29e54cf794278e3bc760e69b1f3",
+      "size": 29118
+    },
+    "/libs/chunks/4690.min.js": {
+      "sha256": "0d7dd97b6fefb9fbb996d253b0949601bb7689f8c953b15928835d1b5f68271c",
+      "size": 818631
+    },
+    "/libs/chunks/4695.min.js": {
+      "sha256": "6a58167b15cec9e5faffe7809bc92c531fe75518d71b5887f464408cce089567",
+      "size": 15676
+    },
+    "/libs/chunks/475.min.js": {
+      "sha256": "a9ed16bc6bb778f017ce4b044b8b3a20fcf0ad96ff50ca77c1f130e39f08e2ea",
+      "size": 294631
+    },
+    "/libs/chunks/475.min.js.LICENSE.txt": {
+      "sha256": "66d211939287d152b7818d81b46a352da686acae373de1e0cf8b32355d57d189",
+      "size": 297
+    },
+    "/libs/chunks/4762.min.js": {
+      "sha256": "8159f111a621760ea1d6be9eceac88d1e3bd99e5eed8e466340d9119556b4015",
+      "size": 19951
+    },
+    "/libs/chunks/493.min.js": {
+      "sha256": "15f29afc6d9deec7a94fe200b2ccb3d90691ddb3f71e4fc1bd31cd97f6e2c070",
+      "size": 29486
+    },
+    "/libs/chunks/5114.min.js": {
+      "sha256": "827a19df3db36277f92b723438a19bd18afca11ba80693f3db03ffa1ff0404d1",
+      "size": 29835
+    },
+    "/libs/chunks/5163.min.js": {
+      "sha256": "6dc12f12e4767c9bd8d1d8945daa1a5c5b5933aa72c05ac6c8c1dc2bc2cb6a88",
+      "size": 10572
+    },
+    "/libs/chunks/5301.min.js": {
+      "sha256": "c93dd88d120a82eb2790b067db33457ddfe2a331419a75a2ad7026d909306b11",
+      "size": 20487
+    },
+    "/libs/chunks/5322.min.js": {
+      "sha256": "fdef3b8f3b043cbdf1d8ed1a285a2e819750d933e8c7b1d781c3781462d4f901",
+      "size": 35428
+    },
+    "/libs/chunks/5388.min.js": {
+      "sha256": "d4a0bff08f188e4cd15322e92b711fb67bc3a95a7502522b6efbed9c48c15548",
+      "size": 19153
+    },
+    "/libs/chunks/544.min.js": {
+      "sha256": "82bf90bb172568d61af85995ea1dec9c56e6b1ba30132b39a861da15fa24f5fc",
+      "size": 29995
+    },
+    "/libs/chunks/547.min.js": {
+      "sha256": "1b61c99396941c34070b66580c915ddbe265640473f40f87599749ff24e447df",
+      "size": 23564
+    },
+    "/libs/chunks/5544.min.js": {
+      "sha256": "bd49a4b434f5a6098c22c64d1aaada3aec1c5b0adb95d06dd7d9fb156899c9f1",
+      "size": 21366
+    },
+    "/libs/chunks/5628.min.js": {
+      "sha256": "ed5ed3011b828c1b61992913605ca90c897691baf2f6c8d4cb7cd1ac399ee290",
+      "size": 4910
+    },
+    "/libs/chunks/5713.min.js": {
+      "sha256": "7248b0b47a3761af388f61bb1c06504e9938dcd2267f7b7f3c24051bd9b45004",
+      "size": 20001
+    },
+    "/libs/chunks/5857.min.js": {
+      "sha256": "efd20d94cdd7b0d8b303620cd11956009d15d7d4eaf6b82a9553168a7209469c",
+      "size": 8547
+    },
+    "/libs/chunks/5860.min.js": {
+      "sha256": "db049a0a615c6c3bce677a748cb9c44320135aaa49879a9a343a9ed193b9305d",
+      "size": 45530
+    },
+    "/libs/chunks/5950.min.js": {
+      "sha256": "72a439ee58aed7701a6454c8ec51f11aef57796251442cabf22927e63dda212c",
+      "size": 21515
+    },
+    "/libs/chunks/6220.min.js": {
+      "sha256": "f36e26da5ced41011b00748b0e6ea139f33bdeaecac56036835f5696c5ecf322",
+      "size": 32510
+    },
+    "/libs/chunks/6322.min.js": {
+      "sha256": "fea6c261d53ffa366c01531f5ce2827897859bb409221d3897ac8edb41301ce4",
+      "size": 751
+    },
+    "/libs/chunks/6586.min.js": {
+      "sha256": "0707d879f958ba8646cb995cd46e8459a450a61a98e534f1f883b995d0c527cf",
+      "size": 12660
+    },
+    "/libs/chunks/6625.min.js": {
+      "sha256": "588d631cd630ad3d3dfa2f29769df953699ebd1dd62850ec83efb7f25cd8efec",
+      "size": 42807
+    },
+    "/libs/chunks/6675.min.js": {
+      "sha256": "359c16c8964bf0e98183a86a7d3916ae7f49844c9a4e9f0e2c3805229977d7b1",
+      "size": 22473
+    },
+    "/libs/chunks/6770.min.js": {
+      "sha256": "e647743e0e47edbd464fde81e8ab62a44d953b49f5d272937198b53a94dfd1d2",
+      "size": 9151
+    },
+    "/libs/chunks/7115.min.js": {
+      "sha256": "09261aee46e4e8725f9f5a83b460bccd7a08fb06fc53fc0aea0319ffb8b5be65",
+      "size": 39976
+    },
+    "/libs/chunks/7134.min.js": {
+      "sha256": "d46ab504f99c4e567c20f7ab690e6c65c8fdae9dfd852a694147c4311568e951",
+      "size": 36811
+    },
+    "/libs/chunks/7185.min.js": {
+      "sha256": "39fb6d7b4aff663d922eb847b45fefd935a3f75ac244592f3364d2111cd308fa",
+      "size": 10760
+    },
+    "/libs/chunks/7256.min.js": {
+      "sha256": "45722a8427529c67dd6abee89f05e186e6c5fe11004a201c60a8a458a483c72a",
+      "size": 25832
+    },
+    "/libs/chunks/7358.min.js": {
+      "sha256": "8b754f29e224812a3fb8731d387a3510e4ab04ade4475cea0702f1abdfba09b7",
+      "size": 21202
+    },
+    "/libs/chunks/7690.min.js": {
+      "sha256": "0899109a0ff40fa4f0dd9932d342828c1217a636d26d577e74e0da3a9c569bfa",
+      "size": 16115
+    },
+    "/libs/chunks/7897.min.js": {
+      "sha256": "5ed27adb8f2f34aee57c2dc2a9ccb2757a512d99a5efa291fa185245c2edf092",
+      "size": 21679
+    },
+    "/libs/chunks/7899.min.js": {
+      "sha256": "7d725b16d03d919d9dcc198f11f2593ed37d15f0c02ca8f4fff3ec5d422290b9",
+      "size": 25702
+    },
+    "/libs/chunks/796.min.js": {
+      "sha256": "219fd066c17752880210afa5f1a589f62954445721d2d4583ad64f0d82dc5038",
+      "size": 23498
+    },
+    "/libs/chunks/8005.min.js": {
+      "sha256": "1939574a7e2c3e7bc10558609b6e8a01d0ffa5cea0f7f19bf39cf2621ede3d4e",
+      "size": 22639
+    },
+    "/libs/chunks/8024.min.js": {
+      "sha256": "ce60ada41d5c23f9e6c1c94370d1d0e8ce533e222088ba48cb9dd18fbfbde51b",
+      "size": 9236
+    },
+    "/libs/chunks/8032.min.js": {
+      "sha256": "24b49d980f8839b83d0e62803264c03f71b2eb8f41faccc12a4b9b1f10e23330",
+      "size": 235
+    },
+    "/libs/chunks/8090.min.js": {
+      "sha256": "20c0649a0802cc1fdf14ad3dd70523bac8091d909ab9f4383dffb32c179a1853",
+      "size": 1714
+    },
+    "/libs/chunks/8146.min.js": {
+      "sha256": "2b89f58ef2b2bbe2a55fcc182d956d5c79f2d5f502a7b848ade59a6aa64c8cb0",
+      "size": 34497
+    },
+    "/libs/chunks/8298.min.js": {
+      "sha256": "e800ab54ebea8d4226323edb2a2a3444de5a51524e8e2bb593aae802bf1e312e",
+      "size": 14568
+    },
+    "/libs/chunks/8528.min.js": {
+      "sha256": "88bf9c55fe56286d95d84e0479618bf01f1bc9bb0711c11889ae008eebd83b97",
+      "size": 19690
+    },
+    "/libs/chunks/8846.min.js": {
+      "sha256": "789e73e9e092a16eee85d890ae702039731cfaaac8e0e4a2bf21a5d9ea51f7b2",
+      "size": 13442
+    },
+    "/libs/chunks/8882.min.js": {
+      "sha256": "d0be9cf92d37f2e4ab413c60cefd9419309fae42780735beb99ba8dfe16fd810",
+      "size": 24404
+    },
+    "/libs/chunks/8890.min.js": {
+      "sha256": "c11b1c9f382dabad5708a0d93edd0ab14f4b6ab46d1948249b645039225d9ef4",
+      "size": 58970
+    },
+    "/libs/chunks/8989.min.js": {
+      "sha256": "abbb50daf57d4386fd0a6f968856ba7420caeec699dedca79a2e801923e54510",
+      "size": 39653
+    },
+    "/libs/chunks/8995.min.js": {
+      "sha256": "e241d26fdf082b430cb210b03806f9fcfca569bf7b3686c5a81e2604003099de",
+      "size": 12302
+    },
+    "/libs/chunks/9013.min.js": {
+      "sha256": "0a4731e1d0fd8ed25ed49c851b82e1d38c8e928186646f580c3c4b65e4c7adb4",
+      "size": 19843
+    },
+    "/libs/chunks/9105.min.js": {
+      "sha256": "63e3a0935166316470553b6e3f853c0d6ecee4137d000c12f5a22cb6372750be",
+      "size": 19218
+    },
+    "/libs/chunks/922.min.js": {
+      "sha256": "fec75187df1099154b0142c5523c7a9a696198abd17a0bfcd9a739fc5336b4ce",
+      "size": 14016
+    },
+    "/libs/chunks/9596.min.js": {
+      "sha256": "30c966109682b326190f19d452bdd195b222416849d3ee4a60a15ef3e4c20467",
+      "size": 185
+    },
+    "/libs/chunks/9612.min.js": {
+      "sha256": "5930b01e7f97739dc82f055fc07fab46018f3d603356d8b59f65026476f0a5f9",
+      "size": 22225
+    },
+    "/libs/chunks/9698.min.js": {
+      "sha256": "e05b4aade814dbad94e738d935c00e21bbdc435f80258e69a7ce5fada42b853d",
+      "size": 19814
+    },
+    "/libs/chunks/9706.min.js": {
+      "sha256": "63456470804cfe53f81a62c38dfac3105a3fa1caae98fbbf063eeb0682451e61",
+      "size": 21523
+    },
+    "/libs/chunks/971.min.js": {
+      "sha256": "9e6cc5c00337b62c0fb71b3a2f56176b1a17a111e6eb8679d0be1f8ae4436f04",
+      "size": 17607
+    },
+    "/libs/chunks/9828.min.js": {
+      "sha256": "e7ca2829205d43b9b05be7b2e612836deb3049e5782dbbf28fa440e56f241a8f",
+      "size": 31803
+    },
+    "/libs/chunks/9890.min.js": {
+      "sha256": "421bf39a3d808ff7dd6c0c395be569622a06f6fccdfe86157cf3aeadf0c06949",
+      "size": 24046
+    },
+    "/libs/chunks/9976.min.js": {
+      "sha256": "71b7b18b1215fb8356eae182ddb98eba01a6860df24bb981a478a2c39055b6e8",
+      "size": 20923
+    },
+    "/libs/close3.min.js": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/libs/emotion.bin": {
+      "sha256": "927ac8224f356ab1e68c2bcfbfa07b0c8567047d1bcf817388ba6e38214c4987",
+      "size": 820516
+    },
+    "/libs/emotion.json": {
+      "sha256": "56f7e557eb0c863a8b9ab04ac7ccba756e93bf2c27dce135ef0e8712b80b7ad2",
+      "size": 17980
+    },
+    "/libs/excalidraw-assets/Cascadia.woff2": {
+      "sha256": "6d27c0474bb6c7922911f90ae811918f6be943005f1c4a6ec0e5b70a2bfddf16",
+      "size": 86812
+    },
+    "/libs/excalidraw-assets/Virgil.woff2": {
+      "sha256": "9976295bfe709bdea64839a4d4e9a1d436dd6eb67538399a5a0e8b8fadbcf1cf",
+      "size": 61248
+    },
+    "/libs/excalidraw-assets/bug-issue-template-7628a1d844446e5ca713.js": {
+      "sha256": "5d27e2289850695ab1ea2fe06bd49d21955200d4420f6fc4dcf778f95ed1a298",
+      "size": 258
+    },
+    "/libs/excalidraw-assets/locales/ar-SA-json-df18063071043058bb35.js": {
+      "sha256": "04edbde5e46ec8c5fb3d62a39059a8e99dbcc206599cc741ef6443175303684e",
+      "size": 18486
+    },
+    "/libs/excalidraw-assets/locales/bg-BG-json-ba39428df4dbd5ac051d.js": {
+      "sha256": "97b6da3c6d719fadcdcd85725d850dd7eb29071a8364f482b328cb2282523bd8",
+      "size": 16659
+    },
+    "/libs/excalidraw-assets/locales/bn-BD-json-a7a189c1a6aa9e464a56.js": {
+      "sha256": "f3924fc4b394c9c6be32bbcb165bd5cfcc6f0425e58f18676f2c983da4a13bd9",
+      "size": 6835
+    },
+    "/libs/excalidraw-assets/locales/ca-ES-json-bf30dc22317ac1f4161e.js": {
+      "sha256": "0ed59fe60032157f09bd5fa8b9cc6af3707160f4b8fa54b179a2fa40a7c67440",
+      "size": 17268
+    },
+    "/libs/excalidraw-assets/locales/cs-CZ-json-0798528a966e2cda88ec.js": {
+      "sha256": "a7a53c6afea20b82d775449c3bd2aec932ad4dcbbacfc2ef2e0c53f49af84b65",
+      "size": 8085
+    },
+    "/libs/excalidraw-assets/locales/da-DK-json-8167504a4d4ae6d98c27.js": {
+      "sha256": "f75ed3224c785648c1e7e38ec27b8d442857b3270410459629c7ff0d4fc4925b",
+      "size": 8972
+    },
+    "/libs/excalidraw-assets/locales/de-DE-json-63e7d4cbfcde0ce1814c.js": {
+      "sha256": "2265b169a08a3b14dbe18244e260f86a441a76b29cbcea68b27ebc120a5747f2",
+      "size": 18338
+    },
+    "/libs/excalidraw-assets/locales/el-GR-json-4a8497d64ac5d089474a.js": {
+      "sha256": "f4b788819b7b10547c0b571c0e45175d7cef3ebc92ac857d4c9586c19dae3e44",
+      "size": 20643
+    },
+    "/libs/excalidraw-assets/locales/es-ES-json-88d0dd30227b3d87a8d5.js": {
+      "sha256": "63ed4ba9e6907e7a3ad66d9ab87a0fa749280997605f3f2fd5b6e5149f67a80f",
+      "size": 17784
+    },
+    "/libs/excalidraw-assets/locales/eu-ES-json-fee6ad26c14c62db47ab.js": {
+      "sha256": "138320a4479f6737f7f473b5c3e152c5b18e18952349b898d775d2e721264b2b",
+      "size": 16829
+    },
+    "/libs/excalidraw-assets/locales/fa-IR-json-4cf3c4cac1aa86837e37.js": {
+      "sha256": "043b6714b68c2abf6c3258cc219049a7af0dc18b1ffb8fcce047250badd133d6",
+      "size": 22370
+    },
+    "/libs/excalidraw-assets/locales/fi-FI-json-1e24513f7499a89764b0.js": {
+      "sha256": "f1ce681cfdfec9ae9787750ef9f02685a874db0d6163fe60291ce6cdd59ea874",
+      "size": 16949
+    },
+    "/libs/excalidraw-assets/locales/fr-FR-json-e957f763c3571741d176.js": {
+      "sha256": "dc26c3aaabd972bc1bd67f05015f2bf34ff3f90891464547a0548497ddffc248",
+      "size": 18789
+    },
+    "/libs/excalidraw-assets/locales/gl-ES-json-4c40e2b7e4ecefba7848.js": {
+      "sha256": "ae2cc67046c7b195e2f090a2268707e299b7162e9ec85ecdec80ccffd7f3dad3",
+      "size": 9598
+    },
+    "/libs/excalidraw-assets/locales/he-IL-json-29dec8d22c5fd34f9a12.js": {
+      "sha256": "e3b65ce22633adaab76252f442fbbbd3950845444b956fb24e94a99a5771e169",
+      "size": 17681
+    },
+    "/libs/excalidraw-assets/locales/hi-IN-json-72a7488b9f75a19d9041.js": {
+      "sha256": "b13264997992e2b86822499425c9f72f449062fc5218d9ff44249af538d5bd21",
+      "size": 20426
+    },
+    "/libs/excalidraw-assets/locales/hu-HU-json-0c93162cc32bb1b3a7d3.js": {
+      "sha256": "74a63416c584f0a6a6a8b2fe332243ab103276276f6e8ba35e815bc6e078cfc9",
+      "size": 17523
+    },
+    "/libs/excalidraw-assets/locales/id-ID-json-4b6f560ef48810f7727d.js": {
+      "sha256": "8d6eeccee7b13af424a1a7627db4db20389a1f9bd24e795060238f631b2f4659",
+      "size": 16672
+    },
+    "/libs/excalidraw-assets/locales/it-IT-json-0ffa72ac304167deb544.js": {
+      "sha256": "ab28f3bc2308e25e578fdc7bccd8c17eaa24fdf1b1903b2bb6dfb39352eea041",
+      "size": 17767
+    },
+    "/libs/excalidraw-assets/locales/ja-JP-json-8c7fb47849bc5c3fb51d.js": {
+      "sha256": "946856b8cfea95e661e206d55cc7a17d7e188cae8a469d0421228da459906f39",
+      "size": 20159
+    },
+    "/libs/excalidraw-assets/locales/kab-KAB-json-a229aaf321c3da577428.js": {
+      "sha256": "319bf3d00a4b5eebfea188f2ae7deff7836d074e9a4093f8b0036fc6c08096bc",
+      "size": 17148
+    },
+    "/libs/excalidraw-assets/locales/kk-KZ-json-6f477840db7f293c3ff3.js": {
+      "sha256": "3d2136164845c180811e13af7c10b2f9e87694e045e198981a301258a9877dbd",
+      "size": 9410
+    },
+    "/libs/excalidraw-assets/locales/ko-KR-json-efb124deee025252945e.js": {
+      "sha256": "1a33167eb7c2293fb845e2e1be9a460531e96c6f48048c97c396b9bf9e36e8e2",
+      "size": 18385
+    },
+    "/libs/excalidraw-assets/locales/lt-LT-json-6a7d4de0f242c78c75b6.js": {
+      "sha256": "51ece6de812b597d4693290b3ac0a8086962c083108b7e5b24dc34cf8205ffef",
+      "size": 8089
+    },
+    "/libs/excalidraw-assets/locales/lv-LV-json-e118f62721061c931a18.js": {
+      "sha256": "148c9816d75132fb4d8bb914bf5a4d158b320d80aa37bcf8574f6369a08fec31",
+      "size": 17791
+    },
+    "/libs/excalidraw-assets/locales/mr-IN-json-f4f95feaf792f55f7c23.js": {
+      "sha256": "5c4848585cd81201013cfefc0d41b98d519d448b88c1e6d649ec8706d524ad59",
+      "size": 32657
+    },
+    "/libs/excalidraw-assets/locales/my-MM-json-a78c614847e6c2a3fe02.js": {
+      "sha256": "53d07a93908d832026fcda85c3786b7237b92ae33de30c5d63296c4f9e4bda03",
+      "size": 17316
+    },
+    "/libs/excalidraw-assets/locales/nb-NO-json-b45aa5fb41a16edbfa81.js": {
+      "sha256": "c27b64667386803f9bd4e4bcbc3bf706c48bac1e143909c0a7d78cea265fe5b9",
+      "size": 16464
+    },
+    "/libs/excalidraw-assets/locales/nl-NL-json-b1c420387d01fa484d1b.js": {
+      "sha256": "9b3e511fe7ee80e0f182a58cdad1065656174b1539ccced38b7be3759148f2d6",
+      "size": 14282
+    },
+    "/libs/excalidraw-assets/locales/nn-NO-json-68936ef7537dcc9292c1.js": {
+      "sha256": "17e6b1515b86b74ac15837677d8daab80bd7a5d0e2e9b224856b1a1eb144112c",
+      "size": 15915
+    },
+    "/libs/excalidraw-assets/locales/oc-FR-json-d41f58dcdb50f62b3523.js": {
+      "sha256": "56158f01866054796d7895f03f7011d6be8d134e3fade735b5c39c5efb15694d",
+      "size": 17409
+    },
+    "/libs/excalidraw-assets/locales/pa-IN-json-41df950fa70ed85758d7.js": {
+      "sha256": "f188a113efc5a591d705c9998d1d48a17f83acba6a180581c6a9a163b861d73f",
+      "size": 24719
+    },
+    "/libs/excalidraw-assets/locales/pl-PL-json-0021485601f1b07ebcab.js": {
+      "sha256": "f989d957dba1ab171849891faf0022d7a591a3722b7b9633381601143efb60be",
+      "size": 16016
+    },
+    "/libs/excalidraw-assets/locales/pt-BR-json-72ff03498a41f90f233d.js": {
+      "sha256": "37b60e23eb3799efafb162770aab8c4c015ddff278ee39fa657b9c662b18f494",
+      "size": 16978
+    },
+    "/libs/excalidraw-assets/locales/pt-PT-json-839be12fe9dbb95f0e8f.js": {
+      "sha256": "737ced813d8892ead7687337ca2fab500296d9f1ae21701160f38553b77c250f",
+      "size": 14671
+    },
+    "/libs/excalidraw-assets/locales/ro-RO-json-9a98741abc72447e08e1.js": {
+      "sha256": "386dd9e62422e5b3b474afccc862b2ff0fe4f1f9d740af914210f7767f6ff576",
+      "size": 18341
+    },
+    "/libs/excalidraw-assets/locales/ru-RU-json-c4aca6954a117af10985.js": {
+      "sha256": "c3283759b13d80ede58823f823a8a0f5636706581a230bd2005b4c2c40029d12",
+      "size": 26328
+    },
+    "/libs/excalidraw-assets/locales/si-LK-json-e73bb7fb47924abe3fc7.js": {
+      "sha256": "42cb638adc185416e5c559481d9d05a54897c8f9ba21d05645c4a1001ae60c74",
+      "size": 7765
+    },
+    "/libs/excalidraw-assets/locales/sk-SK-json-9bf76f9cbac85483adbe.js": {
+      "sha256": "aaa22bcc44f88f511a5b8e3b97476e7b5aad65ff678eaa76f3b534f0c0771ff0",
+      "size": 17813
+    },
+    "/libs/excalidraw-assets/locales/sl-SI-json-089d1313b3307ef3168c.js": {
+      "sha256": "0a351256ee26ddb6060a5e2abad2e7497f4fa9c7878a8858bd5ef9f1299e36a1",
+      "size": 17015
+    },
+    "/libs/excalidraw-assets/locales/sv-SE-json-f0e61f7b9a925a8ac52f.js": {
+      "sha256": "4698dbb818f3a441d81004d0ab96df1f981b34208381b79b3727fabe9341db08",
+      "size": 16968
+    },
+    "/libs/excalidraw-assets/locales/ta-IN-json-771bc7ffd823c6d1f7f2.js": {
+      "sha256": "71284c94bddd0fb991cf6d14e28ebb97a8203e0ed215f255fde42c64d3c14b4a",
+      "size": 34015
+    },
+    "/libs/excalidraw-assets/locales/tr-TR-json-f67b553e451f94a58b73.js": {
+      "sha256": "483f21d025f1c1a153e8f515ad6b6fe0348c9b49071973acaa6bacb12b2ddbeb",
+      "size": 17637
+    },
+    "/libs/excalidraw-assets/locales/uk-UA-json-030974ad2c103dc4f3e8.js": {
+      "sha256": "3f8cd4e3b368847becd2db299e3ba7f794f153ca7e7c0e9548aaa16a6c536a7d",
+      "size": 25701
+    },
+    "/libs/excalidraw-assets/locales/vi-VN-json-14a0d70677d88d13130b.js": {
+      "sha256": "429344a9faa38cddb431743231bd7fa0c735576c43d138a8036cc5923841da26",
+      "size": 7598
+    },
+    "/libs/excalidraw-assets/locales/zh-CN-json-ac83663c09303ebc3acc.js": {
+      "sha256": "04dd63f5d9bc3cec80418dbd674433db3ff08d5bb503f0e57cc0199c0293f8d2",
+      "size": 15172
+    },
+    "/libs/excalidraw-assets/locales/zh-HK-json-fbdd69ac2e81d38f0aa9.js": {
+      "sha256": "cfa7d72a496b7d8966d6519cdb4d679935a3b3fe47ccb6467cea653c2825f799",
+      "size": 8507
+    },
+    "/libs/excalidraw-assets/locales/zh-TW-json-872230fd45944e19c9e6.js": {
+      "sha256": "fc203e66e7163f7953e3d0d0004108617d7b19ca2e1d1737dc2072747ce61a85",
+      "size": 15159
+    },
+    "/libs/excalidraw-assets/socketIoClient-9dfbabed609bb6017f9b.js": {
+      "sha256": "64024efd62e623a2d7dbe8daa14b864969538e583a39fa950cd81ca655a9eb27",
+      "size": 103
+    },
+    "/libs/excalidraw-assets/vendor-75e22c20f1d603abdfc9.js": {
+      "sha256": "727e002417f760b0b87c9d4f0300484484ac406b1725b284f9418c9217815052",
+      "size": 553020
+    },
+    "/libs/excalidraw-assets/vendor-75e22c20f1d603abdfc9.js.LICENSE.txt": {
+      "sha256": "594871473383e29e605a0230c4c52656c60aaba5635da39046ba7c86d1560efe",
+      "size": 4798
+    },
+    "/libs/excalidraw/fonts/Assistant/Assistant-Bold.woff2": {
+      "sha256": "e0cdd332ce039770e93ec44336b6db65f931940f42b0342aad35a06e7f991d29",
+      "size": 20380
+    },
+    "/libs/excalidraw/fonts/Assistant/Assistant-Medium.woff2": {
+      "sha256": "81a9f280ce6a790f20ca8cd521183caa430f1f7fdc0752c36ef1cc6dc828ac57",
+      "size": 20320
+    },
+    "/libs/excalidraw/fonts/Assistant/Assistant-Regular.woff2": {
+      "sha256": "76945f09225aae65bdbd204cb4ac40d4caa4ff67150e5074bab1a04d1b778fc3",
+      "size": 20232
+    },
+    "/libs/excalidraw/fonts/Assistant/Assistant-SemiBold.woff2": {
+      "sha256": "bba47a7d1b185a4a2e0d265ec82aeac5dbc2dc9cb0f482a2ff57cbdfe4e5045d",
+      "size": 20212
+    },
+    "/libs/excalidraw/fonts/Cascadia/CascadiaCode-Regular.woff2": {
+      "sha256": "5bce041e0fcce617e35efbc335b1372d27a84acb65fb464c65ff80ab3424a885",
+      "size": 65732
+    },
+    "/libs/excalidraw/fonts/ComicShanns/ComicShanns-Regular-279a7b317d12eb88de06167bd672b4b4.woff2": {
+      "sha256": "fa930fceb529a4b51ba3055d590302722c27704f6a6357495873950136b1e2ea",
+      "size": 17488
+    },
+    "/libs/excalidraw/fonts/ComicShanns/ComicShanns-Regular-6e066e8de2ac57ea9283adb9c24d7f0c.woff2": {
+      "sha256": "782f24081b810b8de9f04da055007ce4f1445c18abbf096c831f8888d65935c1",
+      "size": 1292
+    },
+    "/libs/excalidraw/fonts/ComicShanns/ComicShanns-Regular-dc6a8806fa96795d7b3be5026f989a17.woff2": {
+      "sha256": "61c376d32e1773588f6163599aed24fe0387b5a5cb622bd200455f20c2b36a87",
+      "size": 2816
+    },
+    "/libs/excalidraw/fonts/ComicShanns/ComicShanns-Regular-fcb0fc02dcbee4c9846b3e2508668039.woff2": {
+      "sha256": "ee641c2e35730c3e6e3826855f1b6cc3b343a017c3e216e4e4a2e47010c53ad1",
+      "size": 9856
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-349fac6ca4700ffec595a7150a0d1e1d.woff2": {
+      "sha256": "a0637cff365c7344d2f7a15905a1f74dceaf56b5ac2ff913d150358bed6921f0",
+      "size": 2656
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-3f2c5db56cc93c5a6873b1361d730c16.woff2": {
+      "sha256": "18ea9be1dd6b5a67b057f44eba8e34cb290f88308c272bcf35c79c1a220d0d7b",
+      "size": 2104
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-41b173a47b57366892116a575a43e2b6.woff2": {
+      "sha256": "c96649a5f96e2faa9143ee94e5b590b5afb08092f8d67c67f09cef332d66e4a7",
+      "size": 8712
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-623ccf21b21ef6b3a0d87738f77eb071.woff2": {
+      "sha256": "b004007be100261e58188cf8a0f7e850e997702f35d57110915995cd880e49f1",
+      "size": 824
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-a88b72a24fb54c9f94e3b5fdaa7481c9.woff2": {
+      "sha256": "e4423b318e11432aff2e6e865e300b7ca270f92321a3f56632268fede01c1b48",
+      "size": 24956
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-b9dcf9d2e50a1eaf42fc664b50a3fd0d.woff2": {
+      "sha256": "b424d16da4398be3e9852857a54ff70e043c8e2ec5c4444dbf7f88d7469b9859",
+      "size": 13296
+    },
+    "/libs/excalidraw/fonts/Excalifont/Excalifont-Regular-be310b9bcd4f1a43f571c46df7809174.woff2": {
+      "sha256": "4fb8ad69be9aeac5664d99e5aa3a68a27ea40c98943b80387f7cd55c034fcc93",
+      "size": 12220
+    },
+    "/libs/excalidraw/fonts/Liberation/LiberationSans-Regular.woff2": {
+      "sha256": "006a2b28cbbeeaec937d1b367d0949f5f48ef4b2e7b4e1d8dc7a799d2d639be8",
+      "size": 70668
+    },
+    "/libs/excalidraw/fonts/Lilita/Lilita-Regular-i7dPIFZ9Zz-WBtRtedDbYE98RXi4EwSsbg.woff2": {
+      "sha256": "2b6568c7a0f16300bc6c8d292bd426c361fcdb40699c2cbfab2bd3e9e6993dea",
+      "size": 1416
+    },
+    "/libs/excalidraw/fonts/Lilita/Lilita-Regular-i7dPIFZ9Zz-WBtRtedDbYEF8RXi4EwQ.woff2": {
+      "sha256": "8d6cd0f298738a92ca9bf6e13f54a9191afd06ce04ea00ebbf24499c017191b7",
+      "size": 10676
+    },
+    "/libs/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTA3j6zbXWjgevT5.woff2": {
+      "sha256": "e512f2d7c9fe062b1acf8f6ea64d4bfd89a77d26728150977627e445c7b6e937",
+      "size": 8392
+    },
+    "/libs/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTQ3j6zbXWjgeg.woff2": {
+      "sha256": "6d1626aac658786e37e78e0adce3ffffddbd75abc923d72e45a7168bd80053da",
+      "size": 16476
+    },
+    "/libs/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTk3j6zbXWjgevT5.woff2": {
+      "sha256": "3e7f76fcc8798b8bba4d6bcc06bdb0d788f6e89706c1d6e64ac81d65ca683c14",
+      "size": 11104
+    },
+    "/libs/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTo3j6zbXWjgevT5.woff2": {
+      "sha256": "7928f47b21192cb6fdb2f46b71a474a3bd2fd608945c5ad7d7ed6bde8b0ae24c",
+      "size": 15476
+    },
+    "/libs/excalidraw/fonts/Nunito/Nunito-Regular-XRXI3I6Li01BKofiOc5wtlZ2di8HDIkhdTs3j6zbXWjgevT5.woff2": {
+      "sha256": "5117398298dd0dba3c95a406ff12fbeb88289fa4e913e3a5cf482cafe7f7071a",
+      "size": 6116
+    },
+    "/libs/excalidraw/fonts/Virgil/Virgil-Regular.woff2": {
+      "sha256": "2279cf7daf1c42a3a53b2c1437ad72f0050efb67ac263e0245f67612fd766714",
+      "size": 56156
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-019d66dcad46dc156b162d267f981c20.woff2": {
+      "sha256": "7404ad8086cf238269c6f6aa3ecb754dac903c7b28be88d1f683b9eab7c463e6",
+      "size": 58580
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-04b718e5623574919c8b0dea5f301444.woff2": {
+      "sha256": "cfdf67b97d5eee43f06d4fd6c8d8a1136d66e3391c3500341cef41bf39672559",
+      "size": 65928
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-069e77aac84590e2e991d0a0176d34f2.woff2": {
+      "sha256": "9a8e521a24e531cbeadfbd2750108c48aef9c0f13b0c0840e2cc9fae3257aed4",
+      "size": 63964
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-06c77b8c66e51ed6c63ccb502dd8b8af.woff2": {
+      "sha256": "cc2e553954218cc43f5f6f7cf54136d4d0a4317b88d670ae1940797545bdec61",
+      "size": 55108
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-08e0dc436ad0ad61ba5558db0674d762.woff2": {
+      "sha256": "101960c709c4a146a181f002808861249fe13ede28fc2d9cff24175715191abc",
+      "size": 49736
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-093b9ef39a46ceae95a1df18a0a3a326.woff2": {
+      "sha256": "819bbcac2468e1b44363442bca0a7a894883c32ce5cf9b28f707d94304a8a3ed",
+      "size": 55712
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-095c169f3314805276f603a362766abd.woff2": {
+      "sha256": "7f05badb0edb31118c69aa6f9bd20b13e737b5719f816617d342a50dc51c9506",
+      "size": 69968
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-09850c4077f3fffe707905872e0e2460.woff2": {
+      "sha256": "4cd090f380a82950208e5ff0b83b63f82d9a998881dfa12a8b8a8e6c7fd298bf",
+      "size": 65048
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0986d134c05864f5025962eef9f994a0.woff2": {
+      "sha256": "76cdc801e75369e01fe0907f0e603a699dccf1fa0d880a717b8dceb0c8751806",
+      "size": 53764
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0b5d723fdc4e249c140f0909e87d03b4.woff2": {
+      "sha256": "4a5ab634a6839e983344645d82d31d85a1786fd4e81d344f8544181158a86c45",
+      "size": 53672
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0f626226ba1272e832aea87bafd9720e.woff2": {
+      "sha256": "c261de5643a0b6fdfeb3fa6c43548dc6270f19756532c2953a4c8f74a1bb670d",
+      "size": 62820
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0f7fb1e0d5015bb1371343153ecf7ce3.woff2": {
+      "sha256": "7d92022e9005636c778ebccb89ca8ab3a17c7d99e17201c422ce833e4d4e0e04",
+      "size": 75564
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0fa55a080fcd0f9dc2e0b0058b793df8.woff2": {
+      "sha256": "a3531eb15218eca282196405dca5e502a0b0ce14d82824ee5c3104e241f12c56",
+      "size": 65884
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-0facdf1ea213ba40261022f5d5ed4493.woff2": {
+      "sha256": "4692019d3f011ff2b8c012ef4d5bcb9d649259bb3e68b8d5eded06fd5f6948ff",
+      "size": 50660
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-10a7ae9a371830a80c3d844acf1c02d7.woff2": {
+      "sha256": "343e81a0225cf0848a0c5c3df11589aba1386a8ea954fa549dd8749384e54c15",
+      "size": 68908
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-112c051027b2d766c19a519f6ee1f4f7.woff2": {
+      "sha256": "64d5521ca4b191e41422c2a1e775aae43a831a720a96c64b42d70a2229e1bec7",
+      "size": 61160
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-11c345711937f0ba4b8f7b6b919c8440.woff2": {
+      "sha256": "cb5cc5380aa885e6ea2d9502f15673ffe1e96d08a8e240cadc8a9a9e727a85d2",
+      "size": 62792
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-12b52b58eb3df36804b9a654ec9ee194.woff2": {
+      "sha256": "d10137e035185e36212a9ec70ea8c2b0b10f30b175f9543f57412a6f48abfddf",
+      "size": 57152
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-13ae07ed2e272d26d59bc0691cd7117a.woff2": {
+      "sha256": "4f0db89e7086b5eef3a83dc41d81ee3d46f9d7ae761e150e5689684e95ceb022",
+      "size": 56140
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-13d2887ec8ee73c43acdabc52a05af7b.woff2": {
+      "sha256": "b8a3f1ac2323db2a1ef228f021be3d13b1190ed7c1f4af6b0d50d0c4d454adbc",
+      "size": 64436
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-145aa02cdd91946e67dc934e1acffe75.woff2": {
+      "sha256": "96f696dd01f2534ceca68a6c9795f927c7c1dd276f7e97069cc7d76d85c9156c",
+      "size": 37412
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-15dc6d811c9cd078f9086a740d5a1038.woff2": {
+      "sha256": "b62e88759e83e6898a7c7588f8587d064aba185b9e6b9b79c15c22c7b195225f",
+      "size": 53168
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-173945821411c09f70c95f98d590e697.woff2": {
+      "sha256": "ef5693cd230dcc67a120cf627d59d9b66acab7b8f356f9a36c3a1e2edf479f0a",
+      "size": 73576
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1b611157cd46bb184d4fa4dae2d6a2b8.woff2": {
+      "sha256": "5b79154058f247d013a6561ba070b044911b3206e872ce8a2476392245f9de27",
+      "size": 64828
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1e6fd68f1f3902ce48ce8c69df385622.woff2": {
+      "sha256": "7a1db91b8de7dee60467eafa390af5aa6e8ad313e6b6fb62c31e7a03ea26f385",
+      "size": 57384
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1ee544f0f1dac422545c505baa788992.woff2": {
+      "sha256": "4c478c0638b0ede25838805d6f99badcc57fbf022e44562c9194c0c75118f1c1",
+      "size": 51728
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-1fdc0c67ed57263a80fd108c1f6ccf24.woff2": {
+      "sha256": "cdc443c022e8300966f91ec8b3185953579979dd5bffbcc66b498fe6b71e6c39",
+      "size": 56004
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-203b0e569e3b14aac86a003dc3fa523e.woff2": {
+      "sha256": "ddfc3cd617e83e271190a01fcfeb8625cd5ff9c105ca362c8804b7f762e595b2",
+      "size": 75216
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-20cc1bbf50e7efb442756cb605672c1f.woff2": {
+      "sha256": "27dce6f37362f4ad1495da86e9aa9ec808237d41d69d3f2f13d54ccbfe504c83",
+      "size": 56932
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-20e7bf72fa05de9adf7dbcc7bf51dde6.woff2": {
+      "sha256": "d9742a018d17fea1da72556502ef20d02b5cb80ddd571e539b60ce26cd19d4df",
+      "size": 72224
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-21430ee05a1248901da8d0de08744d47.woff2": {
+      "sha256": "d7d7130ac4a5ce5cf5f0a01f408267133cde16ef2966dfb35a9fc5a37f762cf8",
+      "size": 56656
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-23686f7f29da6e8008c36dd3a80c83d6.woff2": {
+      "sha256": "ab60b69500468e81eb3a6796b8e23560699e2de1be596956bd1832256fae9d44",
+      "size": 68952
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-23ad2d71b280f00b1363b95b7bea94eb.woff2": {
+      "sha256": "e8dec71d8ede1b9b9f3d7325e1ea31432474a83095719bd2149852fef4794ed5",
+      "size": 68324
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-23f228f3999c01983860012330e4be08.woff2": {
+      "sha256": "20a7232989878afcad6de84b68872facaf96fb85c6827f0457d532c1cbf6bbcc",
+      "size": 54732
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-24476a126f129212beb33f66853ea151.woff2": {
+      "sha256": "c0c147e916a32a86306f2f9864982d87fdf41b6a0c3d1ed77c2aabd2ed772a94",
+      "size": 62844
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-24a21c1e4449222e8d1898d69ff3a404.woff2": {
+      "sha256": "e49f1063fddb7928f50c6490912df4bce1042795bd372ce0673cc0d87beec559",
+      "size": 66072
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-25b7f38e18f035f96cb5e547bd2bd08c.woff2": {
+      "sha256": "a6ec4baa25d737b49526c152b69a98e66373e3ab2a337ca1c7a895d7a6d8b45b",
+      "size": 65836
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-29cec36cd205b211da97acabaa62f055.woff2": {
+      "sha256": "9ab470df6c456a0a376521f52fc8a857849ad15c640b6c8fae020fbdeb0cde0b",
+      "size": 66504
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2a26d20a23b00898ce82f09d2ee47c3f.woff2": {
+      "sha256": "d85471a49823e8757af9c1c7d920fbfb4ccdb9660e06f7b43ea2b2325b438d0f",
+      "size": 63388
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2adbc89c11e65905393d3dfc468b9d5b.woff2": {
+      "sha256": "896a9145f32c6db6eb6ccdff9986859f08e349f505628dd9eeff2139def675cc",
+      "size": 58256
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2b7441d46298788ac94e610ffcc709b6.woff2": {
+      "sha256": "d0493edd4b70aab6e7c4d78be1d5976d2fb0113c486f20bc2114d8d0f8256f5d",
+      "size": 46548
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2b77e8ebfb2367ab2662396a60e7d320.woff2": {
+      "sha256": "6cba567589067e182dd06054fa24e52ce5e8ac8d07278861125e3b6f6d2d2a31",
+      "size": 52492
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2cf96d082d35ea3d8106851223ad0d16.woff2": {
+      "sha256": "714626f97e78b4ee72f935408a48508e9f9855399429ba23dc0c9ef0f4074368",
+      "size": 59524
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2d43040e86ff03ba677f6f9c04cd0805.woff2": {
+      "sha256": "cb1ac8f87c3e4c2e3dd925480e2b6c659100acd59266e957065708c5c46d7385",
+      "size": 58088
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-2e33e8dc771ef5e1d9127d60a6b73679.woff2": {
+      "sha256": "13941783dc59754f2bcdcd3c54e7bb665e433fc1ffe1cafa0e273ddcd4f62dbe",
+      "size": 69776
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-33432927cd87d40cfe393c7482bf221f.woff2": {
+      "sha256": "9b2a6cb479d1b3d2966a5beb93ba63f30d6b05e83c2985b3f9aab447d802a4b5",
+      "size": 53216
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-353f33792a8f60dc69323ddf635a269e.woff2": {
+      "sha256": "aee4567e54a8428067774cbcc9ca8faf2d9bbb10d0a780a374c950d286e1d8d3",
+      "size": 54160
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-36925dfe329a45086cbb7fc5c20d45ac.woff2": {
+      "sha256": "542fd6f0fb2eabcd2cfd79b0cecafb376691aa74afcfbf718c8d26160d0cd9ab",
+      "size": 60896
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3717077e38f98d89eae729b6c14e56dc.woff2": {
+      "sha256": "34718d3ab2e153ea66994f9b20475c76bcbe61c73dcef6b7d4096f0eec2eef6b",
+      "size": 54628
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3756e81d3e149cf6099163ee79944fec.woff2": {
+      "sha256": "9db5961935f12cad41726aa81c08c9783b6c71ecaaf7dfea1e4b8f5768defb4d",
+      "size": 51596
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-395c35dd584b56b0789f58a0559beaf1.woff2": {
+      "sha256": "8d6bb509725a27cd4cde2daaf743be8ec74114ad3719add4c805cd1c2fdd0f13",
+      "size": 73932
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3c9de2ae0ea4bc91a510942dfa4be8d2.woff2": {
+      "sha256": "9c4e535e741d6a13ec36bb2909058db1321919cb14561e661c62be8f0ffda7f9",
+      "size": 58040
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3cc70dbb64df5b21f1326cc24dee2195.woff2": {
+      "sha256": "71a3287e8998e47016b5159ae03f636939516b4f5b251ee71f0c5a5212e4df6b",
+      "size": 64936
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3e1f8f654357353bf0e04ba5c34b5f7f.woff2": {
+      "sha256": "8c3887fce9435759019e1ecba3ee315164d0f8a598ce24b94c8bfecebbb724a4",
+      "size": 69020
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3e63ed8162808a9e425ed80a8bc79114.woff2": {
+      "sha256": "cfafe77006c4bbd7ece2231a735f8c219a3faa6831d4d5733ab14bd91779157a",
+      "size": 73700
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-3eaa538115d76932653c21d8dc28f207.woff2": {
+      "sha256": "04a7b1244c272a46ca740937e1a3e790e8ff142d6fcf53934be0e4a167eacdc9",
+      "size": 70944
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4095eb84ef3874e2600247bee0b04026.woff2": {
+      "sha256": "6ab6ac356c313d98d26c9a23e9b1d5239330974b090d8aba8184ce99c24fcf16",
+      "size": 76200
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-41521fade99856108931b4768b1b2648.woff2": {
+      "sha256": "2c096e4a843896d2d735c8f19b8e2e8e1293202d2e0a41adfab16995e32ae07e",
+      "size": 68208
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-450da755d5bcb70906e1295e559b9602.woff2": {
+      "sha256": "e07fdcb886eb2f90a49b22e3d369eb1f480fdef7c509249d0437ba95af3aedc6",
+      "size": 51332
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-452225341522a7942f0f6aab1a5c91a3.woff2": {
+      "sha256": "a432715f6fed8499a420cb44acfe8f71e600afe0aa340ff2e63b741fa05f6fae",
+      "size": 71640
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4535823663ad81405188a528d8f2b1a2.woff2": {
+      "sha256": "f3c72f094659af2e6fbdbb0e5dba91089c4f5990d479dd9bbe5fa5ae4f95ab41",
+      "size": 68592
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4806e761d750087c2d734fc64596eaff.woff2": {
+      "sha256": "29aa32e6f5a6f5cee931aed56aaedb8d974b2913c71591c605ce5729842497ba",
+      "size": 50704
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4a0fdb40036e87b40aa08dd30584cb85.woff2": {
+      "sha256": "9be1f8a2fd341f5058d483304063535b6ac5be04294846c89a0a946f7fb33f9d",
+      "size": 59276
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4a38cc3e9cf104e69ba246d37f8cf135.woff2": {
+      "sha256": "b3aebf243c2be02360a1452ba3b0090d223faf7a76fde5f7495bf25cedfda5a1",
+      "size": 67888
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4aca6a43e59aceee2166b0c7e4e85ef1.woff2": {
+      "sha256": "cdf1f8c3ff1154762aa390d8babe5ee12450d7ad5cdc3a0b8e58a66dcb75b8ea",
+      "size": 62672
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4bfaa8ffa64c5ee560aa2daba7c9cbd3.woff2": {
+      "sha256": "0405baa428ee4175650f5ea85196d2e2950c3749da32c902f94381ee69b3b72c",
+      "size": 59832
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4dc6d5f188d5c96d44815cd1e81aa885.woff2": {
+      "sha256": "a206f427ff843dbdeaddc1509a92d7b69faebc24871c3138d94baf9b1922b335",
+      "size": 68580
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4ddc14ed3eb0c3e46364317dfc0144a3.woff2": {
+      "sha256": "033809b0d9848a6161681c8e9c5e7ee2bf10e0b639feb800eba43f87dd32a5c2",
+      "size": 66140
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4ee10ae43505e2e0bc62656ced49c0fa.woff2": {
+      "sha256": "a70dd8aa91b85b3a92f4edec64307dbeba67a3e829300abf38bb9ca206c318c5",
+      "size": 68764
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-4f50e5136e136527280bc902c5817561.woff2": {
+      "sha256": "59f4770cf5df29b54036ca5f42e6eafdd70d2dd28acbdcea6e8275c30d2208f0",
+      "size": 56576
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-51502f1206be09c565f1547c406e9558.woff2": {
+      "sha256": "27f0dd9bee1139710abf7ab0f51c0e37df058bef7f2e41a5f8f919dc0ce54fa7",
+      "size": 57744
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-51a0e808bbc8361236ac521a119758a3.woff2": {
+      "sha256": "6f7d20f47fee620a9b6cfac10202ee7350a21667bacd5398084d6781841e9d4c",
+      "size": 81560
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-52a84a22fd1369bffeaf21da2d6158dc.woff2": {
+      "sha256": "bb00bece144c8b55b92445e0bcf013c64eb7250588ebcd8d33d4e972feceba1d",
+      "size": 72436
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5330a2119a716e4e7224ed108b085dac.woff2": {
+      "sha256": "c3d926f24f41fa042951f940854f7094b394929ba2b393c1ad0f69b8ac1e18d7",
+      "size": 54600
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-543fa46ace099a7099dad69123399400.woff2": {
+      "sha256": "dc52bcf986f21c5ecf4f95614edc3fb086008bc4589a606a5545d7be83c6aae7",
+      "size": 66364
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-544fc28abe2c5c30e62383fd4dac255f.woff2": {
+      "sha256": "1822913d0e7128a0d6b8affd019c551f06023368ef8608aa3a9718320d16011c",
+      "size": 59884
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-54acdfc2166ad7fcbd074f75fd4a56ba.woff2": {
+      "sha256": "7c5ee14e16e509b359baef1bc7aed848475cf6286bd449a56e9afaaa0b5d8c5d",
+      "size": 55292
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5572b3513ba8df57a3d5d7303ee6b11b.woff2": {
+      "sha256": "3faaa516fc74d539ca46940b392648c9e3cc4c031e9ad52242aa8b54f7d9e2f8",
+      "size": 57016
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-56467a5c8840c4d23a60b2f935114848.woff2": {
+      "sha256": "0535fd40943797bebaab03292f269eeb09b9844e28ee0a9b20bafcfe6d6f253c",
+      "size": 62452
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-56a32a7689abd0326e57c10c6c069bb4.woff2": {
+      "sha256": "0861a51a85640834a936afe816dc9262712a3b5fceb9d268c3ef013131b7f1c9",
+      "size": 57704
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-57862b464a55b18c7bf234ce22907d73.woff2": {
+      "sha256": "2ab06e5e9dc995faad6240b1b1f6edee7e8865ecfd24aa041dad0bf71aab94f9",
+      "size": 63264
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-583d166e56ba0de4b77eabb47ef67839.woff2": {
+      "sha256": "fbc085efd02787634c45076cfcd3f9a943919b1fd491953bd3199338d3655681",
+      "size": 70356
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5882ffa04f32584d26109137e2da4352.woff2": {
+      "sha256": "0bca2dd7bf9c581d3b9aa2485571f919272790e346a37ead6522d169b9af2d4a",
+      "size": 73288
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-58fd02350d0bc52cf1ca3bb32ce9766e.woff2": {
+      "sha256": "3f843a854c82af7042965ae7f00b6f8698a05e87bbce715cbe087a3ec47899ff",
+      "size": 58968
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5935a5775af3d5c6307ac667bd9ae74e.woff2": {
+      "sha256": "c54f2d93aa1b89e19903c4abc3008742613dcc52b45055a058ec13de99d3a91f",
+      "size": 69344
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-59e9ff77b0efaf684bc09274fb6908c9.woff2": {
+      "sha256": "57426b72fb5d6a406df24e2b60c9b3f8d09c095aade40ae55c23972e5b7d9e1c",
+      "size": 26052
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5a1ce3117cfe90c48e8fb4a9a00f694d.woff2": {
+      "sha256": "164d468fbdee79c04b3898c7e62959de3ff43729c407ba60f0f8f27974352292",
+      "size": 50220
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5a45d991244d4c7140217e1e5f5ca4f4.woff2": {
+      "sha256": "b7bc4c809953df9d0ed98cf11a9542ba959ed3c66a94d3090bb466395f945184",
+      "size": 73116
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5a7fac4b8b23a6e4e5ba0c9bf1756c91.woff2": {
+      "sha256": "2802ab8038ff5266fe6303d79665f0b6cf370361aa67b22639e10e1f4634726b",
+      "size": 58396
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5b0ed6971aaab9c8ad563230bd5471a7.woff2": {
+      "sha256": "ec7e47923ed16e54d1a25bf22ad0638846be78be6e8f46009649d9cf7727e58b",
+      "size": 58980
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-5d2898fbc097a7e24c6f38d80587621e.woff2": {
+      "sha256": "9473d9ba649a6a614fb877bc6051590cb19da98e54ef6104d25f31f1ff52ed55",
+      "size": 56348
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-603aefd23e350ba7eb124273e3c9bcf1.woff2": {
+      "sha256": "cdd0e13364c932bb3cb2c9ae58369716ce47c8d55cbabe86585bf742e710fb5e",
+      "size": 61512
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-60a3089806700d379f11827ee9843b6b.woff2": {
+      "sha256": "d964d94147e46e90fd06f0e271a19aacde808acfffb23e66b896be7fcb359544",
+      "size": 73984
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-60a41c7e1c68f22424e6d22df544bc82.woff2": {
+      "sha256": "0534b52a8dbb84d43b13773bba5cd15bb6d256aa4fb96c58a435ebe391904f66",
+      "size": 59584
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-642b26e2e5f5fb780b51b593dbc8c851.woff2": {
+      "sha256": "961bf60030e7c8b4f5395cd8b748c6979d967b7629e6c582d68e5c11b5d2dfc8",
+      "size": 54540
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-66493ba5a8367f2928812f446f47b56a.woff2": {
+      "sha256": "3b759c89aca9110eddc48220362b6e1113bf8e390f40ddeaccade9bec603028e",
+      "size": 64588
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-670ba603758d94268e8606f240a42e12.woff2": {
+      "sha256": "1c0d75c27b530030e64e77d99967230f71d4ea9db40ecdc2e10a6f1eaf1f150d",
+      "size": 53524
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-671a2c20b1eb9e4ef8a192833940e319.woff2": {
+      "sha256": "3dd77c6fa69a4f80de93433e2868e457b7d04d68662d8d042e6348e7b6ffaf15",
+      "size": 64872
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-684d65f1793cac449dde5d59cb3c47fb.woff2": {
+      "sha256": "079d03e554628ed20a18018875b1bb5681ae892dd56604074969619ebd9f36f2",
+      "size": 56992
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-69c09cc5fa3e55c74fc4821f76909cc3.woff2": {
+      "sha256": "dde445e5fe69c7ab363f034df157c89750b421f31e52757f7a642be3c5644f2a",
+      "size": 65168
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6ae5b42180ad70b971c91e7eefb8eba2.woff2": {
+      "sha256": "dc1eea8f0592ee505adb539566a9cebefa81ece39c3e70624afd06af0e323729",
+      "size": 64304
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6e092f71c1e634059ada0e52abadce67.woff2": {
+      "sha256": "9b771d7ec93aab9efc47096f33c16c724d57a462b99d54735080759cc56e749d",
+      "size": 72236
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6f3256af8454371776bc46670d33cc65.woff2": {
+      "sha256": "4d1cd583547d080c6b94552d1473685c60e6a96340c74a659616e16cdde6bbae",
+      "size": 56504
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-6fe5c5973cc06f74b2387a631ea36b88.woff2": {
+      "sha256": "7142a02b00a992b9a57b75c05ddfaa28956c11f554fb9f1e3fe0333285dd6791",
+      "size": 55696
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-70c2eb8d64e71a42a834eb857ea9df51.woff2": {
+      "sha256": "89474028dcdfc03b27f45d5adc112d9d53a4d810c7e8f0ebf95f599b50ae84ed",
+      "size": 63524
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-70e811fd7994e61f408c923de6ddd078.woff2": {
+      "sha256": "e6818bb44f7d47d16cd8935ed9f5b29b8f10ac0e80043f85957b80501f85bcd9",
+      "size": 57028
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7197d6fda6cba7c3874c53d6381ca239.woff2": {
+      "sha256": "66b77ead39e2479ee3bf4911920fb5cf39217c6b60e3cd84080c7fe429432430",
+      "size": 59464
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-72252d73220fa3cd856677888cee1635.woff2": {
+      "sha256": "1e34a49b238d61c6a723e79c2957f309687bcca89eeaebe99221883f302b80a2",
+      "size": 49972
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-72536a3d71b694a0d53dd90ddceae41e.woff2": {
+      "sha256": "4058683136a7bf8ebaadc59aaba8644044eff3b91776f6b0206954bf805a3132",
+      "size": 67268
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-726303e0774b4e678bff8c2deb6ca603.woff2": {
+      "sha256": "1ad344f682254b66d56187f673f817fe1ac8117d59cb26614796ebba9f2494aa",
+      "size": 62376
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-733171b4ffcd17ea1fe1c0ba627173bf.woff2": {
+      "sha256": "af32f1c4a193d9866655c866d4067b190b121fdc538b380cd45e99f172b4355b",
+      "size": 52596
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-739bc1a567439c7cffcd1614644593d2.woff2": {
+      "sha256": "9bbdcb718fa1010f13c0a6058cca89d75774371e766eb1edf319ac25dc057f0b",
+      "size": 49492
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-73e309718fd16cea44b4d54a33581811.woff2": {
+      "sha256": "6507fb8092efc309d9fdcc301fab6c90330b89931e7007fe7ed7fd1e722a738b",
+      "size": 61808
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7494dc504ae00ee9cd0505f990f88c5d.woff2": {
+      "sha256": "df7f6131e265282b00981c86f4c8d0fbae08c8fa3b3464909609abdafebe5d03",
+      "size": 65456
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-74e2263a91439c25b91d5132ce9f4d62.woff2": {
+      "sha256": "322645e0e2737aed64e43e45e97276930f67ce5aa1bfe845eb6090b27b0acc29",
+      "size": 47540
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-761d05e3cd968cf574166867998ef06a.woff2": {
+      "sha256": "5da4dd830dbcb73f6228469f49b12a1cc3db1edf00e5875e3f530ba62c907538",
+      "size": 57276
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7718fe60986d8b42b1be9c5ace5ccf25.woff2": {
+      "sha256": "ed029431ebadd93a1ffae89347ced2b6835ed92703613d10f3dcd3d37c3ce19b",
+      "size": 54872
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-774d4f764a1299da5d28ec2f2ffe0d69.woff2": {
+      "sha256": "6238cf7ea6f5e88177688f281f55c8d427f0110ca56a0786d8577ab748fb5f8e",
+      "size": 57500
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-79d494361ae093b69e74ee9dbe65bfd4.woff2": {
+      "sha256": "6f78f52b32b85a686bae2602b6f4bd9197e508140a87c23eb38ced0fa501808e",
+      "size": 48736
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-79f007c1c6d07557120982951ea67998.woff2": {
+      "sha256": "ecd5160dfe937d1e8271e2c7efe45569c2d3f53c94f5d7acaf600434c758a423",
+      "size": 64324
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7a07ddc0f0c0f5f4a9bad6ee3dda66b5.woff2": {
+      "sha256": "e1443444d7865b4650e51da424a02e2b58a75ce1d3b5d125b9d4424c0cc5cff7",
+      "size": 54716
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7ab2bed91166a9dca83a5ebfbe2a7f38.woff2": {
+      "sha256": "3d692c33792626f84eaf48e73fb2c9dfd237ffd3a5b8a882d0f1e4a7301949c7",
+      "size": 56228
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7ccce86603f80a099ddb0cb21d4ae3e3.woff2": {
+      "sha256": "ba4c2f8e126245571624eb841623e3a13a394fba39fc215c60786e786d4e4f35",
+      "size": 54436
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7e4bde7e9c7f84cd34d8a845e384c746.woff2": {
+      "sha256": "934ad4e8abe120c1dba1ff0427a04bfa431ecf61e8402d93965fdfc000198e66",
+      "size": 65004
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7e929f262f30c8ee78bf398150b1a7cd.woff2": {
+      "sha256": "03de58036f102830f522035221d660524c01ff4ad4240d6273d6cb0aa8ccbccc",
+      "size": 59984
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7eb9fffd1aa890d07d0f88cc82e6cfe4.woff2": {
+      "sha256": "ccf132ae51caa20dd14896b26c829b3e45f676d933bcf91f8068bf658a4f2860",
+      "size": 17252
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-7f855356ab893b0d2b9c1c83b8116f0e.woff2": {
+      "sha256": "1060f535a62ceaa15c3709cc71d5ba65aa7b25ca9f175b039b692a2f36427c3a",
+      "size": 77420
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-829615148e6357d826b9242eb7fbbd1e.woff2": {
+      "sha256": "4252a1dcca7da24ba065620e30429e9a2de3ee8b5ec7cbfb672c8a008779fefc",
+      "size": 80184
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-866fa7613df6b3fd272bcfd4530c0bb9.woff2": {
+      "sha256": "a4a710432761544ce376c443375cd3c30212a7eac28fe3e02c38fb6a51b30808",
+      "size": 72996
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-87599f94b6cc129d505b375798d0d751.woff2": {
+      "sha256": "3cb8e87a420ef7412eac2b1e7acd90557e3133f5926ab23b307cdd35d3293f7c",
+      "size": 56752
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8c2f33cee3993174f7e87c28e4bf42ee.woff2": {
+      "sha256": "6b01fcbbd25e0588b009efee8aa02c56315c13b071e42f27b3a1b9ded83b9f4b",
+      "size": 64164
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8d3bcabb847b56243b16afe62adaaf21.woff2": {
+      "sha256": "5a27b08a7634da4e22ef40981ff0b4376a5c667fe6d315013c8283660bb3c175",
+      "size": 50356
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8de5b863cb50dfefdd07cb11c774d579.woff2": {
+      "sha256": "8dc7c9aa8d7932d8a62b0d7e556cb7a94c1bb1728a84d50a7952d75b9f159ae0",
+      "size": 70716
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8e9f97f01034820170065b2921b4fb5e.woff2": {
+      "sha256": "e053872045b6e69fa2b374386a30985985700925ea09831eb411299d61cc48a5",
+      "size": 67728
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-8f476c4c99813d57cbe6eca4727388ad.woff2": {
+      "sha256": "018d866b5eef3c096a75a56f53df14e4f3ed2b69fc546178b61095736a0cf92e",
+      "size": 65080
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-903bb6865f3452e2fda42e3a25547bc5.woff2": {
+      "sha256": "4f9d77b306f63f69dc23f187858c688f20590a582f4d614f8934b8fcb31cc01b",
+      "size": 61532
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-91ddb2969bf2d31ba02ad82998d1314c.woff2": {
+      "sha256": "b1c7f6ba934a56bb9ef3c85602de346d594654798004ebfed86cb68fdec23a9f",
+      "size": 56276
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-938d90c10ff8c20386af7f242c05d6b0.woff2": {
+      "sha256": "3d4cb06a72e43dcee4114ca345cfbb93c3a037cc27164cad3ecd979b0affc62c",
+      "size": 52636
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-93fc8f28a33234bcadf1527cafabd502.woff2": {
+      "sha256": "950ff7a9d636ca4b7684833ff898ca7b4c3d21072c322dd6ca482825aaf6f06d",
+      "size": 64544
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-95429962233afd82db1c27df1500a28c.woff2": {
+      "sha256": "63474c129283d98a4426f2af09ce89e7e0fc0a8bf897a5423c3230d513a2816d",
+      "size": 58352
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9544732d2e62d1a429674f8ee41b5d3a.woff2": {
+      "sha256": "b67f74ffa8e1b8ea3b4617c3fa4c68408ec54e34cc532ec71031adc8b15c3343",
+      "size": 55048
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9592bfc861f07bcb8d75c196b370e548.woff2": {
+      "sha256": "aae1aaab500a71b28d1ec96380b49ccaf7550d06b57db71e75737d17715f5261",
+      "size": 51572
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-95bfd249da4902577b4b7d76ebdd0b44.woff2": {
+      "sha256": "ce77aebaeee894d03a85f1d9ccecdb3447ab27f77eb8e3f685c961464119c5ef",
+      "size": 70936
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-968cffdc8ee679da094e77ebf50f58ef.woff2": {
+      "sha256": "7af27211f5491341d85b051445a7ddbc9e28bec438b8124a18783708fef68667",
+      "size": 54956
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-97f7f48ce90c9429bf32ae51469db74d.woff2": {
+      "sha256": "b61251e62c3ecd8d556201f75e5d46e48f1e7619e67ecad2c36690e8d5a9ed4f",
+      "size": 65024
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-982b630266d87db93d2539affb1275c6.woff2": {
+      "sha256": "64ffc06d05e0eb263f161fc3ab45747bc09c916c92195450600576b0867a43cf",
+      "size": 62288
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-98f2ad84457de7f3740d9920b8fa8667.woff2": {
+      "sha256": "20e0422c76332e759d6daabb96bfa9ccdc02be80b17e9928e3873683ae5b9995",
+      "size": 57784
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-99a16ef6a64934d5781933dbd9c46b2e.woff2": {
+      "sha256": "8bdc8f9731f8730a61043729f403e06e6b9bcfed2fb65e71f7fc421ae51b37b7",
+      "size": 56296
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9cfb2a77a4e45025105ad29a1748b90d.woff2": {
+      "sha256": "8a83a1c27c1dc42db2653f37bb39fb95e3bb8180e99ea372766366c995248cee",
+      "size": 54720
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9d81066dd2b337c938df6e90380a00dc.woff2": {
+      "sha256": "3e7444c5704402da829c61e1cdeee82c1867939590d9b25290793c58de548867",
+      "size": 50168
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-9eb5a99df4e76ac3363453ac9ca288b1.woff2": {
+      "sha256": "c464198e0903b1025c20e23e6df719933adbcea5f5e3b68fa67bd388e66dc738",
+      "size": 60796
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a004ddfcb26e67bd6e678c8ed19e25ce.woff2": {
+      "sha256": "429f417980fd11df51d1b7c6e2481e65e2f1a2bf3f16531b3d189556b22be20d",
+      "size": 66012
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a0ca5df4258213d7fc9fce80f65ce760.woff2": {
+      "sha256": "4577ce8d2f2161ddcbb02f1154a9899bc55a77d3a715a3650261c56839153ee6",
+      "size": 56840
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a1f916d6039285c4ffb900cd654e418f.woff2": {
+      "sha256": "355bbd7b9ccfe3501325f51a8b14fcbac0a784b72b5629f7e54d28ab00060ea9",
+      "size": 52880
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a203b91dad570bf05a58c3c3ddb529bf.woff2": {
+      "sha256": "664f032ffd3d67ac08c988cb9df5ed9e14ef1bd29b599085aae5ce019535b8f4",
+      "size": 65680
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a365e82ed54697a52f27adcea1315fe8.woff2": {
+      "sha256": "7431d7c929b66ddef73132026c17ba2bdd1c749a2733b12b15a2bd53da10cee9",
+      "size": 62772
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a4c34be6d42152e64b0df90bc4607f64.woff2": {
+      "sha256": "85c4fb4d97312f0260a0db861ddcd8e1f14cc031db4c0fa8bfff098114eed1a1",
+      "size": 62916
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-a7accba310e821da5505f71c03b76bdb.woff2": {
+      "sha256": "a630539dbb8b53eeef26d3c14c65e8aa65056e6ee70ed55d02bad8c6e2cc34b1",
+      "size": 66148
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-aa0d470430e6391eca720c7cfa44446f.woff2": {
+      "sha256": "9e7d4e67d3026e623581bbb8ffb9767e5cc8ae4208ea1ad9589e1c877a396ae0",
+      "size": 56532
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-aa5c9ca6cf4fba00433b7aa3fa10671a.woff2": {
+      "sha256": "a612a4deee08c188d304a75acfaa1a5f606ec0e959ee36572585a21d63a05767",
+      "size": 54892
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ac9ceb44437becc3e9c4dbfebab7fc2d.woff2": {
+      "sha256": "88cdb98b8b47719cb34de6d927db93102845979729309ed7c9d81c2eca267d18",
+      "size": 55988
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b1220a3c61f85cc0408deedb4c5f57a2.woff2": {
+      "sha256": "0c5b4365bec5a439a325347b8e373ce2d733e69a31227d9be1a6bfb1a81f8339",
+      "size": 58924
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b358f7a51ece39a3247942b1feabdb29.woff2": {
+      "sha256": "da427d935e5286ddb7bc67bbddb53f19f21b1b22a08eb18b81202d6a0d7104ff",
+      "size": 67924
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b57aaedfd8ebdf3931f25119dc6a5eb2.woff2": {
+      "sha256": "489368f841681abe8c4a10d8c04eb1f3dd7ca0431866ee6d998738cb5d953e94",
+      "size": 71976
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b5c1596551c256e0e9cf02028595b092.woff2": {
+      "sha256": "53ddc8aec903cc6923e7bea4290f8c22748d8a9d3fef9310c8db45144b8602f5",
+      "size": 60132
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b6d128682ee29e471486354d486a1b90.woff2": {
+      "sha256": "6fec9175d81ae947476b6e3d23d8a952b3f6f2abf3a236a16d3b2030aec8ee2f",
+      "size": 61376
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b6fd38ca30869792244804b04bc058da.woff2": {
+      "sha256": "729394216762fa8e54dcf7d8a6623812c68ee868fa423cb150eb730fa142d5fe",
+      "size": 77468
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b7d203b051eff504ff59ddca7576b6a9.woff2": {
+      "sha256": "012348fc81bad86733c10d93edc49b31fa98d161162a7b9c7cbe2d02f184e684",
+      "size": 48148
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-b96d9226ce77ec94ceca043d712182e6.woff2": {
+      "sha256": "55f3829b501cf10b929c86d8703be025941489012ae3a237a0f7d4bde532e316",
+      "size": 66240
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ba3de316d63c7e339987b16f41a0b879.woff2": {
+      "sha256": "204c98c6d957da9076afe9318003ced09bd3b44a4ce8365b555337fdd574a04b",
+      "size": 58728
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-bafff7a14c27403dcc6cf1432e8ea836.woff2": {
+      "sha256": "16a0b6a3f5462fc87a5043bb89dfaeab6070f9b15bf7bb33d74c6f1f0e945d7e",
+      "size": 64204
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-bd77e3c7f9e0b072d96af37f73d1aa32.woff2": {
+      "sha256": "762f6b930564a70639a89c41e38b55e4fe93753fe30063aee0577ee6a57b14ed",
+      "size": 71260
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-be549ab72f0719d606a5c01e2c0219b6.woff2": {
+      "sha256": "51f88e333f2a5b2ed3b6670c7b7ff122d16e6b0a09d0297ae4dec70de721bcf3",
+      "size": 54436
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c16ed9740b85badf16e86ea782a3062f.woff2": {
+      "sha256": "2650a650f03c1d5736cc0f1d774f778639d4df2eee805766ec69410108996344",
+      "size": 56800
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c1f94158256bb1f3bf665b053d895af9.woff2": {
+      "sha256": "0d5a4da13c00111ae6e921de8a5d3e7e407773ceb415771997a9e08d490fc603",
+      "size": 62244
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c40533fdf4cc57177b12803598af7e59.woff2": {
+      "sha256": "bf57ac6c74823d2193e4fd637e0fef9f3cf65867dc573bf287cab541eee2862e",
+      "size": 56692
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c4a687ac4f0c2766eefc9f77ed99cddf.woff2": {
+      "sha256": "fbd978baf163d2cf637804b525e7df206e0657d217d3d4339aa204ec584460a0",
+      "size": 38416
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c69f61a4ab18d0488c8d1fc12e7028e8.woff2": {
+      "sha256": "1d7f8daeee505d3f7830d0c0c74af7af68abc2a0b01b2e92147a85239b72249f",
+      "size": 64316
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c8b71798409ccc126ee264a00aadcf21.woff2": {
+      "sha256": "5e78c653a12851d95e2754fd01052e65c952fa2cc603e6e40a7c1a104fe366e8",
+      "size": 63208
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-c99eda15fc26a2941579560f76c3a5cf.woff2": {
+      "sha256": "234ca0a3ee22640185863709a91ed8574ee10cdc97103c74913ef9e7aae8b399",
+      "size": 76564
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cb17fc3db95f6d139afc9d31a8e93293.woff2": {
+      "sha256": "366d1d64220e84149380d851590fa86decac06ab04af7b5d6b84b1593fbc03a7",
+      "size": 74180
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cbaaefaaf326668277aa24dfa93c4d28.woff2": {
+      "sha256": "d912c56af1eb36e3cf58ee3fd05a54cfaa2474d721bf6ebbeafde0163c10d6b3",
+      "size": 63468
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cd145ce4a0ea18469358df53c207bc1b.woff2": {
+      "sha256": "3ef057732d62da9572e373f78d282b218e0f5cb8e003d275adaef15abd2d2cbf",
+      "size": 55960
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cdbce89e82cc1ab53a2decbf5819278f.woff2": {
+      "sha256": "fc2ac910be82739b996e39063360efcccc5b82f4c99a048d8655885afc3ef933",
+      "size": 51420
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ce4884f96f11589608b76b726a755803.woff2": {
+      "sha256": "ea1d4e3f3fa68c9193a72d5df249986350e892091e3edac9025baf7e1759cdee",
+      "size": 65548
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cf2cc71752631e579e35b0e423bf2638.woff2": {
+      "sha256": "ce5a8058ed21535db620e89a942f8d4fe33968cbb4557c26c4521c536d5e8c66",
+      "size": 57424
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cf6ff4e0f491ca0cf3038187a997b9b4.woff2": {
+      "sha256": "996fd1d3fe4f0783b30ffec0912ea858cadf71a077eef41bcbb6f488aa1853ed",
+      "size": 50608
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-cfb211578629b7e8153b37240de6a9d5.woff2": {
+      "sha256": "d07bdf1bc149ae52b05fff010bf5a5c97da67d7bd612cd7975939102446da207",
+      "size": 44464
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-d0cf73942fea1c74edbdf0b3011f4656.woff2": {
+      "sha256": "e802ce5eb6306d4272a9188ba65c41423894ccaa71e679d1b8f53df3acf7298f",
+      "size": 73392
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-d2666cbed13462c5dc36fa2f15c202ca.woff2": {
+      "sha256": "6d157af83341041b1110824b12bcad95a1267c6088aadb7cfebc1fee77c81a27",
+      "size": 56820
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-d3716376641d615e2995605b29bca7b6.woff2": {
+      "sha256": "9b9fa9f96d1ed9160912efab73c4883324225fe1096e6aa6c6f5a534fcac292b",
+      "size": 61636
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-dac48066b5883d8b4551fc584f0c2a3e.woff2": {
+      "sha256": "50fd052c2e0b0ebf8f304eae64965486d1721da85fbbce115683055f05785bf0",
+      "size": 50232
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-dbea1af6dcd9860be40c3d18254338f5.woff2": {
+      "sha256": "4bb0a8345e803f659aca813aadca25703c16bfddf5d89b82ddcec2a50e338471",
+      "size": 54472
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e11567fd2accf9957cd0d3c2be937d87.woff2": {
+      "sha256": "dc6a09381a42ce3aa802d029bc61ed01b4302f0303a1defa8234f130dafa5428",
+      "size": 56440
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e2ead7ea7da0437f085f42ffc05f8d13.woff2": {
+      "sha256": "b4648f5ae511c1d0d4b2aa75a72a547e8436aaa5f1ca15c042e722a9fa8c77f4",
+      "size": 58972
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e3fcf5180fd466c8915c4e8069491054.woff2": {
+      "sha256": "29a56eb3d183f71ddb753f000c8bd902d1b9a35ca08ff2d403c6af19934661fa",
+      "size": 60612
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e480d9c614742d05f0e78f274f1e69e6.woff2": {
+      "sha256": "0ceef1123d1f46d7c9434f5d7f1d3896ba4d1f1b0fe0076383d920ea8da94ec5",
+      "size": 58960
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e4bca6cfa53e499cae0a6be4894a90e9.woff2": {
+      "sha256": "3cc764666e9c2c6483c73c911b3823d74ee680bae209fb3ddee6b976c599f9f1",
+      "size": 59352
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e51ef413167c6e14e0c0fdcc585f2fc9.woff2": {
+      "sha256": "931c27e602508ea6d712803d5647dabb164438140e309fd0be4f15917943f480",
+      "size": 73904
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e5f453bb04da18eed01675eeebd88bf8.woff2": {
+      "sha256": "ab6c969a6b7c481d03f26f68e77eec932b55232608c9b86d710c48f5c200f259",
+      "size": 55832
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-e656f091b9dc4709722c9f4b84d3c797.woff2": {
+      "sha256": "b90cfb35e64c7f9f5b7e1fb48d0c396c44f757349e5669e64a25d98806d642fc",
+      "size": 53564
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ec181b795ac1fb5a50d700b6e996d745.woff2": {
+      "sha256": "6b18e2adafaad34cf0544c53915d65af94806ab621f5de6a60f718ef60c9cb1e",
+      "size": 39516
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-ee8bae97908d5147b423f77ad0d3c1bb.woff2": {
+      "sha256": "6ccb9581b563074b1e101d2f5ed1efe5c1c53e2406f23139543a139f81a4ae5f",
+      "size": 61720
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f0f13b5c60e0af5553bd359f5513be1b.woff2": {
+      "sha256": "75eac42c2d875a86029c0a684b728abb0dc8baa56e503aaaacb1c457f0a01aa6",
+      "size": 58780
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f2b54d4e7be0eaefe1c2c56836fa5368.woff2": {
+      "sha256": "da1a8fde33ea6a56d70b5c87b1a4030c3fe663772effcbe45019fde0b336d3dc",
+      "size": 55180
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f56414bf9bced67990def8660e306759.woff2": {
+      "sha256": "ffb6a7253b90f6f82b90619935ab41e063db09686921f6dace943f5ec183b16b",
+      "size": 69364
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f5d079153c99a25b9be5b8583c4cc8a7.woff2": {
+      "sha256": "b8ec5b4516ddc269a99f306b9d63ff0bdecd37a800736cd0eab28f254291b15e",
+      "size": 67660
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f6032fc06eb20480f096199713f70885.woff2": {
+      "sha256": "937b4d5222bb42c0e190a3f40a1aa9f984edcaa9e8d275e9d4bf1d88ef74754c",
+      "size": 84024
+    },
+    "/libs/excalidraw/fonts/Xiaolai/Xiaolai-Regular-f8ee5d36068a42b51d0e4a1116cfcec1.woff2": {
+      "sha256": "ae083037bfb691cf96205e109a287255f87a45a90848fe2a63cb0b3e7af3e904",
+      "size": 47276
+    },
+    "/libs/external_api.min.js": {
+      "sha256": "f1f16f048534950ea9bfc450d8ea1efe1e745343aacf138d5fcc5fee9a42d61b",
+      "size": 96853
+    },
+    "/libs/face-landmarks-worker.min.js": {
+      "sha256": "f5f86ca2c24b184d65eddcb0ebf16eadf8860c9c62ea1c48d802e37851ebdb9e",
+      "size": 1898016
+    },
+    "/libs/lib-jitsi-meet.e2ee-vault.html": {
+      "sha256": "e5e9a55757ff0c2f9131032a41503bdfd4f3cd01a3f20b3a0923f8ffcac6c157",
+      "size": 492
+    },
+    "/libs/lib-jitsi-meet.e2ee-vault.js": {
+      "sha256": "5003ad1b03c333eb93f9db02b956cde1e80dbfc1fb3983a749c51602b24542d1",
+      "size": 509085
+    },
+    "/libs/lib-jitsi-meet.e2ee-worker.js": {
+      "sha256": "f0a0e95a6eb4d915b8c12f772c6d1b293a91a9fa11e2dce7d4e7b144a8edb86e",
+      "size": 19163
+    },
+    "/libs/lib-jitsi-meet.min.js": {
+      "sha256": "7e5dde66ab7a7f0cc041b18c2bfe53b5765e4b7fb9615d691eafbacfecd885be",
+      "size": 1067964
+    },
+    "/libs/lib-jitsi-meet.min.js.LICENSE.txt": {
+      "sha256": "8415cbf34b91632c0849fc84782d077fca5deb2340a448d2e3f6e47d77ecf850",
+      "size": 518
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation.binarypb": {
+      "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+      "size": 362
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation.js": {
+      "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+      "size": 44542
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation.tflite": {
+      "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+      "size": 249024
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation_landscape.tflite": {
+      "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+      "size": 249792
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation_solution_simd_wasm_bin.data": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation_solution_simd_wasm_bin.js": {
+      "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+      "size": 276493
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm": {
+      "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+      "size": 5694839
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation_solution_wasm_bin.js": {
+      "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+      "size": 276488
+    },
+    "/libs/mediapipe-segmentation/selfie_segmentation_solution_wasm_bin.wasm": {
+      "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+      "size": 5587523
+    },
+    "/libs/noise-suppressor-worklet.min.js": {
+      "sha256": "c389df5df4f041c3da9b073108b8ea52dfaad53bb76c6915ec3c210cea51e198",
+      "size": 1956666
+    },
+    "/libs/olm.js": {
+      "sha256": "cf9a793bcbad919967d79e7f2bf52e0492b646332d36ee7e1c2d1b0ff47b3c40",
+      "size": 42434
+    },
+    "/libs/olm.wasm": {
+      "sha256": "3fc8dbfe8f44d550b1c9165e6c2af33323aaeba0a5ec223cef74959dd434642b",
+      "size": 153573
+    },
+    "/libs/rnnoise.wasm": {
+      "sha256": "677147b9248aedc0a00de79dc090d1ecead37c08c8bb773a790da16109d2c487",
+      "size": 112141
+    },
+    "/libs/screenshot-capture-worker.min.js": {
+      "sha256": "5e9d2fe804ee23663f38aa70c2118927dccca9dd2446446940edc5b026f056e2",
+      "size": 29245
+    },
+    "/libs/selfie_segmentation_landscape.tflite": {
+      "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+      "size": 249792
+    },
+    "/libs/tfjs-backend-wasm-simd.wasm": {
+      "sha256": "c15a51a0651ff85159cde70016708e89ec951becd922327528a147590466c487",
+      "size": 362967
+    },
+    "/libs/tfjs-backend-wasm-threaded-simd.wasm": {
+      "sha256": "084bf18f6d0501b04bc5310628cb5609e378f763da0f6ba9a07daaddb8a3a307",
+      "size": 370274
+    },
+    "/libs/tfjs-backend-wasm.wasm": {
+      "sha256": "f374b0c66211b04ea2e0d4dfcc1736f28885c481f5f2371a70cc3d06a6983398",
+      "size": 254643
+    },
+    "/libs/tflite-simd.wasm": {
+      "sha256": "2f94d03bec242991db8e34be18802dcd136125f036370a76a050c940c4a07498",
+      "size": 2186931
+    },
+    "/libs/tflite.wasm": {
+      "sha256": "23eb7aeab713db51e76559d8ed3dbbd3942d007bd1b06dcd7907b5cd68439b5e",
+      "size": 1634895
+    },
+    "/libs/vb-inference-worker.min.js": {
+      "sha256": "b090a4178a2f4f27589eacffcd6995d137138669d5605a985d68189cf8ed6afa",
+      "size": 1185624
+    },
+    "/manifest.json": {
+      "sha256": "59ce320b91b38cadb160a47a784a94468c2ccbae453914fca1fb8cd4817bb94b",
+      "size": 752
+    },
+    "/plugin.head.html": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/pwa-worker.js": {
+      "sha256": "e341a6018edc3dafc7f2604f79557f4f36fb10084d516a3e24a13c200a0e3f06",
+      "size": 3358
+    },
+    "/robots.txt": {
+      "sha256": "58c711dc6ae00ad0a6a82199bf0256d6ab9ed0bce140e53f2b8aaa33d09de926",
+      "size": 36
+    },
+    "/scripts/coturn-le-update.sh": {
+      "sha256": "9f844175dc99517c7a512c020343198bdb62660d1cf3882d1a2aaf70525a207d",
+      "size": 1696
+    },
+    "/scripts/encode-sound.sh": {
+      "sha256": "a6cdcee7f37d5e3aaecc98ec0f136870f73e9e18174ac6bd0fdc8758c7ab4dc0",
+      "size": 842
+    },
+    "/scripts/install-letsencrypt-cert.sh": {
+      "sha256": "8846b8d8658238161bce6e5a19bbfbc310e48f9efb9da780b0b81beb8360e71f",
+      "size": 3392
+    },
+    "/scripts/lang-sort.sh": {
+      "sha256": "a462c9a16bf916b948312b78bc331da3f40cf47ec393aca109f81665782be594",
+      "size": 172
+    },
+    "/scripts/move-to-jaas.sh": {
+      "sha256": "f286a2f506cdc3169fc52ec213c02df90835f842ffd099e4302ac82b0693f3b1",
+      "size": 1993
+    },
+    "/scripts/register-jaas-account.sh": {
+      "sha256": "64111e1a3113ca7c9d01c4ed7fdf31c79d8652599b15c0fc0bbbced40069f980",
+      "size": 2617
+    },
+    "/scripts/update-asap-daily.sh": {
+      "sha256": "b206bf23696b3f055a4b96c60ec8e8c52ad71eb0dcce9e83d2c3fd99a08954a6",
+      "size": 520
+    },
+    "/scripts/update-ljm.sh": {
+      "sha256": "e216d528e60bfd7bc5e8498f80253c94daf214a22382216b094d1167145098d9",
+      "size": 1420
+    },
+    "/scripts/update-mobile-rnsdk-version.sh": {
+      "sha256": "db1f539aba45f70e069eb9edc4bcf0b5ff5c73f29d0ecf9484ec51eb612f27c5",
+      "size": 381
+    },
+    "/scripts/update-mobile-sdk-version.sh": {
+      "sha256": "776bce682bc6086369bfeb13070c22d791d89bb9af7f6dbf80613fced6dafc77",
+      "size": 548
+    },
+    "/scripts/update-mobile-version.sh": {
+      "sha256": "5d03bcea4f815574a81067abc0e1b5e1ec3271e3d9b83dc3a16b713c3cbd3d26",
+      "size": 559
+    },
+    "/sounds/README.md": {
+      "sha256": "11700c913f27e496f367a7496cb6f2c6364625f24dd97455df35d902b98eeb4c",
+      "size": 153
+    },
+    "/sounds/asked-unmute.mp3": {
+      "sha256": "8a2346ae08aee845b62b1b305183a5b85a4cff534dd9722cf29ec8b44cccfd4f",
+      "size": 6234
+    },
+    "/sounds/asked-unmute.opus": {
+      "sha256": "610dbc62d850f9918e97f89b22262cadf126598a2758f90506969de4f1b0fc7c",
+      "size": 3795
+    },
+    "/sounds/e2eeOff.mp3": {
+      "sha256": "d9dfac5fa6235960db88905b55ee4efc8ebc64ed56cd7e309dae40bbc00c7329",
+      "size": 7456
+    },
+    "/sounds/e2eeOff.opus": {
+      "sha256": "bcee5dc7ddef6f702bcf96d156083bfbab6d5a0bf7bc43e630580faf247e0294",
+      "size": 6825
+    },
+    "/sounds/e2eeOff_fr.mp3": {
+      "sha256": "ab8ed5fe423c11778cbfec736c683c59af600e6b4a60e0a3a99aa21e24c33c3a",
+      "size": 25564
+    },
+    "/sounds/e2eeOff_fr.opus": {
+      "sha256": "112495c0cc3074f932123a7eaa081b18a95999bef3ab48f2fc974cee9d939c70",
+      "size": 22955
+    },
+    "/sounds/e2eeOff_frCA.mp3": {
+      "sha256": "ab8ed5fe423c11778cbfec736c683c59af600e6b4a60e0a3a99aa21e24c33c3a",
+      "size": 25564
+    },
+    "/sounds/e2eeOff_frCA.opus": {
+      "sha256": "112495c0cc3074f932123a7eaa081b18a95999bef3ab48f2fc974cee9d939c70",
+      "size": 22955
+    },
+    "/sounds/e2eeOn.mp3": {
+      "sha256": "7d16635bd3b5cf8e9a6e5af16f3508177f55d13dcc5e770f6d1cb20b57532d7f",
+      "size": 7014
+    },
+    "/sounds/e2eeOn.opus": {
+      "sha256": "91e9e2fe7de37f558fca5f4d7b7b6ab636376b2a88e0dcd96b350a5f8dbe4bb5",
+      "size": 6584
+    },
+    "/sounds/e2eeOn_fr.mp3": {
+      "sha256": "d5a180020395aba68a4b69d0bd34aba816e5efce2f5bcb327b8fd7f073caf628",
+      "size": 23898
+    },
+    "/sounds/e2eeOn_fr.opus": {
+      "sha256": "96918f67ab4f7d4ef02605820e94c61ad6f955c6eb94f50f0f1f2f75b49d5120",
+      "size": 21540
+    },
+    "/sounds/e2eeOn_frCA.mp3": {
+      "sha256": "d5a180020395aba68a4b69d0bd34aba816e5efce2f5bcb327b8fd7f073caf628",
+      "size": 23898
+    },
+    "/sounds/e2eeOn_frCA.opus": {
+      "sha256": "96918f67ab4f7d4ef02605820e94c61ad6f955c6eb94f50f0f1f2f75b49d5120",
+      "size": 21540
+    },
+    "/sounds/incomingMessage.mp3": {
+      "sha256": "14215fe87bd70be10886b1f2711da1b5f1f4e39c337648bbe4d10fc8a5df4e68",
+      "size": 4024
+    },
+    "/sounds/incomingMessage.opus": {
+      "sha256": "2e25ae06b172363b9adf4dea5c688ce66d0e7521222d5535d2b6978ce2c9cde5",
+      "size": 2269
+    },
+    "/sounds/incomingMessage.wav": {
+      "sha256": "e0b142244fa229a41f091596d3731d1620297fc2b7d9d1a14e9a15833db89ef1",
+      "size": 100452
+    },
+    "/sounds/joined.mp3": {
+      "sha256": "ac41f5cfd670378110611082e707fefa2745012f6137c63f0b6aa475cd9c1e39",
+      "size": 2725
+    },
+    "/sounds/joined.opus": {
+      "sha256": "3a2882319f1c5a72983ffa2824135bb65036d3d88c53db4600f530c1c404cddf",
+      "size": 1656
+    },
+    "/sounds/joined.wav": {
+      "sha256": "fb79ba5ac416f16c44d6d8ab391d9b4dca35475a70082b8600465e42c61e08c5",
+      "size": 42156
+    },
+    "/sounds/knock.mp3": {
+      "sha256": "5b7b5bc13d9d6e9ea1e192cedc9a5eb67add77a8c7827f266b277e14393dfc3f",
+      "size": 8053
+    },
+    "/sounds/knock.opus": {
+      "sha256": "fd2a27bad7481ce53aae29e8879342ad7d79b2ed4b893f3526781689b4516493",
+      "size": 3805
+    },
+    "/sounds/left.mp3": {
+      "sha256": "13e1727c57dfc02f8423974e94ec50f49a0f70c4141aa27e7d2dafc20dda65ab",
+      "size": 2725
+    },
+    "/sounds/left.opus": {
+      "sha256": "ced75459c1f4eb88332509fe284d111e7421acdf6a06681aa9a070e372508b3f",
+      "size": 1626
+    },
+    "/sounds/left.wav": {
+      "sha256": "1ebe3e096f14edf9c4b1469ddae2407f53b8f3788b00b1b3f76d6d5c9f2e97f5",
+      "size": 42156
+    },
+    "/sounds/liveStreamingOff.mp3": {
+      "sha256": "0b82a18cda8e59b0228d1655c923a0d2df84eea1eeec0322979971c710abeb32",
+      "size": 13461
+    },
+    "/sounds/liveStreamingOff.opus": {
+      "sha256": "1c8bb042a4ef3916efc53b3ec5e80ff07e5645828f8be1d95bb38590ac7d5c16",
+      "size": 9650
+    },
+    "/sounds/liveStreamingOff_fr.mp3": {
+      "sha256": "a43cd04eb218cf37361b889ab916f49407c424b75c7287c47ed2f21d551ab196",
+      "size": 25069
+    },
+    "/sounds/liveStreamingOff_fr.opus": {
+      "sha256": "99f437a99c5961459aa8ef9f488f84925b1bc170dcc578b65efd6bbf68f605dc",
+      "size": 21909
+    },
+    "/sounds/liveStreamingOff_frCA.mp3": {
+      "sha256": "a43cd04eb218cf37361b889ab916f49407c424b75c7287c47ed2f21d551ab196",
+      "size": 25069
+    },
+    "/sounds/liveStreamingOff_frCA.opus": {
+      "sha256": "99f437a99c5961459aa8ef9f488f84925b1bc170dcc578b65efd6bbf68f605dc",
+      "size": 21909
+    },
+    "/sounds/liveStreamingOn.mp3": {
+      "sha256": "7b48bd232c9d34a7d87e83b99e4f9149abfc5950761c857ee7fa649cae1379e6",
+      "size": 12141
+    },
+    "/sounds/liveStreamingOn.opus": {
+      "sha256": "d0f45225cd88af078104f873d8dab55dffb9bbad905223758cd7b59ff607b89b",
+      "size": 8631
+    },
+    "/sounds/liveStreamingOn_fr.mp3": {
+      "sha256": "6555fe7b77f8242ad39898f4f3e1216cad9d4c76bc1742c8053106820a6fe281",
+      "size": 24781
+    },
+    "/sounds/liveStreamingOn_fr.opus": {
+      "sha256": "81c81b8898c78ddb44b4f059db11585daee585ec9eaac15e53bfaeb528486646",
+      "size": 22740
+    },
+    "/sounds/liveStreamingOn_frCA.mp3": {
+      "sha256": "6555fe7b77f8242ad39898f4f3e1216cad9d4c76bc1742c8053106820a6fe281",
+      "size": 24781
+    },
+    "/sounds/liveStreamingOn_frCA.opus": {
+      "sha256": "81c81b8898c78ddb44b4f059db11585daee585ec9eaac15e53bfaeb528486646",
+      "size": 22740
+    },
+    "/sounds/noAudioSignal.mp3": {
+      "sha256": "86144b15c3a7c558d83ff86a1090bd13dca65e7a752a7c20506ff6135568d1f7",
+      "size": 3114
+    },
+    "/sounds/noAudioSignal.opus": {
+      "sha256": "2ffb76273c5a94a35d6d67397f546c779625f6196fc2c9b4e40fe64a7d669ae2",
+      "size": 1579
+    },
+    "/sounds/noisyAudioInput.mp3": {
+      "sha256": "86144b15c3a7c558d83ff86a1090bd13dca65e7a752a7c20506ff6135568d1f7",
+      "size": 3114
+    },
+    "/sounds/noisyAudioInput.opus": {
+      "sha256": "a5cb0fa3eeae1e00fea87aad03dfc28857b6fe9b62a486223e2d22fed04caa79",
+      "size": 1579
+    },
+    "/sounds/outgoingRinging.mp3": {
+      "sha256": "6a121491d345c9b07e9e0bc890d1ecbbeacf74a3505054e25eb2ce3a84787a44",
+      "size": 3816
+    },
+    "/sounds/outgoingRinging.opus": {
+      "sha256": "aaea2e1819949ecb3c21f91d66711ee00c157aaca44877bd0321462110ee7904",
+      "size": 11080
+    },
+    "/sounds/outgoingRinging.wav": {
+      "sha256": "5c038175d03e57ed15103289caf367f1aa541773b98260408fb25f2e7a4b3c11",
+      "size": 132344
+    },
+    "/sounds/outgoingStart.mp3": {
+      "sha256": "8eda9ebc8df2ff187caef58faae87de182d279d48164f5d671bb9219a268f0da",
+      "size": 12657
+    },
+    "/sounds/outgoingStart.opus": {
+      "sha256": "c504f7b681012799e0737edca3c40c1809ba8685ebb34ed460828dbbced53707",
+      "size": 13341
+    },
+    "/sounds/outgoingStart.wav": {
+      "sha256": "032af7341cb34d9ce12377d1ba4b8834a44d9b6546cbf0685db8b9cd8ec3270f",
+      "size": 211000
+    },
+    "/sounds/reactions-applause.mp3": {
+      "sha256": "52c0454622cb9664b319b0502538199016d77fdcf56b2bc8547e584f6d4fc28a",
+      "size": 9874
+    },
+    "/sounds/reactions-applause.opus": {
+      "sha256": "d9b4c6d28c4d54320f10fd2768c4d3a4907b4afdf1d77539e89cce726b56644b",
+      "size": 7961
+    },
+    "/sounds/reactions-boo.mp3": {
+      "sha256": "2b58034d940fcf50734951249973bd3fc97ac5d9af0a18457ca60b2541e7f383",
+      "size": 9457
+    },
+    "/sounds/reactions-boo.opus": {
+      "sha256": "24b94c45ede175cca9bcc91e4f873787901434dfe0c382a2238ac041ab9fda70",
+      "size": 8053
+    },
+    "/sounds/reactions-crickets.mp3": {
+      "sha256": "fc70bcb4dafb8a562f67a132deb1b759cde4bdec7697cf4ac3ceda109c3d3c98",
+      "size": 14163
+    },
+    "/sounds/reactions-crickets.opus": {
+      "sha256": "c82cc9749fc09c10c2375a48227e19d9810f3dd1537286f2211dfa5cd7ab8f97",
+      "size": 10727
+    },
+    "/sounds/reactions-laughter.mp3": {
+      "sha256": "44c5441e2412dc2e2d0f57d29af23a47a0147c106d91d3e9200445900bcdf2a2",
+      "size": 10341
+    },
+    "/sounds/reactions-laughter.opus": {
+      "sha256": "994e7d9b0b55bbb9f5ae87e59df4db92373765609e51af87f43ba02f2cc46002",
+      "size": 7210
+    },
+    "/sounds/reactions-love.mp3": {
+      "sha256": "2b2ff090aae059e747a5301970498c215428ef0b61ba740fb2d96d635cadcfac",
+      "size": 15528
+    },
+    "/sounds/reactions-love.opus": {
+      "sha256": "1a363ada692e16393d590854a5d1bce9d7abfec702496a39ef3b27558610752e",
+      "size": 31647
+    },
+    "/sounds/reactions-raised-hand.mp3": {
+      "sha256": "137dc6c25337c949f1614bbc49820f41dde9f3acff106543cd5ad6a9a1771541",
+      "size": 8418
+    },
+    "/sounds/reactions-raised-hand.opus": {
+      "sha256": "3ffb3490e9c0fa53271e134a4cb8fca0e8938400e371cb7fe86517ec624e5429",
+      "size": 4953
+    },
+    "/sounds/reactions-surprise.mp3": {
+      "sha256": "338bfb2a2b4e1c1853cbb760776a894c3c092483833c1d5d2d14cd7d9c33bf9c",
+      "size": 9094
+    },
+    "/sounds/reactions-surprise.opus": {
+      "sha256": "58b845e520ba0d2ff115cd780614eea4e5295bb1a6ca186fdecc68cee9af923a",
+      "size": 7753
+    },
+    "/sounds/reactions-thumbs-up.mp3": {
+      "sha256": "26be78413972ed232b76ee95ba72b0f32fd7532eab28f0c06202275295092232",
+      "size": 10212
+    },
+    "/sounds/reactions-thumbs-up.opus": {
+      "sha256": "2e1fac2690865982264a091b7d5a98082f2db7427155098c42189a587ace4c7d",
+      "size": 8157
+    },
+    "/sounds/recordingAndTranscriptionOff.mp3": {
+      "sha256": "816656f28e22b9a9e1d2e58da923e0174ae6be4e724f4fa0a8d6593af532d4d9",
+      "size": 13568
+    },
+    "/sounds/recordingAndTranscriptionOff.opus": {
+      "sha256": "d3e99f1ee7dc67042b42734de314601ba362dec47337677fdf37382e9bad39fd",
+      "size": 8437
+    },
+    "/sounds/recordingAndTranscriptionOff_fr.mp3": {
+      "sha256": "32cf587167bd1e8e0dc0627c4bccc1167a6dab2874304514404829145724b14b",
+      "size": 18327
+    },
+    "/sounds/recordingAndTranscriptionOff_fr.opus": {
+      "sha256": "b639d758cc5863c8d5d569eef8ab30840956eb95a5391066715af7bb071fdc24",
+      "size": 12737
+    },
+    "/sounds/recordingAndTranscriptionOff_frCA.mp3": {
+      "sha256": "9684aacd0e390240d677b19732f5d8ddbcfa58f818896fb4038f1c7fe34e5917",
+      "size": 13410
+    },
+    "/sounds/recordingAndTranscriptionOff_frCA.opus": {
+      "sha256": "7c40249cc855cc2d50b6c96ba1044899f7e8783868aee68932bf9af508b2c6f0",
+      "size": 9365
+    },
+    "/sounds/recordingAndTranscriptionOn.mp3": {
+      "sha256": "00b0971d3983be3d2df6d6eb8756d423c39131a525b9e65888cce00f1bfc870a",
+      "size": 12918
+    },
+    "/sounds/recordingAndTranscriptionOn.opus": {
+      "sha256": "4b0bc48e9ab2e72331d9b5b9b17c724a54a6f9efb0c8598260c085a07443be18",
+      "size": 8678
+    },
+    "/sounds/recordingAndTranscriptionOn_fr.mp3": {
+      "sha256": "e33b90150d02016db16529d0f5a68f05da96182eee8c59f6fea854534ff49e10",
+      "size": 19136
+    },
+    "/sounds/recordingAndTranscriptionOn_fr.opus": {
+      "sha256": "ce2a8879a3779c12990c6c9b29e1924837dc9b0376850235cbce14dd566f9b64",
+      "size": 13215
+    },
+    "/sounds/recordingAndTranscriptionOn_frCA.mp3": {
+      "sha256": "b42e8212f48a59da871e6ec7ddb763c9916839c6d395b2ff2db012097774105e",
+      "size": 13567
+    },
+    "/sounds/recordingAndTranscriptionOn_frCA.opus": {
+      "sha256": "f2ed6fee3640c0d19216327642816f44f43fa2276172c8ccc9ccf206c8f04f73",
+      "size": 9454
+    },
+    "/sounds/recordingOff.mp3": {
+      "sha256": "87ec3889562854b89c6600f683be81257bfe229950458d4df12effe8cc362f60",
+      "size": 9381
+    },
+    "/sounds/recordingOff.opus": {
+      "sha256": "f195fcc989a51e40c2f5db4ebf48fbd01085fda5fa720a19702380b70fb2cee3",
+      "size": 6503
+    },
+    "/sounds/recordingOff_fr.mp3": {
+      "sha256": "6cb33c60b9921482ecb769e86836080eef3f88a7f0dbcb8b9b517196f5e5b45e",
+      "size": 18788
+    },
+    "/sounds/recordingOff_fr.opus": {
+      "sha256": "8d9be74e80f0ba802bc8f15c634dbea3ca3afed7bc5c8ff574c0db611b961219",
+      "size": 16823
+    },
+    "/sounds/recordingOff_frCA.mp3": {
+      "sha256": "6cb33c60b9921482ecb769e86836080eef3f88a7f0dbcb8b9b517196f5e5b45e",
+      "size": 18788
+    },
+    "/sounds/recordingOff_frCA.opus": {
+      "sha256": "8d9be74e80f0ba802bc8f15c634dbea3ca3afed7bc5c8ff574c0db611b961219",
+      "size": 16823
+    },
+    "/sounds/recordingOn.mp3": {
+      "sha256": "295ed82cd31eeaae8d395467670761f9c4db8d195996da55888c3440891db682",
+      "size": 9141
+    },
+    "/sounds/recordingOn.opus": {
+      "sha256": "0dad93c5deba689027225842255302d147b205bf41adb4be2d33c4c7f8ea8cbc",
+      "size": 7404
+    },
+    "/sounds/recordingOn_fr.mp3": {
+      "sha256": "ff2571e1e3a59335ce0438e8f73f336e103a4582ca2e5eb5c7dbfb7cc3ea1c9e",
+      "size": 18840
+    },
+    "/sounds/recordingOn_fr.opus": {
+      "sha256": "e4bde991eb556ca63dc2aafdb2cf7257df232e76dbd17a45fd1f87e014a85cc7",
+      "size": 17139
+    },
+    "/sounds/recordingOn_frCA.mp3": {
+      "sha256": "ff2571e1e3a59335ce0438e8f73f336e103a4582ca2e5eb5c7dbfb7cc3ea1c9e",
+      "size": 18840
+    },
+    "/sounds/recordingOn_frCA.opus": {
+      "sha256": "e4bde991eb556ca63dc2aafdb2cf7257df232e76dbd17a45fd1f87e014a85cc7",
+      "size": 17139
+    },
+    "/sounds/rejected.mp3": {
+      "sha256": "bbc34a7fbfcd381079c7742012ab430000b728b9c9ea99e4ab49d74804945b12",
+      "size": 7222
+    },
+    "/sounds/rejected.opus": {
+      "sha256": "dcb415db2db8f819bd5199cdd3dfde01b27a6c20eed858f3494b63475af8b8ef",
+      "size": 5619
+    },
+    "/sounds/rejected.wav": {
+      "sha256": "9abe9f2f297c9a0d23484686f83177b8ce06db60ae3cc3fbcd60fb6a6694355a",
+      "size": 69236
+    },
+    "/sounds/ring.mp3": {
+      "sha256": "b656dabe684b67b4ba91708c1da434c85c78c2a9454bf48253521dd8f3888d8c",
+      "size": 1840
+    },
+    "/sounds/ring.opus": {
+      "sha256": "6c0590d275e585b7a624c07904af79b9ab2d5c9ff5637c5b61f4b4bb8679fd2f",
+      "size": 6121
+    },
+    "/sounds/ring.wav": {
+      "sha256": "c96eb38261d095ecd3c7f4320bfa175bdca7dd98361b1baa3c605933099312d7",
+      "size": 44144
+    },
+    "/sounds/talkWhileMuted.mp3": {
+      "sha256": "86144b15c3a7c558d83ff86a1090bd13dca65e7a752a7c20506ff6135568d1f7",
+      "size": 3114
+    },
+    "/sounds/talkWhileMuted.opus": {
+      "sha256": "a9e21ef66d92fb47d7ba4ff0b71ee8e088987d96e15bb993f61599e809be28ed",
+      "size": 1579
+    },
+    "/sounds/transcriptionOff.mp3": {
+      "sha256": "87450e498a547df2998f1ef3d961e4b00cd4ad9412bcb322bf181a0a51ea9c7e",
+      "size": 10446
+    },
+    "/sounds/transcriptionOff.opus": {
+      "sha256": "9dca4cdf4407195ed12c8e4f58797b9c84a8a503af77dc1187bd9d5b98ee4c8f",
+      "size": 5918
+    },
+    "/sounds/transcriptionOff_fr.mp3": {
+      "sha256": "63ea1361ba35ea950f820e2e1fca3a2fc9480b81548a5b4ffcd67573c49319b5",
+      "size": 14119
+    },
+    "/sounds/transcriptionOff_fr.opus": {
+      "sha256": "d8e2f29ac7072916011bfc161b01cd2c285ce4876e080ce02b4703955c6d192e",
+      "size": 9188
+    },
+    "/sounds/transcriptionOff_frCA.mp3": {
+      "sha256": "b895e9ac30a9d64b16400b95803bd93c02ed041b3833891196223750a71356fe",
+      "size": 9094
+    },
+    "/sounds/transcriptionOff_frCA.opus": {
+      "sha256": "fb1be700b21c0b741f8c7435bf1a556cacc5d00eedc0baf8ff39009f70c61121",
+      "size": 6194
+    },
+    "/sounds/transcriptionOn.mp3": {
+      "sha256": "bd0f0832036334e6b547cab22e389bbe64963794a7f7a36a46e0143efcb11bab",
+      "size": 7327
+    },
+    "/sounds/transcriptionOn.opus": {
+      "sha256": "3681c50857940f9606b9d1159ffe2d1c797a7dd525f8e31bd08ec1cb61e25c38",
+      "size": 4681
+    },
+    "/sounds/transcriptionOn_fr.mp3": {
+      "sha256": "715a1465a743a6f5c6df13eaa43cdf1736bb1d0a4cbcb8de351ffebba405aafc",
+      "size": 14428
+    },
+    "/sounds/transcriptionOn_fr.opus": {
+      "sha256": "da40791b856b22bfa03a905c97c3ff7b0324b756113d7bf696fab65133d305c3",
+      "size": 10110
+    },
+    "/sounds/transcriptionOn_frCA.mp3": {
+      "sha256": "731c38ba8733951b1bd7ec3e981a23d28e36ac771623674632931bf636241704",
+      "size": 9718
+    },
+    "/sounds/transcriptionOn_frCA.opus": {
+      "sha256": "2de01dc1a212683f12b737535f729b66c866f4c094066d6f615ca5bc0eff1385",
+      "size": 6862
+    },
+    "/static/404.html": {
+      "sha256": "0d47170b52612df687c30d4720b0608092d596419f0c165a516140ca49762787",
+      "size": 1317
+    },
+    "/static/close.html": {
+      "sha256": "aa404e1664e192598689493fffe804474bafa99d81c5606c667f25d02d567388",
+      "size": 1591
+    },
+    "/static/close.js": {
+      "sha256": "9ec6289dd4392546e57674df17761388a122e58d75e98c28901fbca4177f5b89",
+      "size": 2112
+    },
+    "/static/close2.html": {
+      "sha256": "8d2ce027387de2a0e11edd787452af313d3d34d91345c580e1238a6ad0bb98ab",
+      "size": 1630
+    },
+    "/static/close3.html": {
+      "sha256": "ce14c1e07ddf030b1eebdc20f8de12d6e341723c85e9487184a3dc9cffc435ee",
+      "size": 417
+    },
+    "/static/close3.js": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "/static/dialInInfo.html": {
+      "sha256": "9ea44a38a69b477cc6cfe80902b0435765b9c5299cf3aa1fe745956d16d03b81",
+      "size": 1949
+    },
+    "/static/load-config.js": {
+      "sha256": "a0d06c16990210e99d994f4dbc65b6dd5835b469500b0439ffb8c1be1a444d03",
+      "size": 4686
+    },
+    "/static/msredirect.html": {
+      "sha256": "aefe59f45811b24e6a0b03686f4036f8b4244ca5e1c5b9d51c14ac1be41758b2",
+      "size": 689
+    },
+    "/static/oauth.html": {
+      "sha256": "0f3dd4d7b6888f0be153dd5e31ae7d266e100769248fec602d3ec9f481842b38",
+      "size": 1739
+    },
+    "/static/offline.html": {
+      "sha256": "ac1a09fda4f0eceedb453dba93be5816913f57b67c37d3538c054e882d7fef9a",
+      "size": 3238
+    },
+    "/static/planLimit.html": {
+      "sha256": "ce14c1e07ddf030b1eebdc20f8de12d6e341723c85e9487184a3dc9cffc435ee",
+      "size": 417
+    },
+    "/static/prejoin.html": {
+      "sha256": "7f8ac9b65c188e8f414ab5d7f0e3ccac7ab1de5640a75c5e9eada4d6dff01154",
+      "size": 2179
+    },
+    "/static/pwa/icons/icon192.png": {
+      "sha256": "5d98db7909a183f1c558efb31bc3cac98203463d08acbf6f1ed9ef1efeb8f5da",
+      "size": 31410
+    },
+    "/static/pwa/icons/icon512.png": {
+      "sha256": "dcf948d8393920e23af2dbf5190aa811b6a1410ac5235237d700bb78b4076876",
+      "size": 42848
+    },
+    "/static/pwa/icons/iconMask.png": {
+      "sha256": "8d2d52da38cb2e916ab8a5e5c64ce07ffa279d2b65a68e6d0edad531f93eccff",
+      "size": 72341
+    },
+    "/static/recommendedBrowsers.html": {
+      "sha256": "e9e5067776959c28de53c578cfef966b7224ac939efa9ff9867ce71cdd629c9f",
+      "size": 1779
+    },
+    "/static/settingsToolbarAdditionalContent.html": {
+      "sha256": "a6ad7dca51703d9c25c4175f730580156c91ba224db8f10a9331a77da7f72212",
+      "size": 72
+    },
+    "/static/webrtcUnsupported.html": {
+      "sha256": "f22654ebf5471b0a2832023822ac6044a429697157c55dd5e636cebef2fa4c51",
+      "size": 1498
+    },
+    "/static/welcomePageAdditionalCard.html": {
+      "sha256": "a5f2abc05b031697e5c8e6ac320abba22a516d4264bb0a6c9140fccb3b300661",
+      "size": 67
+    },
+    "/static/welcomePageAdditionalContent.html": {
+      "sha256": "201384c9f11db0af774a3b4a895cd9afc91b81c51792637c83ffc829e7fb5c41",
+      "size": 70
+    },
+    "/static/whiteboard.html": {
+      "sha256": "9632d9107aeefd8078136dd179dd4d5c7e5b0c11d1a1cc2b19c74dea1e96980d",
+      "size": 1974
+    },
+    "/title.html": {
+      "sha256": "2a40b71be7f19b9f461d207cce37c03a7e2c6c214cb05a3020adc06704852919",
+      "size": 606
+    }
+  }
+}
