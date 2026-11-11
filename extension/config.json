@@ -17,8 +17,8 @@
     "files": {
       "/libs/lib-jitsi-meet.min.js": "7e5dde66ab7a7f0cc041b18c2bfe53b5765e4b7fb9615d691eafbacfecd885be",
       "/libs/lib-jitsi-meet.e2ee-worker.js": "f0a0e95a6eb4d915b8c12f772c6d1b293a91a9fa11e2dce7d4e7b144a8edb86e",
-      "/libs/lib-jitsi-meet.e2ee-vault.html": "7ef57ec59fd0d307b4cddb3dd67a1d71bb6e4dd16696c636ea76f7c5a7a60cf5",
-      "/libs/lib-jitsi-meet.e2ee-vault.js": "ab3cfa60869dc007310e60aab63795280117559dfafd7b09292e6d490bb2f3e4",
+      "/libs/lib-jitsi-meet.e2ee-vault.html": "e5e9a55757ff0c2f9131032a41503bdfd4f3cd01a3f20b3a0923f8ffcac6c157",
+      "/libs/lib-jitsi-meet.e2ee-vault.js": "5003ad1b03c333eb93f9db02b956cde1e80dbfc1fb3983a749c51602b24542d1",
       "/libs/olm.js": "cf9a793bcbad919967d79e7f2bf52e0492b646332d36ee7e1c2d1b0ff47b3c40",
       "/libs/olm.wasm": "3fc8dbfe8f44d550b1c9165e6c2af33323aaeba0a5ec223cef74959dd434642b"
     },
