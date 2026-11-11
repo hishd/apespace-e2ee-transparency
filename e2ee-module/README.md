@@ -8,8 +8,8 @@ Source: [jitsi/lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) v2118.0.
 |---|---|---|
 | `/libs/lib-jitsi-meet.min.js` | The library | `7e5dde66ab7a7f0cc041b18c2bfe53b5765e4b7fb9615d691eafbacfecd885be` |
 | `/libs/lib-jitsi-meet.e2ee-worker.js` | Encrypts and decrypts media frames | `f0a0e95a6eb4d915b8c12f772c6d1b293a91a9fa11e2dce7d4e7b144a8edb86e` |
-| `/libs/lib-jitsi-meet.e2ee-vault.html` | The key vault page (sandboxed frame) | `7ef57ec59fd0d307b4cddb3dd67a1d71bb6e4dd16696c636ea76f7c5a7a60cf5` |
-| `/libs/lib-jitsi-meet.e2ee-vault.js` | The key vault's code (unminified) | `ab3cfa60869dc007310e60aab63795280117559dfafd7b09292e6d490bb2f3e4` |
+| `/libs/lib-jitsi-meet.e2ee-vault.html` | The key vault page (sandboxed frame) | `e5e9a55757ff0c2f9131032a41503bdfd4f3cd01a3f20b3a0923f8ffcac6c157` |
+| `/libs/lib-jitsi-meet.e2ee-vault.js` | The key vault's code (unminified) | `5003ad1b03c333eb93f9db02b956cde1e80dbfc1fb3983a749c51602b24542d1` |
 | `/libs/olm.js` | Olm, from @matrix-org/olm | `cf9a793bcbad919967d79e7f2bf52e0492b646332d36ee7e1c2d1b0ff47b3c40` |
 | `/libs/olm.wasm` | Olm, from @matrix-org/olm | `3fc8dbfe8f44d550b1c9165e6c2af33323aaeba0a5ec223cef74959dd434642b` |
 
@@ -37,7 +37,7 @@ It changes `modules/e2ee/OlmAdapter.js`, `modules/e2ee/E2EEErrors.ts`, `modules/
 
 `e2ee-key-vault.patch` is APESpace's own too: every key lives in the **key vault**, out of reach of the meeting page.
 
-- The vault is `lib-jitsi-meet.e2ee-vault.html`, loaded in an iframe with `sandbox="allow-scripts"`. It has its own opaque origin, so the page (including the closed-source APESpace app) can't reach into it. Its code is built unminified from `modules/e2ee/vault/`, and it loads Olm from `olm.js`.
+- The vault is `lib-jitsi-meet.e2ee-vault.html`, loaded in an iframe with `sandbox="allow-scripts"`. It has its own opaque origin, so the page (including the closed-source APESpace app) can't reach into it. Its code is built unminified from `modules/e2ee/vault/`, and it loads Olm from `olm.js`. Olm's WebAssembly (the same `olm.wasm` from @matrix-org/olm 3.2.15) is built into the vault's script, so the vault fetches nothing and its policy allows no connections; in a sandboxed frame, Safari refuses a fetch of `olm.wasm`.
 - The vault holds the Olm account and sessions, generates and ratchets our media key, and runs emoji verification and the group safety number. This is the library's unchanged `OlmAdapter` and `ManagedKeyHandler`, running on a stand-in conference (`VaultConference`).
 - The page only relays: participants and their E2EE properties into the vault; Olm messages (already encrypted), our public identity keys and E2EE events out of it.
 - Media keys go from the vault straight to the encryption worker, over a `MessageChannel` whose two ends the page hands over without keeping. Once the worker has that channel, it ignores keys from the page.

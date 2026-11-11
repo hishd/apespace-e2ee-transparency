@@ -656,10 +656,10 @@ index 00000000..24a524dd
 +}
 diff --git a/modules/e2ee/vault/index.js b/modules/e2ee/vault/index.js
 new file mode 100644
-index 00000000..0ac274a9
+index 00000000..2e7846bf
 --- /dev/null
 +++ b/modules/e2ee/vault/index.js
-@@ -0,0 +1,121 @@
+@@ -0,0 +1,142 @@
 +/* global Olm */
 +
 +// The E2EE key vault: runs in a sandboxed frame (its own, opaque origin), so the
@@ -683,10 +683,30 @@ index 00000000..0ac274a9
 +//   ready, send { to, payload }, set-property { name, value },
 +//   event { name, args }, done { requestId }
 +
++// Olm's WebAssembly, from @matrix-org/olm, built into this script (a data: URL).
++// The vault fetches nothing: in a sandboxed frame (opaque origin) WebKit refuses
++// a fetch of olm.wasm under connect-src 'self', so the vault's policy allows no
++// connections at all, and Olm gets its code from here.
++import olmWasm from '@matrix-org/olm/olm.wasm';
++
 +import { JitsiConferenceEvents } from '../../../JitsiConferenceEvents';
 +import { ManagedKeyHandler } from '../ManagedKeyHandler';
 +
 +import VaultConference from './VaultConference';
++
++/**
++ * Makes Olm.init use the built-in WebAssembly instead of fetching olm.wasm.
++ *
++ * @returns {void}
++ */
++function useBuiltInOlmWasm() {
++    const binary = atob(olmWasm.slice(olmWasm.indexOf(',') + 1));
++    const wasmBinary = Uint8Array.from(binary, c => c.charCodeAt(0));
++    const init = Olm.init.bind(Olm);
++
++    Olm.init = (options = {}) => init({ ...options,
++        wasmBinary });
++}
 +
 +/**
 + * The conference events the key code emits that the page re-emits.
@@ -779,21 +799,23 @@ index 00000000..0ac274a9
 +    if (typeof Olm === 'undefined') {
 +        throw new Error('E2EE key vault: Olm is not loaded');
 +    }
++    useBuiltInOlmWasm();
 +    start(event.ports[0], event.ports[1]);
 +});
 diff --git a/modules/e2ee/vault/vault.html b/modules/e2ee/vault/vault.html
 new file mode 100644
-index 00000000..b5002fb3
+index 00000000..3b83a6b2
 --- /dev/null
 +++ b/modules/e2ee/vault/vault.html
-@@ -0,0 +1,12 @@
+@@ -0,0 +1,13 @@
 +<!DOCTYPE html>
 +<html>
 +<head>
 +    <meta charset="utf-8">
-+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'">
++    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'">
 +    <title>E2EE key vault</title>
-+    <!-- Olm from @matrix-org/olm, served next to this page. -->
++    <!-- Olm from @matrix-org/olm, served next to this page. Its WebAssembly is
++         built into lib-jitsi-meet.e2ee-vault.js, so this page fetches nothing. -->
 +    <script src="olm.js"></script>
 +    <script src="lib-jitsi-meet.e2ee-vault.js"></script>
 +</head>
@@ -863,8 +885,46 @@ index d5423c0a..4d48c63b 100644
  
  /**
   * @internal
+diff --git a/package-lock.json b/package-lock.json
+index 61e954d3..6b820f00 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -29,6 +29,7 @@
+         "@babel/preset-env": "7.25.9",
+         "@babel/preset-typescript": "7.25.9",
+         "@jitsi/eslint-config": "6.0.4",
++        "@matrix-org/olm": "3.2.15",
+         "@types/async": "3.2.12",
+         "@types/jasmine": "4.0.3",
+         "@types/lodash-es": "4.17.12",
+@@ -1952,6 +1953,13 @@
+         "@jridgewell/sourcemap-codec": "^1.4.14"
+       }
+     },
++    "node_modules/@matrix-org/olm": {
++      "version": "3.2.15",
++      "resolved": "https://registry.npmjs.org/@matrix-org/olm/-/olm-3.2.15.tgz",
++      "integrity": "sha512-S7lOrndAK9/8qOtaTq/WhttJC/o4GAzdfK0MUPpo8ApzsJEC0QjtwrkC3KBXdFP1cD1MXi/mlKR7aaoVMKgs6Q==",
++      "dev": true,
++      "license": "Apache-2.0"
++    },
+     "node_modules/@nicolo-ribaudo/eslint-scope-5-internals": {
+       "version": "5.1.1-v1",
+       "resolved": "https://registry.npmjs.org/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz",
+diff --git a/package.json b/package.json
+index 7793bf6d..dffa6d76 100644
+--- a/package.json
++++ b/package.json
+@@ -36,6 +36,7 @@
+     "@babel/preset-env": "7.25.9",
+     "@babel/preset-typescript": "7.25.9",
+     "@jitsi/eslint-config": "6.0.4",
++    "@matrix-org/olm": "3.2.15",
+     "@types/async": "3.2.12",
+     "@types/jasmine": "4.0.3",
+     "@types/lodash-es": "4.17.12",
 diff --git a/webpack.config.js b/webpack.config.js
-index f16784f0..01e83b9a 100644
+index f16784f0..0f2dc5b1 100644
 --- a/webpack.config.js
 +++ b/webpack.config.js
 @@ -1,3 +1,4 @@
@@ -872,7 +932,7 @@ index f16784f0..01e83b9a 100644
  const path = require('path');
  const process = require('process');
  
-@@ -32,6 +33,28 @@ module.exports = (_env, argv) => {
+@@ -32,6 +33,33 @@ module.exports = (_env, argv) => {
                  path: path.join(process.cwd(), 'dist', 'umd')
              },
              resolve: config.resolve
@@ -883,7 +943,12 @@ index f16784f0..01e83b9a 100644
 +                vault: './modules/e2ee/vault/index.js'
 +            },
 +            mode,
-+            module: config.module,
++            module: { ...config.module,
++                rules: [ ...config.module.rules, {
++                    // Olm's WebAssembly is built into the vault's script: the vault fetches nothing.
++                    test: /olm\.wasm$/,
++                    type: 'asset/inline'
++                } ] },
 +            optimization: {
 +                minimize: false
 +            },
