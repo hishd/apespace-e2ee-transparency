@@ -175,6 +175,14 @@ node checks/client-hygiene.mjs --url "https://<meeting URL>"
 
 Against a library without the key vault, the page walk finds the media key (at `APP.conference._room._e2eEncryption._keyHandler._key`), so the run reports `INSECURE`.
 
+## What the server can read of each content channel — `checks/content-channels.mjs`
+
+In an encrypted meeting, Alice uses every content channel (display name, chat, private chat, poll, reaction, file sharing), each with a unique marker. A tap in her browser records everything she sends to the servers (WebSocket, data channel, HTTP), and the check reports for each channel whether the marker left readable, on which path, and whether Bob received it. An inventory, not a pass/fail test: only audio, video and screen sharing are end-to-end encrypted.
+
+```sh
+node checks/content-channels.mjs --url "https://<meeting URL>"
+```
+
 ## The media path — `checks/media-path.mjs`
 
 In an encrypted meeting, reads from inside each browser the network path media takes (the selected ICE candidate pair: direct to the bridge or through a TURN relay, remote address and protocol), the STUN/TURN servers offered (addresses only), and whether every frame the bridge forwarded is end-to-end encrypted.
