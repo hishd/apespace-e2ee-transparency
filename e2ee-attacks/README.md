@@ -114,6 +114,20 @@ node attacks/hidden-recipient.mjs --url "https://<meeting URL>"
 
 On the current build the ghost is refused (`e2ee.session.hidden-participant`) and the Inspector lists every real key recipient. With `--visible` the same participant, shown in the list, does receive keys — and appears in everyone's participant list, so it can be seen and removed.
 
+## Key lifecycle and tampering — `checks/key-lifecycle.mjs`
+
+Three checks that need no malicious server. Alice and Bob start an encrypted meeting; Carol joins later and then leaves. Every browser records, with the published Inspector, the media keys it holds and the encrypted frames it receives, and the script then tries the keys against real captured frames. Keys are tried at every key index and every allowed ratchet step, so a check passes only because the key material differs.
+
+| Check | Passes when |
+|---|---|
+| A late joiner can't read earlier content | Carol's keys open none of the frames Alice sent before Carol joined |
+| A participant who left can't keep decrypting | Carol's keys open none of the frames Alice sent once the key changed after Carol left. The run also reports how long her old key kept working. |
+| Tampering is rejected | One flipped bit in the readable header, the encrypted payload, the IV or the authentication tag makes decryption fail |
+
+```sh
+node checks/key-lifecycle.mjs --url "https://<meeting URL>"
+```
+
 ## Proving the test is meaningful: run it against pre-fix code
 
 A test that always passes proves nothing. To see the attacks **succeed** — and the suite report `INSECURE` — run them against the library APESpace forked *before* the fix:
