@@ -15,7 +15,9 @@
 //     from Carol;
 //   - whether Alice and Bob stay encrypted.
 //
-//   node checks/unsupported-participant.mjs [--url <meeting URL>] [--lib <dir>] [--headed]
+//   node checks/unsupported-participant.mjs [--url <meeting URL>] [--lib <dir>] [--app <app.bundle.min.js>] [--headed]
+//
+// --app serves the meeting app from a local build instead of the meeting's own.
 //
 // Keep the room empty apart from the three browsers this opens.
 
@@ -38,6 +40,8 @@ const libFiles = libDir ? [
     [ 'olm.js', 'text/javascript' ]
 ].filter(([ file ]) => fs.existsSync(path.join(libDir, file)))
     .map(([ file, contentType ]) => [ file, fs.readFileSync(path.join(libDir, file)), contentType ]) : [];
+
+arg('--app') && libFiles.push([ 'app.bundle.min.js', fs.readFileSync(arg('--app')), 'text/javascript' ]);
 const target = meetingTarget(argv, 'unsupported');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const log = m => console.log(`[${new Date().toISOString().slice(11, 19)}] ${m}`);
@@ -79,12 +83,19 @@ async function join(name, { unsupported = false } = {}) {
         await page.addInitScript({ path: path.join(HERE, '../../extension/inspector/leak-scan.js') });
         await page.addInitScript({ path: path.join(HERE, '../../extension/inspector/hook.js') });
     }
-    await joinMeeting(page, target.url({
+    const joining = joinMeeting(page, target.url({
         'config.p2p.enabled': false,
         'config.startWithAudioMuted': false,
         'config.startWithVideoMuted': false,
         'userInfo.displayName': name
     }), name);
+
+    if (unsupported) {
+        // A client that leaves an encrypted meeting at once may never look "joined" to the helper.
+        await joining.catch(e => log(`${name}: ${e.message}`));
+    } else {
+        await joining;
+    }
 
     return page;
 }
@@ -158,20 +169,22 @@ await waitInPage(bob, () => APP.conference._room.isE2EEEnabled(), null, 30000);
 log('E2EE on; Carol, without encryption support, joins');
 
 const carol = await join('carol', { unsupported: true });
-const carolSupported = Boolean(await carol.evaluate(() => APP.conference._room.isE2EESupported()));
-const carolId = await carol.evaluate(() => APP.conference._room.myUserId()).catch(() => null);
+const carolSupported = Boolean(await carol.evaluate(() => window.APP?.conference?._room?.isE2EESupported?.()
+    ?? window.JitsiMeetJS?.isE2EESupported?.()).catch(() => false));
+const bobId = await bob.evaluate(() => APP.conference._room.myUserId());
 
 await sleep(15000);
 
-const carolInMeeting = await carol.evaluate(() => Boolean(APP.conference._room?.isJoined?.())).catch(() => false);
+const carolInMeeting = await carol.evaluate(() => Boolean(window.APP?.conference?._room?.isJoined?.())).catch(() => false);
+const carolScreen = await carol.evaluate(() => document.body.innerText.slice(0, 300)).catch(() => '');
 const carolSends = carolInMeeting ? await sendingRate(carol) : { audio: 0, video: 0 };
 
-// Frames Alice received from Carol, before decryption.
+// Frames Alice received from anyone but Bob (that is, from Carol, even after she left), before decryption.
 const { streams } = await alice.evaluate(() => window.__e2eeInspector.exportMeta());
 let carolFrames = 0;
 let carolEncrypted = 0;
 
-for (const s of streams.filter(st => st.participantId === carolId)) {
+for (const s of streams.filter(st => st.participantId !== bobId)) {
     const frames = await alice.evaluate(([ id, n ]) => window.__e2eeInspector.exportFrames(id, 0, n), [ s.id, s.frameCount ]);
 
     for (const f of frames) {
@@ -189,13 +202,14 @@ await Promise.all([ alice, bob, carol ].map(p => leaveMeeting(p).catch(() => {})
 await browser.close();
 
 check('ENC-08', 'Carol\'s client reports no encryption support (control)', carolSupported === false, `${carolSupported}`);
+log(`Carol ${carolInMeeting ? 'is still in the meeting' : 'left the meeting'}; her screen: ${carolScreen.replace(/\s+/g, ' ').slice(0, 200)}`);
 check('ENC-08', 'Alice and Bob stay encrypted', stillOn.alice && stillOn.bob, JSON.stringify(stillOn));
 check('ENC-08', 'Carol sends no unencrypted audio or video into the encrypted meeting',
     !carolInMeeting || (carolSends.audio === 0 && carolSends.video === 0),
     carolInMeeting ? `in the meeting, sending ${carolSends.audio} audio and ${carolSends.video} video bytes in 3 s`
         : 'not in the meeting');
 check('ENC-08', 'no unencrypted frame from Carol reaches Alice', carolFrames === carolEncrypted,
-    `${carolFrames - carolEncrypted} of ${carolFrames} frames received from Carol unencrypted`);
+    `${carolFrames - carolEncrypted} of ${carolFrames} frames received from anyone but Bob unencrypted`);
 check('ENC-08', 'Alice and Bob play none of Carol\'s unencrypted video', played.alice === 0 && played.bob === 0,
     `frames decoded in 3 s: ${JSON.stringify(played)}`);
 
