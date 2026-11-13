@@ -17,10 +17,16 @@
 // Keys are tried at every key index and every allowed ratchet step, so a check
 // passes only because the key material differs, not because of bookkeeping.
 //
-//   node checks/key-lifecycle.mjs [--url <meeting URL>] [--headed] [--slowmo <ms>]
+//   node checks/key-lifecycle.mjs [--url <meeting URL>] [--lib <dir>] [--headed] [--slowmo <ms>]
+//
+// --lib <dir>  serve the encryption library from <dir> instead of the meeting's
+//              own (lib-jitsi-meet.min.js, its worker, its key vault page and
+//              script, and olm.js if present), e.g. to test a new build before
+//              it is deployed.
 //
 // Keep the room empty apart from the three browsers this opens.
 
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
@@ -31,6 +37,15 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
 const headed = argv.includes('--headed');
 const slowMo = argv.includes('--slowmo') ? Number(argv[argv.indexOf('--slowmo') + 1]) : 0;
+const libDir = argv.includes('--lib') ? argv[argv.indexOf('--lib') + 1] : null;
+const libFiles = libDir ? [
+    [ 'lib-jitsi-meet.min.js', 'text/javascript' ],
+    [ 'lib-jitsi-meet.e2ee-worker.js', 'text/javascript' ],
+    [ 'lib-jitsi-meet.e2ee-vault.js', 'text/javascript' ],
+    [ 'lib-jitsi-meet.e2ee-vault.html', 'text/html' ],
+    [ 'olm.js', 'text/javascript' ]
+].filter(([ file ]) => fs.existsSync(path.join(libDir, file)))
+    .map(([ file, contentType ]) => [ file, fs.readFileSync(path.join(libDir, file)), contentType ]) : [];
 const target = meetingTarget(argv, 'keys');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const log = m => console.log(`[${new Date().toISOString().slice(11, 19)}] ${m}`);
@@ -46,11 +61,22 @@ const browser = await chromium.launch({ channel: 'chrome', headless: !headed, sl
     '--use-fake-ui-for-media-stream',
     '--use-fake-device-for-media-stream',
     `--use-file-for-fake-audio-capture=${path.join(HERE, '../harness/media/tone440.wav')}`,
-    '--autoplay-policy=no-user-gesture-required'
+    '--autoplay-policy=no-user-gesture-required',
+
+    // For a server on this machine (localhost): let the sandboxed key vault frame
+    // load its scripts from it. Chrome's local network access checks block that
+    // otherwise. No effect on a server on the internet.
+    '--disable-features=LocalNetworkAccessChecks,PrivateNetworkAccessRespectPreflightResults,BlockInsecurePrivateNetworkRequests'
 ] });
 
 async function join(name) {
-    const page = await (await browser.newContext({ ignoreHTTPSErrors: true })).newPage();
+    const context = await browser.newContext({ ignoreHTTPSErrors: true });
+
+    for (const [ file, body, contentType ] of libFiles) {
+        await context.route(new RegExp(`/libs/${file.replace(/\./g, '\\.')}(\\?|$)`),
+            r => r.fulfill({ body, contentType }));
+    }
+    const page = await context.newPage();
 
     await page.addInitScript({ path: path.join(HERE, '../../extension/inspector/leak-scan.js') });
     await page.addInitScript({ path: path.join(HERE, '../../extension/inspector/hook.js') });
