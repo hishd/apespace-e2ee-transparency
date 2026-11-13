@@ -3,8 +3,9 @@
 # of every file of it that APESpace serves:
 #
 #   lib-jitsi-meet v2118.0.0 plus olm-key-auth.patch (upstream commit 4a958bc1),
-#   hidden-key-recipients.patch, group-safety-number.patch, e2ee-key-vault.patch and
-#   newcomer-key-ratchet.patch:
+#   hidden-key-recipients.patch, group-safety-number.patch, e2ee-key-vault.patch,
+#   newcomer-key-ratchet.patch, dtx-empty-frames.patch (upstream commit 8b4d9371),
+#   frame-counter-replay.patch and vp8-on-reenable.patch:
 #     /libs/lib-jitsi-meet.min.js            the library
 #     /libs/lib-jitsi-meet.e2ee-worker.js    encrypts and decrypts media frames
 #     /libs/lib-jitsi-meet.e2ee-vault.html   the key vault (sandboxed frame)
@@ -33,6 +34,9 @@ git -C "$WORK/src" apply "$HERE/hidden-key-recipients.patch"
 git -C "$WORK/src" apply "$HERE/group-safety-number.patch"
 git -C "$WORK/src" apply "$HERE/e2ee-key-vault.patch"
 git -C "$WORK/src" apply "$HERE/newcomer-key-ratchet.patch"
+git -C "$WORK/src" apply "$HERE/dtx-empty-frames.patch"
+git -C "$WORK/src" apply "$HERE/frame-counter-replay.patch"
+git -C "$WORK/src" apply "$HERE/vp8-on-reenable.patch"
 
 docker run --rm -v "$WORK/src":/src -w /src -e LIB_JITSI_MEET_COMMIT_HASH="$BASE+$FIX+apespace" node:20 \
     sh -c "npm ci --no-audit --no-fund >/dev/null && npm pack >/dev/null && npm pack @matrix-org/olm@$OLM >/dev/null"
