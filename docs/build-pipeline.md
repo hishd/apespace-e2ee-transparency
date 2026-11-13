@@ -1,6 +1,6 @@
 # How APE Space builds, signs and publishes a release
 
-_Status: draft for APE Space approval · 13 November 2026. Answers checklist rows REL-02, REL-06, REL-07 and REL-08. Sections marked **To complete** need details only APE Space can give._
+_Status: draft for APE Space approval · 13 November 2026. Answers checklist rows REL-02, REL-06, REL-07 and REL-08._
 
 ## The pipeline
 
@@ -47,10 +47,17 @@ One GitHub Actions workflow in the application repository (`.github/workflows/bu
 - So whatever reaches that tag is deployed without a person in between. That is either the pipeline above, or anyone who can push to the registry package.
 - Anyone can check what a server serves against the signed releases (`verify/`). A build that isn't a signed release shows as one.
 
-**To complete:**
-- who has admin and write access to the application repository, the organisation and the registry package;
-- whether two-factor authentication is required for them;
-- who can change Actions settings and secrets.
+**Access control**, as GitHub reports it (13 November 2026):
+
+| Setting | State |
+|---|---|
+| Two-factor authentication required for the organisation | Yes; no member without it |
+| People with access to the application repository | 2, both administrators |
+| Outside collaborators | None |
+| Default permission of organisation members | Read |
+| Who can change Actions settings and secrets | The repository's administrators |
+
+The organisation allows any third-party action to run. The workflow pins every action by commit, but the setting doesn't enforce that. Restricting it to selected actions would.
 
 ## Signing (REL-02)
 
@@ -66,7 +73,9 @@ One GitHub Actions workflow in the application repository (`.github/workflows/bu
   - the encryption library: vendored, rebuilt from public source, checked by hash.
 - **Software bill of materials:** published for every build, next to its signed record, and covered by the signature through its hash.
 - **Updates:** a dependency update is a change like any other. It goes through a pull request and review (REL-08), and through the re-review policy when it touches the encryption library or Olm (`docs/re-review-policy.md`).
-- **Advisories:** the weekly watch (`.github/workflows/upstream-watch.yml`) covers the encryption libraries. **To complete:** enable GitHub Dependabot alerts on the application repository for the other dependencies.
+- **Advisories:**
+  - the weekly watch (`.github/workflows/upstream-watch.yml`) covers the encryption libraries;
+  - GitHub Dependabot alerts cover every other dependency of the application repository (on since 13 November 2026). Alerts are triaged by whether the package is in the code served to browsers.
 - **Known inconsistency:** the lockfile resolves `@jitsi/logger` 2.0.2 while the vendored lib-jitsi-meet declares 2.1.1, so `npm sbom` refuses to run (hence the SBOM script). It has no effect on what is served: the library is shipped as a prebuilt bundle with its own copy.
 
 ## Review before release (REL-08)
