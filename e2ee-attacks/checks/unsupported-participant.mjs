@@ -46,6 +46,7 @@ const target = meetingTarget(argv, 'unsupported');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const log = m => console.log(`[${new Date().toISOString().slice(11, 19)}] ${m}`);
 const results = [];
+const timeline = {}; // when Carol detected the encrypted meeting, from her console
 const check = (id, name, ok, detail) => results.push({ id, name, ok, detail });
 
 setTimeout(() => {
@@ -78,6 +79,10 @@ async function join(name, { unsupported = false } = {}) {
     const page = await context.newPage();
 
     if (unsupported) {
+        page.on('console', m => /can't encrypt: leaving/.test(m.text()) && (timeline.detected ??= Date.now()));
+        argv.includes('--debug') && page.on('console', m => /Joining MUC|entered|session-initiate|can't encrypt|doLeave|hangup|conference.joined|CONFERENCE_JOINED|e2ee.enabled/i.test(m.text())
+            && console.log(`[${new Date().toISOString().slice(11, 23)}] carol console: ${m.text().slice(0, 160)}`));
+        page.on('framenavigated', f => f === page.mainFrame() && timeline.joinedAt && (timeline.navigated ??= Date.now()));
         await page.addInitScript({ content: NO_E2EE });
     } else {
         await page.addInitScript({ path: path.join(HERE, '../../extension/inspector/leak-scan.js') });
@@ -168,6 +173,7 @@ await waitInPage(alice, () => APP.conference._room.isE2EEEnabled(), null, 30000)
 await waitInPage(bob, () => APP.conference._room.isE2EEEnabled(), null, 30000);
 log('E2EE on; Carol, without encryption support, joins');
 
+timeline.carolStarts = Date.now();
 const carol = await join('carol', { unsupported: true });
 const carolSupported = Boolean(await carol.evaluate(() => window.APP?.conference?._room?.isE2EESupported?.()
     ?? window.JitsiMeetJS?.isE2EESupported?.()).catch(() => false));
@@ -179,7 +185,9 @@ const carolInMeeting = await carol.evaluate(() => Boolean(window.APP?.conference
 const carolScreen = await carol.evaluate(() => document.body.innerText.slice(0, 300)).catch(() => '');
 const carolSends = carolInMeeting ? await sendingRate(carol) : { audio: 0, video: 0 };
 
-// Frames Alice received from anyone but Bob (that is, from Carol, even after she left), before decryption.
+// Frames Alice received from anyone but Bob since Carol started joining (that is, from Carol, even after
+// she left), before decryption. Earlier frames are Alice and Bob's own switch-over, on streams the
+// Inspector may not have matched to Bob yet.
 const { streams } = await alice.evaluate(() => window.__e2eeInspector.exportMeta());
 let carolFrames = 0;
 let carolEncrypted = 0;
@@ -187,11 +195,14 @@ let carolEncrypted = 0;
 for (const s of streams.filter(st => st.participantId !== bobId)) {
     const frames = await alice.evaluate(([ id, n ]) => window.__e2eeInspector.exportFrames(id, 0, n), [ s.id, s.frameCount ]);
 
-    for (const f of frames) {
+    for (const f of frames.filter(fr => fr.t >= timeline.carolStarts)) {
         const data = Buffer.from(f.data, 'base64');
 
         carolFrames++;
         carolEncrypted += data.length > 14 && data[data.length - 2] === 12 ? 1 : 0;
+        argv.includes('--debug') && log(`  frame from Carol: ${s.kind} ${f.type ?? 'audio'} ${data.length} bytes, `
+            + `${timeline.detected ? `${f.t - timeline.detected} ms after she detected E2EE` : 'no detection logged'}`
+            + ` (at ${new Date(f.t).toISOString().slice(11, 23)})`);
     }
 }
 const played = { alice: await decodedFrom(alice, 'carol'), bob: await decodedFrom(bob, 'carol') };
