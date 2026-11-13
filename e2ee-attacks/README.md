@@ -156,6 +156,25 @@ node checks/codecs.mjs --url "https://<meeting URL>"
 
 Against a library without `vp8-on-reenable.patch`, the second sequence fails: the existing participants send AV1 under E2EE, and none of their video is decoded.
 
+## Where keys can end up on the client — `checks/client-hygiene.mjs`
+
+Alice and Bob hold an encrypted meeting for 30 s and leave. Every media key either browser held is then looked for (raw, hex, base64 at any alignment, byte lists) in:
+
+| Place | Why |
+|---|---|
+| every HTTP request (URL and body), WebSocket and data-channel message | telemetry, log uploads, signalling |
+| every console message of the page, its frames and workers | what a log upload or debug session sees |
+| every object reachable from the page's global scope | what the app's own code, or a debug console, can reach |
+| localStorage, sessionStorage, IndexedDB, Cache Storage, cookies, service workers after leaving | what stays on the device |
+
+It also lists every host contacted and the storage left behind, and checks that no source maps are served.
+
+```sh
+node checks/client-hygiene.mjs --url "https://<meeting URL>"
+```
+
+Against a library without the key vault, the page walk finds the media key (at `APP.conference._room._e2eEncryption._keyHandler._key`), so the run reports `INSECURE`.
+
 ## Proving the test is meaningful: run it against pre-fix code
 
 A test that always passes proves nothing. To see the attacks **succeed** — and the suite report `INSECURE` — run them against the library APESpace forked *before* the fix:
