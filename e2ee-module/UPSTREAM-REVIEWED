@@ -1,0 +1,25 @@
+# Upstream changes and advisories reviewed for APE Space's encryption code.
+# The first non-comment line is the last reviewed upstream lib-jitsi-meet commit on
+# master and its date; .github/workflows/upstream-watch.yml reports anything newer.
+fb7890da 2026-11-12
+
+# Review of 13 November 2026 (base: v2118.0.0, 67fd2c84, 2025-12-19)
+#
+# lib-jitsi-meet commits touching modules/e2ee since the base:
+#   8b4d9371 2026-09-04 fix(e2ee): pass empty frames through
+#            applied (dtx-empty-frames.patch); receive side narrowed in frame-counter-replay.patch
+#   4a958bc1 2026-09-15 feat(e2ee): authenticate Olm curve25519 keys and bind them to SAS
+#            applied (olm-key-auth.patch)
+#   17e73aa9 2026-10-08 fix(e2ee): enable and key the shared context in the worker
+#            not applicable: only affects externally managed (shared) keys, which APE Space doesn't use
+#   3dae168b 2026-11-12 docs(e2ee) explain which key slot is ratcheted on decrypt failure
+#            comments only
+#
+# Advisories:
+#   npm advisory database, @matrix-org/olm and lib-jitsi-meet: none
+#   libolm deprecated by Matrix.org (August 2024): see docs/crypto-roadmap.md
+#   jitsi/lib-jitsi-meet GHSA-hg53-vwvc-h58x (2022) fail-open decryption: fixed in v2118
+#   jitsi/jitsi-meet GHSA-8f5r-2qpr-4g34 (2022) E2EE cues on unsupported clients: fixed upstream; see docs/jitsi-2023-analysis.md
+#   jitsi/jitsi-meet GHSA-rj5g-9fmh-p5fj (2022) poll vote manipulation: fixed upstream
+#   jitsi/jitsi-meet GHSA-5fx7-wgcr-fj78 (2025-11-13) DOM redirect on Microsoft OAuth flow:
+#            not encryption code; for the app team to assess (calendar integration is disabled in the development settings)
