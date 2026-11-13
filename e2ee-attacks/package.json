@@ -1,0 +1,14 @@
+{
+  "name": "apespace-e2ee-attacks",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Run a malicious meeting server against an APESpace meeting and check that it cannot read the end-to-end-encrypted media.",
+  "scripts": {
+    "all": "node run-all.mjs"
+  },
+  "dependencies": {
+    "@matrix-org/olm": "3.2.15",
+    "playwright-core": "1.48.2"
+  }
+}
