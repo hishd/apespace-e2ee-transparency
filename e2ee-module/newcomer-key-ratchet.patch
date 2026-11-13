@@ -1,0 +1,112 @@
+diff --git a/modules/e2ee/ManagedKeyHandler.js b/modules/e2ee/ManagedKeyHandler.js
+index a06dbf94..62ee2419 100644
+--- a/modules/e2ee/ManagedKeyHandler.js
++++ b/modules/e2ee/ManagedKeyHandler.js
+@@ -34,6 +34,10 @@ export class ManagedKeyHandler extends KeyHandler {
+         this._rotateKey = debounce(this._rotateKeyImpl, DEBOUNCE_PERIOD);
+         this._ratchetKey = debounce(this._ratchetKeyImpl, DEBOUNCE_PERIOD);
+ 
++        // Move our key forward before it first goes to a participant, so a newcomer
++        // can't decrypt media sent before they joined (see OlmAdapter._keyInfoFor).
++        this._olmAdapter.setNewRecipientRatchet(() => this._ratchetKeyImpl());
++
+         // Olm signalling events.
+         this._olmAdapter.on(
+             OlmAdapter.events.KEY_RECIPIENTS_CHANGED,
+diff --git a/modules/e2ee/OlmAdapter.js b/modules/e2ee/OlmAdapter.js
+index 2603429e..5d8d084b 100644
+--- a/modules/e2ee/OlmAdapter.js
++++ b/modules/e2ee/OlmAdapter.js
+@@ -78,6 +78,7 @@ export class OlmAdapter extends Listenable {
+         this._init = new Deferred();
+         this._mediaKey = undefined;
+         this._mediaKeyIndex = -1;
++        this._ratchetForNewRecipient = undefined;
+         this._reqs = new Map();
+         this._sessionInitialization = undefined;
+         this._sessionReadyCallbacks = new Map(); // participantId -> callback
+@@ -314,6 +315,7 @@ export class OlmAdapter extends Listenable {
+             promises.push(d);
+ 
+             this._sendMessage(data, pId);
++            olmData.hasOurKey = key instanceof Uint8Array;
+         }
+ 
+         await Promise.allSettled(promises);
+@@ -346,6 +348,7 @@ export class OlmAdapter extends Listenable {
+             olmData.session = undefined;
+             this._keyRecipientsChanged();
+         }
++        olmData.hasOurKey = false;
+ 
+         // Clear all session-related state to allow clean re-initialization
+         olmData.pendingSessionUuid = undefined;
+@@ -544,6 +547,41 @@ export class OlmAdapter extends Listenable {
+         }
+     }
+ 
++    /**
++     * Sets the function that moves our media key one step forward (and starts
++     * using the new key for our own media).
++     *
++     * @param {Function} ratchet - Returns a promise that settles once the key has moved forward.
++     * @returns {void}
++     */
++    setNewRecipientRatchet(ratchet) {
++        this._ratchetForNewRecipient = ratchet;
++    }
++
++    /**
++     * Encrypts our current key information for a participant. The first time our
++     * current key goes to a participant, the key first moves one step forward, so
++     * a newcomer never receives the key that encrypted media sent before they
++     * joined; they can only follow it forward from here. (The ratchet on join runs
++     * 5 s after a participant joins, by which time the newcomer would already hold
++     * the earlier key.)
++     *
++     * @param {Object} olmData - The participant's Olm data.
++     * @param {Olm.Session} session - The participant's session.
++     * @returns {Promise<string>} - The encrypted key information.
++     * @private
++     */
++    async _keyInfoFor(olmData, session) {
++        if (this._mediaKey instanceof Uint8Array) {
++            if (!olmData.hasOurKey && this._ratchetForNewRecipient) {
++                await this._ratchetForNewRecipient();
++            }
++            olmData.hasOurKey = true;
++        }
++
++        return this._encryptKeyInfo(session);
++    }
++
+     /**
+      * Internal helper for encrypting the current key information for a given participant.
+      *
+@@ -676,7 +714,7 @@ export class OlmAdapter extends Listenable {
+                     [JITSI_MEET_MUC_TYPE]: OLM_MESSAGE_TYPE,
+                     olm: {
+                         data: {
+-                            ciphertext: this._encryptKeyInfo(session),
++                            ciphertext: await this._keyInfoFor(olmData, session),
+                             idKey: this._idKeys.curve25519,
+                             signature,
+                             uuid: msg.data.uuid
+@@ -796,7 +834,7 @@ export class OlmAdapter extends Listenable {
+                         [JITSI_MEET_MUC_TYPE]: OLM_MESSAGE_TYPE,
+                         olm: {
+                             data: {
+-                                ciphertext: this._encryptKeyInfo(olmData.session),
++                                ciphertext: await this._keyInfoFor(olmData, olmData.session),
+                                 uuid: msg.data.uuid
+                             },
+                             type: OLM_MESSAGE_TYPES.KEY_INFO_ACK
+@@ -1214,7 +1252,7 @@ export class OlmAdapter extends Listenable {
+                         [JITSI_MEET_MUC_TYPE]: OLM_MESSAGE_TYPE,
+                         olm: {
+                             data: {
+-                                ciphertext: this._encryptKeyInfo(olmData.session),
++                                ciphertext: await this._keyInfoFor(olmData, olmData.session),
+                                 uuid
+                             },
+                             type: OLM_MESSAGE_TYPES.KEY_INFO
