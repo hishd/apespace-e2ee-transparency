@@ -24,7 +24,9 @@ export async function listReleases(config) {
     const releases = {};
 
     for (const { path } of tree.tree) {
-        const m = path.match(/^releases\/([0-9a-f]{64})\/(manifest\.json|builds\/([^/]+)(?<!\.sigstore)\.json)$/);
+        // Build records are builds/<name>.json; their signature bundles (.json.sigstore.json) and
+        // software bills of materials (.sbom.cdx.json, covered by the record's "sbom" hash) are not.
+        const m = path.match(/^releases\/([0-9a-f]{64})\/(manifest\.json|builds\/([^/]+)(?<!\.sigstore)(?<!\.sbom\.cdx)\.json)$/);
 
         if (m) {
             const r = releases[m[1]] ??= { id: m[1], builds: [] };

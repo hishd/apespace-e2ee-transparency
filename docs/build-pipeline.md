@@ -41,11 +41,16 @@ One GitHub Actions workflow in the application repository (`.github/workflows/bu
 
 **Tampering is visible.** A tampered build would differ from an independent rebuild of the same commit. The encryption code can be rebuilt by anyone (`e2ee-module/build.sh`); the full app can be rebuilt by an auditor with access to the application source.
 
+**Deployment.**
+- The development and production servers are APE Space's own (self-hosted), and only authorised staff have access to them.
+- Each server runs Watchtower, which pulls a new image from the GitHub container registry when the image tag it follows changes, and restarts the web container with it.
+- So whatever reaches that tag is deployed without a person in between. That is either the pipeline above, or anyone who can push to the registry package.
+- Anyone can check what a server serves against the signed releases (`verify/`). A build that isn't a signed release shows as one.
+
 **To complete:**
-- who has admin and write access to the application repository and the organisation;
+- who has admin and write access to the application repository, the organisation and the registry package;
 - whether two-factor authentication is required for them;
-- who can change Actions settings and secrets;
-- how images move from the registry to the development and production servers, and who can trigger that.
+- who can change Actions settings and secrets.
 
 ## Signing (REL-02)
 
