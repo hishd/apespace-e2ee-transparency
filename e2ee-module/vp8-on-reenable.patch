@@ -1,0 +1,20 @@
+diff --git a/modules/e2ee/KeyHandler.js b/modules/e2ee/KeyHandler.js
+index dda428ee..5779a052 100644
+--- a/modules/e2ee/KeyHandler.js
++++ b/modules/e2ee/KeyHandler.js
+@@ -82,9 +82,12 @@ export class KeyHandler extends Listenable {
+ 
+         this._setEnabled && await this._setEnabled(enabled);
+ 
+-        // Only restart media sessions if E2EE is enabled. If it's later disabled
+-        // we'll continue to use the existing media sessions with an empty transform.
+-        if (!this._firstEnable && enabled) {
++        // Restart media sessions every time E2EE is switched on, not only the first time: the new session
++        // chooses the video codec under E2EE's VP8-only rule (CodecSelection.selectPreferredCodec). Otherwise a
++        // codec chosen while E2EE was off (on a join or leave) stays in use, and encrypted AV1 or VP9 video
++        // can't be played. Choosing the codec again on the running session doesn't take effect reliably.
++        // If it's later disabled we'll continue to use the existing media sessions with an empty transform.
++        if (enabled) {
+             this._firstEnable = true;
+             this.conference._restartMediaSessions();
+         }

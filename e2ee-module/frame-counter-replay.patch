@@ -1,8 +1,8 @@
 diff --git a/modules/e2ee/Context.spec.ts b/modules/e2ee/Context.spec.ts
-index ceb9e902..7a5f0ef9 100644
+index ceb9e902..f7a5fc44 100644
 --- a/modules/e2ee/Context.spec.ts
 +++ b/modules/e2ee/Context.spec.ts
-@@ -241,3 +241,161 @@ describe('E2EE Context', () => {
+@@ -241,3 +241,176 @@ describe('E2EE Context', () => {
          });
      });
  });
@@ -156,6 +156,21 @@ index ceb9e902..7a5f0ef9 100644
 +        expect(await decode([ f[1] ])).toEqual(0);
 +    });
 +
++    it('passes an empty frame through but drops a short frame that doesn\'t decrypt', async () => {
++        const out = [];
++        const controller = { enqueue: f => out.push(f) };
++        const frame = bytes => ({
++            data: new Uint8Array(bytes).buffer,
++            type: 'key',
++            getMetadata: () => ({ synchronizationSource: 321 })
++        });
++
++        await receiver.decodeFunction(frame([]), controller);
++        await receiver.decodeFunction(frame([ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]), controller);
++        expect(out.length).toEqual(1);
++        expect(out[0].data.byteLength).toEqual(0);
++    });
++
 +    it('treats a stream that started below 0xFFFF and passes it as a 32-bit sender', async () => {
 +        sender._sendCounts.set(123, 0xFFFD);
 +        const f = await encrypt(4); // counters 0xFFFD, 0xFFFE, 0xFFFF, 0x10000
@@ -165,7 +180,7 @@ index ceb9e902..7a5f0ef9 100644
 +    });
 +});
 diff --git a/modules/e2ee/Context.ts b/modules/e2ee/Context.ts
-index a2001962..be0599d5 100644
+index a2001962..3f2be428 100644
 --- a/modules/e2ee/Context.ts
 +++ b/modules/e2ee/Context.ts
 @@ -30,6 +30,22 @@ const IV_LENGTH = 12;
@@ -314,3 +329,15 @@ index a2001962..be0599d5 100644
      /**
       * Sets a set of keys and resets the sendCount.
       * decryption.
+@@ -366,8 +458,9 @@ export class Context {
+         }
+ 
+         // Empty frames (opus DTX) are sent unencrypted, they carry no data. Pass them through, otherwise
+-        // they are dropped here because there is no key index to read.
+-        if (encodedFrame.data.byteLength < UNENCRYPTED_BYTES[encodedFrame.type]) {
++        // they are dropped here because there is no key index to read. Only frames with no data at all:
++        // any other frame that doesn't decrypt is dropped, so nothing with content skips decryption.
++        if (encodedFrame.data.byteLength === 0) {
+             return controller.enqueue(encodedFrame);
+         }
+ 

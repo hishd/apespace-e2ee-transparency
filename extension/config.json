@@ -13,12 +13,12 @@
   "signer": "^https://github\\.com/OFF-GRID-APPS/APESpace-Jitsi-Meet-WebApp/\\.github/workflows/build-docker-image\\.yml@refs/heads/(develop|main|master)$",
   "encryptionLibrary": {
     "path": "/libs/lib-jitsi-meet.min.js",
-    "sha256": "96cbce6bde14fe3a9b4f47cfc6b339e09a750622f8360f84374f71afec2b6f13",
+    "sha256": "686d5d759c1a7173736de95cf83fd61ca9fc2abcaedd39ba36e1bd8c8ee0a20c",
     "files": {
-      "/libs/lib-jitsi-meet.min.js": "96cbce6bde14fe3a9b4f47cfc6b339e09a750622f8360f84374f71afec2b6f13",
-      "/libs/lib-jitsi-meet.e2ee-worker.js": "1d23c900bc89ddcbf0ddfc2797452c4efa6967a788f5d3f9357d9a52f940ad24",
+      "/libs/lib-jitsi-meet.min.js": "686d5d759c1a7173736de95cf83fd61ca9fc2abcaedd39ba36e1bd8c8ee0a20c",
+      "/libs/lib-jitsi-meet.e2ee-worker.js": "61ae549c1f20e0ff1134114b351dd5c7333c7ca68e811a7f0a5806090b2b220e",
       "/libs/lib-jitsi-meet.e2ee-vault.html": "e5e9a55757ff0c2f9131032a41503bdfd4f3cd01a3f20b3a0923f8ffcac6c157",
-      "/libs/lib-jitsi-meet.e2ee-vault.js": "c9f7b8d696264b89e5d1c9411b87e939dc4f5db9bac5350c54f65a037d8ad3bc",
+      "/libs/lib-jitsi-meet.e2ee-vault.js": "3998dee7c80ca1a00dd754b5ea8ab57730e5e9e83dc3023a9e5364120e645ab6",
       "/libs/olm.js": "cf9a793bcbad919967d79e7f2bf52e0492b646332d36ee7e1c2d1b0ff47b3c40",
       "/libs/olm.wasm": "3fc8dbfe8f44d550b1c9165e6c2af33323aaeba0a5ec223cef74959dd434642b"
     },
