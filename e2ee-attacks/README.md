@@ -128,6 +128,24 @@ Three checks that need no malicious server. Alice and Bob start an encrypted mee
 node checks/key-lifecycle.mjs --url "https://<meeting URL>"
 ```
 
+## Frame counter and replays — `checks/frame-counter-replay.mjs`
+
+Bob's browser carries a tap (`harness/replay-tap.js`) on the encrypted frames between the network and his decryption, which is where a malicious media server sits. It plays the server: it replaces the payload of later audio frames with genuine frames Alice sent earlier. Those frames still decrypt with Alice's key, so only a replay check can stop them.
+
+| Check | Passes when |
+|---|---|
+| A frame replayed from about 1 s earlier is dropped | none of 20 comes out of Bob's decryption to be played |
+| A frame replayed from about 30 s earlier is dropped | none of 20 comes out of Bob's decryption |
+| Control | Alice's genuine audio frames do come out of Bob's decryption |
+| The IV never repeats | every encrypted frame received has a distinct IV, and each stream's counter goes up by one per frame |
+| The counter uses all 32 bits | at least one stream's counter is at or above 0xFFFF (a 16-bit counter never is) |
+
+```sh
+node checks/frame-counter-replay.mjs --url "https://<meeting URL>"
+```
+
+Against a library without `frame-counter-replay.patch` (pass it with `--lib <dir>`), every replay is played and the counter stays below 0xFFFF, so the run reports `INSECURE`.
+
 ## Proving the test is meaningful: run it against pre-fix code
 
 A test that always passes proves nothing. To see the attacks **succeed** — and the suite report `INSECURE` — run them against the library APESpace forked *before* the fix:
