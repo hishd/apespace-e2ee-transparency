@@ -1,0 +1,316 @@
+diff --git a/modules/e2ee/Context.spec.ts b/modules/e2ee/Context.spec.ts
+index ceb9e902..7a5f0ef9 100644
+--- a/modules/e2ee/Context.spec.ts
++++ b/modules/e2ee/Context.spec.ts
+@@ -241,3 +241,161 @@ describe('E2EE Context', () => {
+         });
+     });
+ });
++
++describe('E2EE Context: frame counter and replay protection', () => {
++    const key = new Uint8Array(32).fill(7);
++    let sender;
++    let receiver;
++
++    /**
++     * Encrypts n frames made by makeFrame and returns them.
++     */
++    async function encrypt(n, makeFrame = makeAudioFrame) {
++        const out = [];
++        const controller = { enqueue: f => out.push(f) };
++
++        for (let i = 0; i < n; i++) {
++            await sender.encodeFunction(makeFrame(), controller);
++        }
++
++        return out;
++    }
++
++    // A fresh copy, as decodeFunction replaces the frame's data with the plaintext.
++    const copy = f => ({ ...f, data: f.data.slice(0) });
++
++    // Decodes copies of the given frames in order and returns how many the receiver let through.
++    async function decode(frames) {
++        let n = 0;
++        const controller = { enqueue: () => n++ };
++
++        for (const f of frames) {
++            await receiver.decodeFunction(copy(f), controller);
++        }
++
++        return n;
++    }
++
++    // The 32-bit frame counter: the last 4 bytes of the IV, which sits before the 2-byte trailer.
++    const counterOf = f => new DataView(f.data).getUint32(f.data.byteLength - 2 - 12 + 8);
++
++    beforeEach(async () => {
++        sender = new Context('sender');
++        sender.setEnabled(true);
++        await sender.setKey(key, 0);
++        receiver = new Context('receiver');
++        receiver.setEnabled(true);
++        await receiver.setKey(key, 0);
++    });
++
++    it('counts frames with the full 32 bits, one step per frame', async () => {
++        const frames = await encrypt(5);
++
++        for (let i = 1; i < frames.length; i++) {
++            expect(counterOf(frames[i])).toEqual((counterOf(frames[i - 1]) + 1) >>> 0);
++        }
++    });
++
++    it('starts each stream\'s counter at a random 32-bit value', async () => {
++        const starts = [];
++
++        for (let i = 0; i < 20; i++) {
++            sender = new Context('sender');
++            sender.setEnabled(true);
++            await sender.setKey(key, 0);
++            starts.push(counterOf((await encrypt(1))[0]));
++        }
++
++        // The old counter stayed below 0xFFFF; 20 random 32-bit starts all below it has odds 2^-320.
++        expect(starts.some(c => c >= 0xFFFF)).toBe(true);
++        expect(new Set(starts).size).toEqual(starts.length);
++    });
++
++    it('keeps counting across a key change', async () => {
++        const [ before ] = await encrypt(1);
++
++        await sender.setKey(new Uint8Array(32).fill(9), 1);
++        const [ after ] = await encrypt(1);
++
++        expect(counterOf(after)).toEqual((counterOf(before) + 1) >>> 0);
++    });
++
++    it('decrypts a frame once and drops an exact replay', async () => {
++        const [ frame ] = await encrypt(1);
++
++        expect(await decode([ frame ])).toEqual(1);
++        expect(await decode([ frame ])).toEqual(0);
++    });
++
++    it('drops a frame replayed later in the stream', async () => {
++        const frames = await encrypt(10);
++
++        expect(await decode(frames)).toEqual(10);
++        expect(await decode([ frames[3] ])).toEqual(0);
++        expect(await decode([ frames[9] ])).toEqual(0);
++    });
++
++    it('accepts frames reordered within the window', async () => {
++        const f = await encrypt(5);
++
++        expect(await decode([ f[0], f[2], f[1], f[4], f[3] ])).toEqual(5);
++    });
++
++    it('drops an unseen frame older than the window, accepts one inside it', async () => {
++        const f = await encrypt(1100);
++
++        expect(await decode([ f[0], f[1099] ])).toEqual(2);
++        expect(await decode([ f[1] ])).toEqual(0); // 1098 frames behind: stale
++        expect(await decode([ f[100] ])).toEqual(1); // 999 frames behind, never seen
++        expect(await decode([ f[100] ])).toEqual(0); // and only once
++    });
++
++    it('keeps a separate window for each stream', async () => {
++        const audio = await encrypt(3, makeAudioFrame);
++        const video = await encrypt(3, makeVideoFrame);
++
++        expect(await decode([ audio[0], video[0], audio[1], video[1], audio[2], video[2] ])).toEqual(6);
++        expect(await decode([ audio[1], video[2] ])).toEqual(0);
++    });
++
++    it('rejects a replay whose counter was changed, because the IV is authenticated', async () => {
++        const [ frame ] = await encrypt(1);
++
++        expect(await decode([ frame ])).toEqual(1);
++
++        const forged = copy(frame);
++        const view = new DataView(forged.data);
++        const at = forged.data.byteLength - 2 - 12 + 8;
++
++        view.setUint32(at, (view.getUint32(at) + 1) >>> 0);
++        expect(await decode([ forged ])).toEqual(0);
++    });
++
++    it('follows a sender from before this change across its counter wrap at 0xFFFF', async () => {
++        sender._sendCounts.set(123, 0xFFFD);
++        const old = await encrypt(2); // counters 0xFFFD, 0xFFFE
++
++        sender._sendCounts.set(123, 0); // the old sender wraps to 0
++        const wrapped = await encrypt(2); // counters 0, 1
++
++        expect(await decode([ ...old, ...wrapped ])).toEqual(4);
++        expect(await decode([ old[1] ])).toEqual(0);
++    });
++
++    it('follows a 32-bit counter across its wrap at 2^32', async () => {
++        sender._sendCounts.set(123, 0xFFFFFFFE);
++        const f = await encrypt(4); // counters 0xFFFFFFFE, 0xFFFFFFFF, 0, 1
++
++        expect(counterOf(f[2])).toEqual(0);
++        expect(await decode(f)).toEqual(4);
++        expect(await decode([ f[1] ])).toEqual(0);
++    });
++
++    it('treats a stream that started below 0xFFFF and passes it as a 32-bit sender', async () => {
++        sender._sendCounts.set(123, 0xFFFD);
++        const f = await encrypt(4); // counters 0xFFFD, 0xFFFE, 0xFFFF, 0x10000
++
++        expect(await decode(f)).toEqual(4);
++        expect(await decode([ f[0] ])).toEqual(0);
++    });
++});
+diff --git a/modules/e2ee/Context.ts b/modules/e2ee/Context.ts
+index a2001962..be0599d5 100644
+--- a/modules/e2ee/Context.ts
++++ b/modules/e2ee/Context.ts
+@@ -30,6 +30,22 @@ const IV_LENGTH = 12;
+ 
+ const RATCHET_WINDOW_SIZE = 8;
+ 
++// Receivers accept each frame counter once per stream (SSRC) and reject counters more than this many
++// frames behind the newest one seen, so a server can't replay or re-inject old frames. Legitimately
++// reordered frames arrive well within this window.
++const REPLAY_WINDOW_SIZE = 1024;
++
++// Senders before this change count frames modulo 0xFFFF, wrapping from 0xFFFE to 0. The replay window
++// follows that wrap, so mixed versions keep working during an upgrade. For such senders a frame replayed
++// more than half a cycle (32767 frames) later can pass; senders on this version are protected fully.
++const LEGACY_COUNTER_MODULUS = 0xFFFF;
++
++interface IReplayWindow {
++    highest: number; // the newest counter seen, on a continuous line (it can exceed 2^32)
++    legacy: boolean; // every counter so far was below 0xFFFF, as from a sender before this change
++    seen: Uint8Array;
++}
++
+ export interface IContextOptions {
+     sharedKey?: boolean | ArrayBuffer;
+ }
+@@ -58,6 +74,7 @@ export class Context {
+     private _cryptoKeyRing: (ICryptoKeyData | false)[];
+     private _currentKeyIndex: number;
+     private _sendCounts: Map<number, number>;
++    private _replayWindows: Map<number, IReplayWindow>;
+     private _sharedKey: ArrayBuffer | boolean;
+     private _enabled: boolean;
+ 
+@@ -70,6 +87,7 @@ export class Context {
+         // A pointer to the currently used key.
+         this._currentKeyIndex = -1;
+         this._sendCounts = new Map<number, number>();
++        this._replayWindows = new Map<number, IReplayWindow>();
+         this._sharedKey = sharedKey;
+         this._enabled = false;
+     }
+@@ -125,6 +143,11 @@ export class Context {
+                 encryptionKey,
+                 new Uint8Array(encodedFrame.data, cipherTextStart, cipherTextLength));
+ 
++            // The frame is authentic (AES-GCM verified it, IV included). Accept its counter only once.
++            if (this._isReplay(iv)) {
++                return;
++            }
++
+             const newData = new ArrayBuffer(frameHeader.byteLength + plainText.byteLength);
+             const newUint8 = new Uint8Array(newData);
+ 
+@@ -194,21 +217,90 @@ export class Context {
+ 
+         // having to keep our own send count (similar to a picture id) is not ideal.
+         if (!this._sendCounts.has(synchronizationSource)) {
+-            // Initialize with a random offset, similar to the RTP sequence number.
+-            this._sendCounts.set(synchronizationSource, Math.floor(Math.random() * 0xFFFF));
++            // Initialize with a random offset, similar to the RTP sequence number. The full 32 bits are
++            // used, so the counter alone doesn't repeat for 2^32 frames of one stream (over two years
++            // at 50 frames per second), whatever the RTP timestamp does.
++            this._sendCounts.set(synchronizationSource, crypto.getRandomValues(new Uint32Array(1))[0]);
+         }
+ 
+         const sendCount = this._sendCounts.get(synchronizationSource) as number;
+ 
+         ivView.setUint32(0, synchronizationSource);
+         ivView.setUint32(4, timestamp);
+-        ivView.setUint32(8, sendCount % 0xFFFF);
++        ivView.setUint32(8, sendCount);
+ 
+-        this._sendCounts.set(synchronizationSource, sendCount + 1);
++        this._sendCounts.set(synchronizationSource, (sendCount + 1) >>> 0);
+ 
+         return iv;
+     }
+ 
++    /**
++     * Checks the frame counter in an authenticated IV against the stream's replay window, and records it.
++     * A counter seen before, or more than REPLAY_WINDOW_SIZE frames behind the newest, is a replay.
++     *
++     * @param {Uint8Array} iv - The frame's IV: SSRC (4 bytes), RTP timestamp (4 bytes), counter (4 bytes).
++     * @returns {boolean} true if the frame must be dropped.
++     * @private
++     */
++    private _isReplay(iv: Uint8Array): boolean {
++        if (iv.byteLength !== IV_LENGTH) {
++            return true;
++        }
++
++        const view = new DataView(iv.buffer, iv.byteOffset, iv.byteLength);
++        const ssrc = view.getUint32(0);
++        const counter = view.getUint32(8);
++        const slot = (n: number) => ((n % REPLAY_WINDOW_SIZE) + REPLAY_WINDOW_SIZE) % REPLAY_WINDOW_SIZE;
++        const window = this._replayWindows.get(ssrc);
++
++        if (!window) {
++            const seen = new Uint8Array(REPLAY_WINDOW_SIZE);
++
++            seen[slot(counter)] = 1;
++            this._replayWindows.set(ssrc, { highest: counter, legacy: counter < LEGACY_COUNTER_MODULUS, seen });
++
++            return false;
++        }
++
++        // A counter at or above 0xFFFF means the sender counts with 32 bits. A legacy sender that has
++        // already wrapped can't produce one.
++        if (window.legacy && counter >= LEGACY_COUNTER_MODULUS) {
++            if (window.highest >= LEGACY_COUNTER_MODULUS) {
++                return true;
++            }
++            window.legacy = false;
++        }
++
++        // Place the counter on a continuous line: the value with these low bits closest to the newest
++        // counter seen. Wraps (at 2^32, or at 0xFFFF for a legacy sender) then need no special case.
++        const modulus = window.legacy ? LEGACY_COUNTER_MODULUS : 2 ** 32;
++        const distance = (((counter - window.highest) % modulus) + modulus) % modulus;
++        const extended = distance < modulus / 2 ? window.highest + distance : window.highest - (modulus - distance);
++
++        if (extended > window.highest) {
++            // Newer than anything seen: slide the window forward.
++            if (extended - window.highest >= REPLAY_WINDOW_SIZE) {
++                window.seen.fill(0);
++            } else {
++                for (let n = window.highest + 1; n <= extended; n++) {
++                    window.seen[slot(n)] = 0;
++                }
++            }
++            window.highest = extended;
++            window.seen[slot(extended)] = 1;
++
++            return false;
++        }
++
++        if (window.highest - extended >= REPLAY_WINDOW_SIZE || window.seen[slot(extended)]) {
++            return true;
++        }
++
++        window.seen[slot(extended)] = 1;
++
++        return false;
++    }
++
+     /**
+      * Sets a set of keys and resets the sendCount.
+      * decryption.

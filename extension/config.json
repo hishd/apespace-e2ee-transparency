@@ -16,7 +16,7 @@
     "sha256": "96cbce6bde14fe3a9b4f47cfc6b339e09a750622f8360f84374f71afec2b6f13",
     "files": {
       "/libs/lib-jitsi-meet.min.js": "96cbce6bde14fe3a9b4f47cfc6b339e09a750622f8360f84374f71afec2b6f13",
-      "/libs/lib-jitsi-meet.e2ee-worker.js": "f0a0e95a6eb4d915b8c12f772c6d1b293a91a9fa11e2dce7d4e7b144a8edb86e",
+      "/libs/lib-jitsi-meet.e2ee-worker.js": "1d23c900bc89ddcbf0ddfc2797452c4efa6967a788f5d3f9357d9a52f940ad24",
       "/libs/lib-jitsi-meet.e2ee-vault.html": "e5e9a55757ff0c2f9131032a41503bdfd4f3cd01a3f20b3a0923f8ffcac6c157",
       "/libs/lib-jitsi-meet.e2ee-vault.js": "c9f7b8d696264b89e5d1c9411b87e939dc4f5db9bac5350c54f65a037d8ad3bc",
       "/libs/olm.js": "cf9a793bcbad919967d79e7f2bf52e0492b646332d36ee7e1c2d1b0ff47b3c40",
