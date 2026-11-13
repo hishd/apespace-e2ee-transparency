@@ -62,6 +62,15 @@
   exactly the same code, and that this code is a release signed by APESpace's official build.
   Nothing here asks you to trust APESpace's servers: your browser downloads the code and checks it itself.</p>
 
+  <section id="mine" class="env" hidden>
+    <header><h3>The meeting you came from</h3><span class="origin mono" id="mine-app"></span></header>
+    <div class="status">Looking up its release…</div>
+    <ul class="checks"></ul>
+    <p><small>Your meeting showed these fingerprints and linked here. Code altered by a server could also show genuine
+      fingerprints, so this confirms which release they belong to, not what your browser actually ran. For that, use the
+      APESpace Verify extension (below).</small></p>
+  </section>
+
   <div class="actions">
     <button id="run">Verify now</button>
     <small>Downloads about 45&nbsp;MB from each environment, the same files a meeting loads. Takes 1&ndash;3 minutes.</small>
@@ -123,6 +132,7 @@ node verify/cli.mjs</code></pre>
 
 <script type="module">
   import { checkAll } from './verify/check.js';
+  import { releaseLoader } from './extension/lib/releases.js';
 
   const $ = sel => document.querySelector(sel);
   const el = (tag, attrs = {}, text) => Object.assign(document.createElement(tag), attrs, text === undefined ? {} : { textContent: text });
@@ -150,6 +160,49 @@ node verify/cli.mjs</code></pre>
     }
     list.append(li);
   };
+
+  // Opened from a meeting's security dialog: ?app=<sha256 of app.bundle.min.js>&lib=<sha256 of lib-jitsi-meet.min.js>.
+  const params = new URLSearchParams(location.search);
+  const hex = v => (/^[0-9a-f]{64}$/.test(v ?? '') ? v : null);
+  const [ appHash, libHash ] = [ hex(params.get('app')), hex(params.get('lib')) ];
+
+  if (appHash) {
+    const box = $('#mine');
+    const list = box.querySelector('.checks');
+
+    box.hidden = false;
+    $('#mine-app').textContent = `app ${short(appHash)}`;
+    (async () => {
+      try {
+        const release = await releaseLoader(config).find('/libs/app.bundle.min.js', appHash);
+
+        if (!release) {
+          box.querySelector('.status').textContent = 'Not found';
+          item(list, 'bad', 'This app fingerprint is not in any published release');
+
+          return;
+        }
+        box.querySelector('.status').textContent = `Release ${release.id}`;
+        for (const b of release.builds) {
+          b.verified
+            ? item(list, 'ok', `Signed by the official build: ${b.source.branch} @ ${b.source.commit.slice(0, 7)}, ${new Date(b.builtAt).toLocaleString()}`,
+              { href: `https://search.sigstore.dev/?logIndex=${b.logIndex}`, text: `public log #${b.logIndex}` })
+            : item(list, 'bad', `A build record does not verify: ${b.error}`);
+        }
+        if (libHash) {
+          const inRelease = release.files['/libs/lib-jitsi-meet.min.js']?.sha256 === libHash;
+          const published = config.encryptionLibrary.files['/libs/lib-jitsi-meet.min.js'] === libHash;
+
+          inRelease
+            ? item(list, 'ok', `The encryption library fingerprint is this release's${published ? ', and the published, rebuildable build' : ''}`)
+            : item(list, 'bad', 'The encryption library fingerprint is not this release\'s');
+        }
+      } catch (e) {
+        box.querySelector('.status').textContent = 'Could not look it up';
+        item(list, 'bad', e.message);
+      }
+    })();
+  }
 
   $('#run').addEventListener('click', async () => {
     $('#run').disabled = true;
