@@ -146,6 +146,16 @@ node checks/frame-counter-replay.mjs --url "https://<meeting URL>"
 
 Against a library without `frame-counter-replay.patch` (pass it with `--lib <dir>`), every replay is played and the counter stays below 0xFFFF, so the run reports `INSECURE`.
 
+## Video codec and readable bytes — `checks/codecs.mjs`
+
+The published frame layout (VP8: 10 readable bytes in a keyframe, 3 in a delta frame; Opus: 1) holds only if encrypted meetings send VP8. The check prefers AV1 first (as a deployment may) and runs two sequences: E2EE switched on, then switched off, a third participant joining, and E2EE switched on again. After each it reads the codec every participant sends, decrypts a sample of video frames using the published layout, and reports how many video frames the receiver decodes from each sender.
+
+```sh
+node checks/codecs.mjs --url "https://<meeting URL>"
+```
+
+Against a library without `vp8-on-reenable.patch`, the second sequence fails: the existing participants send AV1 under E2EE, and none of their video is decoded.
+
 ## Proving the test is meaningful: run it against pre-fix code
 
 A test that always passes proves nothing. To see the attacks **succeed** — and the suite report `INSECURE` — run them against the library APESpace forked *before* the fix:
