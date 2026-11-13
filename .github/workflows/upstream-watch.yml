@@ -1,0 +1,58 @@
+# Weekly: reports upstream changes to lib-jitsi-meet's encryption code, and new
+# security advisories for the encryption libraries, that APE Space hasn't reviewed
+# yet (e2ee-module/UPSTREAM-REVIEWED). Opens an issue when there is something new.
+name: Watch upstream encryption code and advisories
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Look for unreviewed changes and advisories
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          read -r reviewed since <<< "$(grep -v '^#' e2ee-module/UPSTREAM-REVIEWED | grep -v '^$' | head -1)"
+          after="${since}T23:59:59Z"
+          {
+            echo "Last reviewed: lib-jitsi-meet \`$reviewed\` ($since)."
+            echo
+            echo "## lib-jitsi-meet commits touching modules/e2ee since then"
+            gh api "repos/jitsi/lib-jitsi-meet/commits?path=modules/e2ee&sha=master&since=$after&per_page=100" \
+              --jq '.[] | "- [`" + .sha[:8] + "`](" + .html_url + ") " + .commit.committer.date[:10] + " " + (.commit.message | split("\n")[0])'
+            echo
+            echo "## Changes to lib-jitsi-meet's @matrix-org/olm dependency since then"
+            gh api "repos/jitsi/lib-jitsi-meet/commits?path=package.json&sha=master&since=$after&per_page=100" --jq '.[].sha' |
+              while read -r sha; do
+                gh api "repos/jitsi/lib-jitsi-meet/commits/$sha" \
+                  --jq 'select([.files[].patch // "" | test("matrix-org/olm")] | any) | "- [`" + .sha[:8] + "`](" + .html_url + ") " + (.commit.message | split("\n")[0])'
+              done
+            echo
+            echo "## Advisories published since then"
+            for pkg in %40matrix-org%2Folm lib-jitsi-meet; do
+              gh api "advisories?ecosystem=npm&affects=$pkg&published=>$since&per_page=100" \
+                --jq '.[] | "- [" + .ghsa_id + "](" + .html_url + ") " + .severity + ": " + .summary'
+            done
+            for repo in jitsi/lib-jitsi-meet jitsi/jitsi-meet; do
+              gh api "repos/$repo/security-advisories?per_page=100" \
+                --jq ".[] | select((.published_at // \"\") > \"$after\") | \"- [\" + .ghsa_id + \"](\" + .html_url + \") $repo \" + .severity + \": \" + .summary"
+            done
+          } > report.md
+          cat report.md
+          if grep -q '^- ' report.md; then
+            title="Upstream encryption changes or advisories to review"
+            if [ -z "$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+              gh issue create --title "$title" --body-file report.md
+            fi
+          fi
