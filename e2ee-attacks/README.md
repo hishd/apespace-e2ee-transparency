@@ -175,6 +175,14 @@ node checks/client-hygiene.mjs --url "https://<meeting URL>"
 
 Against a library without the key vault, the page walk finds the media key (at `APP.conference._room._e2eEncryption._keyHandler._key`), so the run reports `INSECURE`.
 
+## A participant who can't encrypt — `checks/unsupported-participant.mjs`
+
+Carol's browser has the APIs end-to-end encryption needs removed (`RTCRtpScriptTransform`, `createEncodedStreams`), as on a browser or app that can't encrypt. Alice and Bob start an encrypted meeting and Carol joins. The check reads whether Carol's client stays in and sends media, whether the frames Alice receives from her are encrypted (tapped before decryption), whether Alice and Bob play any of her video, and whether they stay encrypted.
+
+```sh
+node checks/unsupported-participant.mjs --url "https://<meeting URL>"
+```
+
 ## Proving the test is meaningful: run it against pre-fix code
 
 A test that always passes proves nothing. To see the attacks **succeed** — and the suite report `INSECURE` — run them against the library APESpace forked *before* the fix:
