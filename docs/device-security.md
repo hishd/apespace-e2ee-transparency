@@ -17,9 +17,10 @@ Encryption can't protect what happens on a device itself. Before encrypting and 
 ## What you can do
 
 - **Keep your system and browser up to date.** Use a current version of Chrome, Edge, Firefox or Safari, or the latest APE Space app. Updates fix the flaws malware uses.
-- **Be careful with browser extensions.** An extension that may "read and change data on all websites" can read the meeting page. Keep only extensions you trust. For sensitive meetings, use a browser profile without extensions.
+- **Be careful with browser extensions.** An extension that may "read and change data on all websites" can read the meeting page. Keep only extensions you trust. For sensitive meetings, use a browser profile with no other extensions than APE Space Verify (below).
 - **Install software only from sources you trust,** and keep your device's own protection (for example Windows Security or XProtect) on.
 - **Lock your device** with a PIN, password or biometrics, and don't join sensitive meetings from shared or public computers.
+- **For sensitive meetings, verify the meeting code.** Install the APE Space Verify browser extension ([instructions](../extension/README.md)). It checks that every file your meeting loads is APE Space's published, signed release, so it would notice code altered for you alone.
 - **Check who is in the meeting.** For sensitive meetings, compare the safety number aloud with everyone. A matching number means no one is intercepting the encryption between you.
 - **Mind your surroundings.** Others in the room, or a window behind you, aren't protected by encryption.
 - **Remember the other participants.** Their devices see what you share. Only invite people you trust with the conversation.
